@@ -6,7 +6,7 @@
 #    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hugothms          #+#    #+#              #
-#    Updated: 2020/05/04 09:53:38 by hugothms         ###   ########.fr        #
+#    Updated: 2020/05/04 12:49:04 by hugothms         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,16 @@ NAME = cub3d
 --LDFLAGS += #-g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native #-O3
 
---SRCS =	srcs/get_next_line.c	\
-			srcs/main.c
-
+--SRCS =	srcs/error.c			\
+			srcs/color.c			\
+			srcs/get_next_line.c	\
+			srcs/main.c 			\
+			srcs/parse.c 			\
+			srcs/save_bmp.c			\
+			srcs/utils.c 			\
+			srcs/set_elements.c		\
+			srcs/main.c 			
+			
 
 --OBJS = $(--SRCS:.c=.o)
 --OBJSLIBFT =$(--LIBFTDIR)*.o
@@ -104,10 +111,10 @@ re:		fclean all
 
 
 test: $(NAME)
-	./$< scenes/test.rt
+	./$< scenes/test.cub
 
 test_save: $(NAME)
-	./$< scenes/test.rt -save
+	./$< scenes/test.cub -save
 
 
 

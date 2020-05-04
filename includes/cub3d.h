@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/04 10:04:47 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/04 15:33:54 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 
 # include "../libft/libft.h"
-# include "mlxlinux.h"
+# include "mlx.h"
 # include "get_next_line.h"
 
 # define OPEN_ERROR -1
@@ -94,13 +94,9 @@ typedef struct		s_rgb
 typedef struct		s_scene
 {
 	t_couple		resolution;
-	char*			north_texture;
-	char*			south_texture;
-	char*			west_texture;
-	char*			east_texture;
-	char*			sprite_texture;
-	char*			floor_color;
-	char*			ceilling_color;
+	char**			textures;
+	t_rgb			*floor_color;
+	t_rgb			*ceilling_color;
 	int**			map;
 }					t_scene;
 
@@ -110,5 +106,36 @@ typedef struct		s_window
 	t_img			*img;
 	t_scene			*scene;
 }					t_window;
+
+# define NB_TEXTURES 5
+# define WHITE_SPACES " \t"
+# define NB_ELEM_RESOLUTION 3
+# define NB_ELEM_TEXTURE 2
+# define NB_ELEM_COLOR 2
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
+# define SPRITE 4
+//ft_putchar('e');
+
+t_scene		*get_scene(const int argc, const char *argv[]);
+
+void	set_resolution(t_scene *scene, char **data);
+void	set_texture(t_scene *scene, char *data, int code);
+void	set_floor_color(t_scene *scene, char **data);
+void	set_ceilling_color(t_scene *scene, char **data);
+
+t_rgb	*int_to_rgb(int r, int g, int b);
+t_rgb	*str_to_rgb(char *str);
+int		rgb_to_int(t_rgb rgb);
+
+char	*screenshot_datetime(void);
+int     ft_tab_size(char **tab);
+
+void	print_err_and_exit(char *str, int err);
+
+void			save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
 
 #endif

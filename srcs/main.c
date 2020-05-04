@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/04 09:56:23 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/04 15:41:31 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		main(const int argc, const char *argv[])
 	t_mlx		*mlx;
 	t_img		*img;
 	
+	putchar('e');
 	clock_t start, end;
 	start = clock();
 	scene = get_scene(argc, argv);
@@ -111,13 +112,13 @@ int		main(const int argc, const char *argv[])
 	img = init_img(mlx, &scene->resolution);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	start = clock();
-	make_img(img, scene, scene->cameras->content);
-	end = clock();
-	printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	// start = clock();
+	// make_img(img, scene, scene->cameras->content);
+	// end = clock();
+	// printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
 	{
-		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
+		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, ft_strcat("", argv[1]))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 		start = clock();
 		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
