@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/04 14:55:42 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/08 20:17:18 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_scene		*parse(int fd)
 	int		ret;
 	char	**data;
 
-	putchar('a');
 	if (!(scene = malloc(sizeof(*scene))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(init_scene(scene)))

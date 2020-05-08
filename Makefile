@@ -6,7 +6,7 @@
 #    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hugothms          #+#    #+#              #
-#    Updated: 2020/05/04 12:49:04 by hugothms         ###   ########.fr        #
+#    Updated: 2020/05/08 20:02:30 by hugothms         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3d
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
---LDFLAGS += #-g3 -fsanitize=address
+--LDFLAGS += -g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native #-O3
 
 --SRCS =	srcs/error.c			\
