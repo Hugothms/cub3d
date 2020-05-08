@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/08 20:17:18 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 00:08:11 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void		*init_scene(t_scene *scene)
 	scene->textures[WEST] = NULL;
 	scene->textures[EAST] = NULL;
 	scene->textures[SPRITE]= NULL;
-	scene->floor_color = int_to_rgb(0, 0, 0);
-	scene->ceilling_color = int_to_rgb(0, 0, 0);
+	scene->floor_color = NULL;
+	scene->ceilling_color = NULL;
 	scene->map = NULL;
 	return (scene);
 }
@@ -52,28 +52,28 @@ t_scene		*parse(int fd)
 		return (NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
 		ft_putstr(line);
+		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
 		ft_putchar('\n');
 		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && !scene->resolution.w)
 			set_resolution(scene, data);
 		else if (check_line(line, data, "NO", NB_ELEM_TEXTURE) && !scene->textures[NORTH])
-			set_texture(scene, data[1], NORTH);
+			set_texture(scene, data, NORTH);
 		else if (check_line(line, data, "SO", NB_ELEM_TEXTURE) && !scene->textures[SOUTH])
-			set_texture(scene, data[1], SOUTH);
+			set_texture(scene, data, SOUTH);
 		else if (check_line(line, data, "WE", NB_ELEM_TEXTURE) && !scene->textures[WEST])
-			set_texture(scene, data[1], WEST);
+			set_texture(scene, data, WEST);
 		else if (check_line(line, data, "EA", NB_ELEM_TEXTURE) && !scene->textures[EAST])
-			set_texture(scene, data[1], EAST);
+			set_texture(scene, data, EAST);
 		else if (check_line(line, data, "S", NB_ELEM_TEXTURE) && !scene->textures[SPRITE])
-			set_texture(scene, data[1], SPRITE);
-		else if (check_line(line, data, "F", NB_ELEM_COLOR) && !scene->floor_color->r)
-			scene->ceilling_color = str_to_rgb(data[NB_ELEM_COLOR - 1]);
-		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !scene->ceilling_color->r)
-			scene->ceilling_color = str_to_rgb(data[NB_ELEM_COLOR - 1]);
+			set_texture(scene, data, SPRITE);
+		else if (check_line(line, data, "F", NB_ELEM_COLOR) && !scene->floor_color)
+			set_color(scene, data, 0);
+		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !scene->ceilling_color)
+			set_color(scene, data, 1);
 		free(line);
-		free(data);
-		if (scene->resolution.w && scene->textures[NORTH] && scene->textures[SOUTH] && scene->textures[WEST] && scene->textures[EAST] && scene->textures[SPRITE] && scene->floor_color && scene->ceilling_color);
+		free_tab(data);
+		if (scene->resolution.w && scene->textures[NORTH] && scene->textures[SOUTH] && scene->textures[WEST] && scene->textures[EAST] && scene->textures[SPRITE] && scene->floor_color && scene->ceilling_color)
 			break;
 	}
 	//parse_map(); 

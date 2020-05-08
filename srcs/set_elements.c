@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/04 13:30:36 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 00:06:34 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,16 @@ void	set_resolution(t_scene *scene, char **data)
 	scene->resolution = *resolution;
 }
 
-void	set_texture(t_scene *scene, char *data, int code)
+void	set_texture(t_scene *scene, char **data, int code)
 {
-	if (!(scene->textures[code] = ft_strdup(data)))
+	if (!(scene->textures[code] = ft_strdup(data[1])))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+}
+
+void 	set_color(t_scene *scene, char **data, int code)
+{
+	if (code == 0)
+		scene->floor_color = str_to_rgb(data[NB_ELEM_COLOR - 1]);
+	else
+		scene->ceilling_color = str_to_rgb(data[NB_ELEM_COLOR - 1]);
 }

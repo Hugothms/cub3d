@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/04 15:33:54 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 00:04:42 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,8 @@ typedef struct		s_window
 t_scene		*get_scene(const int argc, const char *argv[]);
 
 void	set_resolution(t_scene *scene, char **data);
-void	set_texture(t_scene *scene, char *data, int code);
-void	set_floor_color(t_scene *scene, char **data);
-void	set_ceilling_color(t_scene *scene, char **data);
+void	set_texture(t_scene *scene, char **data, int code);
+void 	set_color(t_scene *scene, char **data, int code);
 
 t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
@@ -135,6 +134,7 @@ char	*screenshot_datetime(void);
 int     ft_tab_size(char **tab);
 
 void	print_err_and_exit(char *str, int err);
+void	free_tab(void **tab);
 
 void			save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
 

@@ -6,18 +6,31 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/08 20:16:55 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 00:05:16 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+void	free_scene(t_scene *scene)
+{
+	int i;
+	
+	free(scene->map);
+	i = 0;
+	while (i < NB_TEXTURES)
+		free(scene->textures[i++]);
+	free(scene->textures);
+	free(scene->ceilling_color);
+	free(scene->floor_color);
+}
 
 int		close_function(const t_window *w)
 {
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	//free(mlx);
+	free_scene(w->scene);
 	exit(0);
 }
 
@@ -131,6 +144,7 @@ int		main(const int argc, const char *argv[])
 		save_bmp(screenshot_datetime(), img->data, scene->resolution);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+		free_scene(scene);
 	}
 	return (0);
 }

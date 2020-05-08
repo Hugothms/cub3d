@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/04 11:39:02 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/08 23:53:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ int     ft_tab_size(char **tab)
     while (tab[i])
         i++;
     return (i);
+}
+
+void	free_tab(void **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
