@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/09 00:08:11 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 13:19:10 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,84 @@ int			check_line(char *line, char **data, char *type, int nb_elements)
 			return (ft_tab_size(data) == nb_elements);
 	}
 	return (0);
+}
+
+int			get_map(t_scene *scene, char*join)
+{
+	int 	line;
+	int		col;
+	char	**map;
+	
+	scene->map = ft_split(join, '\n');
+	line = 0;
+	while (map[line])
+	{
+		ft_putstr("test\n");
+		ft_putnbr(map[line]);
+		ft_putstr("\ntest\n");
+		ft_putstr(map[line]);
+		ft_putstr("\ntest\n");
+		col = 0;
+		while (map[line][col])
+		{
+			if (ft_in_charset(map[line][col], "012"))
+				scene->map[line][col] = map[line][col] - '0';
+			else if (ft_in_charset(map[line][col], "NSEW"))
+			{
+				scene->map[line][col] = 0;
+				scene->position.w = line;
+				scene->position.h = col;
+				if (map[line][col] == 'N')
+					scene->orientation = NORTH;
+				else if (map[line][col] == 'S')
+					scene->orientation = SOUTH;
+				else if (map[line][col] == 'E')
+					scene->orientation = EAST;
+				else if (map[line][col] == 'W')
+					scene->orientation = WEST;
+			}
+			else
+				break;
+			free(line);
+			col++;
+		}
+		line++;
+	}
+}
+
+int			parse_map(t_scene *scene, int fd)
+{
+	char	*line;
+	char	*join;
+	char	*tmp;
+	int		ret;
+	int 	i;
+	int		col;
+
+	//get_size_map(scene->size, split);
+	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		if (line[0])
+			break;
+	}
+	join = ft_strdup(line);
+	tmp = join;
+	join = ft_strjoin(join, "\n");
+	free(tmp);
+	while ((ret = get_next_line(fd, &line)) == 1)
+	{
+		tmp = join;
+		join = ft_strjoin(join, line);
+		free(tmp);
+		tmp = join;
+		join = ft_strjoin(join, "\n");
+		free(tmp);
+	}
+	ft_putstr("join\n");
+	ft_putstr(join);
+	get_map(scene, join);
+	//check_map(scene->map);
+	return (1);
 }
 
 t_scene		*parse(int fd)
@@ -76,7 +154,7 @@ t_scene		*parse(int fd)
 		if (scene->resolution.w && scene->textures[NORTH] && scene->textures[SOUTH] && scene->textures[WEST] && scene->textures[EAST] && scene->textures[SPRITE] && scene->floor_color && scene->ceilling_color)
 			break;
 	}
-	//parse_map(); 
+	parse_map(scene, fd);
 	return (scene);
 }
 

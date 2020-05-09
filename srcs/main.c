@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/09 00:05:16 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/09 00:47:53 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->scene = scene;
-	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window);
+	//mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window);
 	mlx_key_hook(mlx->win_ptr, key_function, window);
 	mlx_loop(mlx->mlx_ptr);
 }
