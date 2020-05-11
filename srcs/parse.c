@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/09 13:19:10 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/11 21:06:05 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ int			get_map(t_scene *scene, char*join)
 	int		col;
 	char	**map;
 	
-	scene->map = ft_split(join, '\n');
+	scene->map = ft_split(join, '\n'); //echanger map et scene->map
+	free(join);
 	line = 0;
-	while (map[line])
+	scene->size.h = ft_tab_size(scene->map);
+	if (!(map = malloc(scene->size.h * sizeof(char*))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	while (line < scene->size.h)
 	{
-		ft_putstr("test\n");
-		ft_putnbr(map[line]);
-		ft_putstr("\ntest\n");
-		ft_putstr(map[line]);
-		ft_putstr("\ntest\n");
+		if (!(map[line] = malloc((ft_strlen(scene->map[line]) + 1) * sizeof(char))))
+			print_err_and_exit("Malloc failed", MALLOC_ERROR);
 		col = 0;
 		while (map[line][col])
 		{
@@ -109,6 +110,7 @@ int			parse_map(t_scene *scene, int fd)
 		tmp = join;
 		join = ft_strjoin(join, "\n");
 		free(tmp);
+		free(line);
 	}
 	ft_putstr("join\n");
 	ft_putstr(join);

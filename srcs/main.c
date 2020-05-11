@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/09 00:47:53 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/11 21:00:46 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	free_scene(t_scene *scene)
 {
 	int i;
 	
+	i = 0;
+	while (i < scene->size.h)
+		free(scene->map[i++]);
 	free(scene->map);
 	i = 0;
 	while (i < NB_TEXTURES)
