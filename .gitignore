@@ -2,7 +2,8 @@
 .vscode/*
 ressources/*
 *.txt
-**/*.o
+*/*.o
+*.o
 *.code-workspace
 *.out*
 *.bmp
