@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/11 21:06:05 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 10:46:53 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,23 @@ int			get_map(t_scene *scene, char*join)
 	int		col;
 	char	**map;
 	
-	scene->map = ft_split(join, '\n'); //echanger map et scene->map
+	map = ft_split(join, '\n'); //echanger map et scene->map
 	free(join);
 	line = 0;
-	scene->size.h = ft_tab_size(scene->map);
-	if (!(map = malloc(scene->size.h * sizeof(char*))))
+	scene->size.h = ft_tab_size(map);
+	if (!(scene->map = malloc(scene->size.h * sizeof(char*))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while (line < scene->size.h)
 	{
-		if (!(map[line] = malloc((ft_strlen(scene->map[line]) + 1) * sizeof(char))))
+		if (!(scene->map[line] = malloc((ft_strlen(map[line]) + 1) * sizeof(char))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
 		col = 0;
 		while (map[line][col])
 		{
 			if (ft_in_charset(map[line][col], "012"))
-				scene->map[line][col] = map[line][col] - '0';
+				scene->map[line][col] = map[line][col];
+			else if (map[line][col] == ' ')
+				scene->map[line][col] = 0;
 			else if (ft_in_charset(map[line][col], "NSEW"))
 			{
 				scene->map[line][col] = 0;
@@ -75,15 +77,16 @@ int			get_map(t_scene *scene, char*join)
 					scene->orientation = WEST;
 			}
 			else
-				break;
+				print_err_and_exit("Bad map format", PARSE_ERROR);
 			free(line);
 			col++;
 		}
 		line++;
 	}
+	free(map);
 }
 
-int			parse_map(t_scene *scene, int fd)
+void		parse_map(t_scene *scene, int fd)
 {
 	char	*line;
 	char	*join;
@@ -97,8 +100,11 @@ int			parse_map(t_scene *scene, int fd)
 	{
 		if (line[0])
 			break;
+		free(line);
 	}
+	tmp = line;
 	join = ft_strdup(line);
+	free(tmp);
 	tmp = join;
 	join = ft_strjoin(join, "\n");
 	free(tmp);
@@ -116,7 +122,6 @@ int			parse_map(t_scene *scene, int fd)
 	ft_putstr(join);
 	get_map(scene, join);
 	//check_map(scene->map);
-	return (1);
 }
 
 t_scene		*parse(int fd)
