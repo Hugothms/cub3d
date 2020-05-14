@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/14 10:46:53 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 11:12:17 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,11 @@ int			get_map(t_scene *scene, char*join)
 			}
 			else
 				print_err_and_exit("Bad map format", PARSE_ERROR);
-			free(line);
 			col++;
 		}
 		line++;
 	}
-	free(map);
+	free_tab(map);
 }
 
 void		parse_map(t_scene *scene, int fd)
@@ -91,12 +90,10 @@ void		parse_map(t_scene *scene, int fd)
 	char	*line;
 	char	*join;
 	char	*tmp;
-	int		ret;
-	int 	i;
+	int		i;
 	int		col;
 
-	//get_size_map(scene->size, split);
-	while ((ret = get_next_line(fd, &line)) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
 		if (line[0])
 			break;
@@ -108,7 +105,7 @@ void		parse_map(t_scene *scene, int fd)
 	tmp = join;
 	join = ft_strjoin(join, "\n");
 	free(tmp);
-	while ((ret = get_next_line(fd, &line)) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
 		tmp = join;
 		join = ft_strjoin(join, line);
@@ -118,8 +115,9 @@ void		parse_map(t_scene *scene, int fd)
 		free(tmp);
 		free(line);
 	}
-	ft_putstr("join\n");
-	ft_putstr(join);
+	free(line);
+	// ft_putstr("join\n");
+	// ft_putstr(join);
 	get_map(scene, join);
 	//check_map(scene->map);
 }

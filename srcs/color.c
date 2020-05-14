@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/08 20:04:09 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 11:15:01 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ t_rgb	*int_to_rgb(int r, int g, int b)
 t_rgb		*str_to_rgb(char *str)
 {
 	char	**tab;
+	t_rgb	*tmp;
 
 	tab = ft_split(str, ',');
-	return (int_to_rgb(ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2])));
+	tmp = int_to_rgb(ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+	free_tab(tab);
+	return (tmp);
 }
 
 int		rgb_to_int(t_rgb rgb)
