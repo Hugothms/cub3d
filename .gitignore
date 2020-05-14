@@ -7,3 +7,5 @@ ressources/*
 *.out*
 *.bmp
 .fuse*
+cub3d
+libft.a
