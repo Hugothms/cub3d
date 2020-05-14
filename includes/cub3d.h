@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/09 13:06:38 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 13:55:23 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 #  define ESC		65307
 #  define LEFT		65361
 #  define RIGHT		65363
+#  define UP		65362
+#  define DOWN		65364
+#  define KEY_Q		113
+#  define KEY_D		100
+#  define KEY_Z		122
 #  define KEY_S		115
 # else
 #  define ESC		53
@@ -84,6 +89,12 @@ typedef struct		s_couple
 	int				h;
 }					t_couple;
 
+typedef struct		s_pos
+{
+	float			x;
+	float			y;
+}					t_pos;
+
 typedef struct		s_rgb
 {
 	int				r;
@@ -99,7 +110,7 @@ typedef struct		s_scene
 	t_rgb			*ceilling_color;
 	t_couple 		size;
 	char			**map;
-	t_couple		position;
+	t_pos			position;
 	int				orientation;
 }					t_scene;
 
@@ -133,7 +144,7 @@ t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
 int		rgb_to_int(t_rgb rgb);
 
-char	*screenshot_datetime(void);
+char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
 
 void	print_err_and_exit(char *str, int err);

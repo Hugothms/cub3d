@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/14 11:12:17 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 13:25:24 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,19 @@ int			get_map(t_scene *scene, char*join)
 	{
 		if (!(scene->map[line] = malloc((ft_strlen(map[line]) + 1) * sizeof(char))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
+		scene->map[line][ft_strlen(map[line])] = '\0';
 		col = 0;
 		while (map[line][col])
 		{
 			if (ft_in_charset(map[line][col], "012"))
 				scene->map[line][col] = map[line][col];
 			else if (map[line][col] == ' ')
-				scene->map[line][col] = 0;
+				scene->map[line][col] = '0';
 			else if (ft_in_charset(map[line][col], "NSEW"))
 			{
-				scene->map[line][col] = 0;
-				scene->position.w = line;
-				scene->position.h = col;
+				scene->map[line][col] = '0';
+				scene->position.x = line;
+				scene->position.y = col;
 				if (map[line][col] == 'N')
 					scene->orientation = NORTH;
 				else if (map[line][col] == 'S')
@@ -160,6 +161,12 @@ t_scene		*parse(int fd)
 			break;
 	}
 	parse_map(scene, fd);
+	int i = 0;
+	while(i < scene->size.h)
+	{
+		ft_putstr(scene->map[i++]);
+		ft_putchar('\n');
+	}
 	return (scene);
 }
 

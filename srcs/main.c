@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/11 21:00:46 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 13:56:06 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int		close_function(const t_window *w)
 
 int		key_function(const int keycode, const t_window *w)
 {
-	clock_t start, end;
+	char	filename[35];
+	clock_t	start, end;
+
 	printf("%i\n", keycode);
 	if (keycode == ESC)
 		close_function(w);
@@ -56,7 +58,7 @@ int		key_function(const int keycode, const t_window *w)
 	if (keycode == KEY_S)
 	{
 		start = clock();
-		save_bmp(screenshot_datetime(), w->img->data, w->scene->resolution);
+		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->resolution);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	}
@@ -103,7 +105,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->scene = scene;
-	//mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window);
+	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close
 	mlx_key_hook(mlx->win_ptr, key_function, window);
 	mlx_loop(mlx->mlx_ptr);
 }
@@ -127,24 +129,17 @@ int		main(const int argc, const char *argv[])
 	img = init_img(mlx, &scene->resolution);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	// start = clock();
-	// make_img(img, scene, scene->cameras->content);
-	// end = clock();
-	// printf("make_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
 	{
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, argv[1])))
-		print_err_and_exit("Minilibx error", MLX_ERROR);
-		start = clock();
-		mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img->img_ptr, 0, 0);
-		end = clock();
-		printf("put_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+			print_err_and_exit("Minilibx error", MLX_ERROR);
 		get_controls_loop(mlx, img, scene);
 	}
 	else if (argc == 3)
 	{
+		char filename[35];
 		start = clock();
-		save_bmp(screenshot_datetime(), img->data, scene->resolution);
+		save_bmp(screenshot_datetime(filename), img->data, scene->resolution);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 		free_scene(scene);

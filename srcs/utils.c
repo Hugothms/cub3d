@@ -6,27 +6,39 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/08 23:53:21 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 13:58:24 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*screenshot_datetime()
+char	*screenshot_datetime(char res[])
 {
-	char		*res[35];
 	time_t		t;
 	struct tm	tm;
+	char		*tmp;
 
 	t = time(NULL);
 	tm = *localtime(&t);
-	*res = ft_strdup("Screenshot YYYY-MM-DD hh:mm:ss.bmp");
-	ft_memcpy(*res + 11, ft_itoa_width(tm.tm_year + 1900, 4), 4);
-	ft_memcpy(*res + 16, ft_itoa_width(tm.tm_mon + 1, 2), 2);
-	ft_memcpy(*res + 19, ft_itoa_width(tm.tm_mday, 2), 2);
-	ft_memcpy(*res + 22, ft_itoa_width(tm.tm_hour, 2), 2);
-	ft_memcpy(*res + 25, ft_itoa_width(tm.tm_min, 2), 2);
-	ft_memcpy(*res + 28, ft_itoa_width(tm.tm_sec, 2), 2);
+	ft_memcpy(res, "Screenshot YYYY-MM-DD hh:mm:ss.bmp", 35);
+	tmp = ft_itoa_width(tm.tm_year + 1900, 4);
+	ft_memcpy(res + 11, tmp, 4);
+	free(tmp);
+	tmp = ft_itoa_width(tm.tm_mon + 1, 2);
+	ft_memcpy(res + 16, tmp, 2);
+	free(tmp);
+	tmp = ft_itoa_width(tm.tm_mday, 2);
+	ft_memcpy(res + 19, tmp, 2);
+	free(tmp);
+	tmp = ft_itoa_width(tm.tm_hour, 2);
+	ft_memcpy(res + 22, tmp, 2);
+	free(tmp);
+	tmp = ft_itoa_width(tm.tm_min, 2);
+	ft_memcpy(res + 25, tmp, 2);
+	free(tmp);
+	tmp = ft_itoa_width(tm.tm_sec, 2);
+	ft_memcpy(res + 28, tmp, 2);
+	free(tmp);
 	return (*res);
 }
 
