@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/14 13:55:23 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/14 15:18:56 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ typedef struct		s_scene
 	char			**textures;
 	t_rgb			*floor_color;
 	t_rgb			*ceilling_color;
-	t_couple 		size;
 	char			**map;
+	t_couple 		size;
 	t_pos			position;
-	int				orientation;
+	t_pos			orientation;
 }					t_scene;
 
 typedef struct		s_window

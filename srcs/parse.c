@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/14 13:25:24 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 12:17:58 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		*init_scene(t_scene *scene)
 {
-	scene->resolution.w = 0;
-	scene->resolution.h = 0;
+	scene->resolution.w = -1;
+	scene->resolution.h = -1;
 	if (!(scene->textures = malloc(NB_TEXTURES * sizeof(char*))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	scene->textures[NORTH] = NULL;
@@ -26,6 +26,12 @@ void		*init_scene(t_scene *scene)
 	scene->floor_color = NULL;
 	scene->ceilling_color = NULL;
 	scene->map = NULL;
+	scene->size.w = -1;
+	scene->size.h = -1;
+	scene->position.x = -1;
+	scene->position.y = -1;
+	scene->orientation.x = -1;
+	scene->orientation.y = -1;
 	return (scene);
 }
 
@@ -63,19 +69,31 @@ int			get_map(t_scene *scene, char*join)
 				scene->map[line][col] = map[line][col];
 			else if (map[line][col] == ' ')
 				scene->map[line][col] = '0';
-			else if (ft_in_charset(map[line][col], "NSEW"))
+			else if (ft_in_charset(map[line][col], "NSEW") && scene->position.x == -1)
 			{
 				scene->map[line][col] = '0';
 				scene->position.x = line;
 				scene->position.y = col;
 				if (map[line][col] == 'N')
-					scene->orientation = NORTH;
+				{
+					scene->orientation.x = 0;
+					scene->orientation.x = -1;
+				}
 				else if (map[line][col] == 'S')
-					scene->orientation = SOUTH;
+				{
+					scene->orientation.x = 0;
+					scene->orientation.x = 1;
+				}
 				else if (map[line][col] == 'E')
-					scene->orientation = EAST;
+				{
+					scene->orientation.x = 1;
+					scene->orientation.x = 0;
+				}
 				else if (map[line][col] == 'W')
-					scene->orientation = WEST;
+				{
+					scene->orientation.x = -1;
+					scene->orientation.x = 0;
+				}
 			}
 			else
 				print_err_and_exit("Bad map format", PARSE_ERROR);
@@ -83,7 +101,7 @@ int			get_map(t_scene *scene, char*join)
 		}
 		line++;
 	}
-	free_tab(map);
+	free_tab((void**)map);
 }
 
 void		parse_map(t_scene *scene, int fd)
@@ -139,7 +157,7 @@ t_scene		*parse(int fd)
 		ft_putstr(line);
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
 		ft_putchar('\n');
-		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && !scene->resolution.w)
+		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && scene->resolution.w == -1)
 			set_resolution(scene, data);
 		else if (check_line(line, data, "NO", NB_ELEM_TEXTURE) && !scene->textures[NORTH])
 			set_texture(scene, data, NORTH);
@@ -156,7 +174,7 @@ t_scene		*parse(int fd)
 		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !scene->ceilling_color)
 			set_color(scene, data, 1);
 		free(line);
-		free_tab(data);
+		free_tab((void**)data);
 		if (scene->resolution.w && scene->textures[NORTH] && scene->textures[SOUTH] && scene->textures[WEST] && scene->textures[EAST] && scene->textures[SPRITE] && scene->floor_color && scene->ceilling_color)
 			break;
 	}
