@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/14 13:58:24 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 20:31:51 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,13 @@ void	free_tab(void **tab)
 	while (tab[i])
 		free(tab[i++]);
 	free(tab);
+}
+
+void	rotation(t_pos *dir, float angle)
+{
+	float	x;
+	
+	x = dir->x;
+	dir->x = x * cos(angle) - dir->y * sin(angle);
+	dir->y = x * sin(angle) + dir->y * cos(angle);
 }

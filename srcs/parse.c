@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/15 19:42:30 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 20:32:11 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void		*init_scene(t_scene *scene)
 	scene->map = NULL;
 	scene->size.w = -1;
 	scene->size.h = -1;
-	scene->position.x = -1;
-	scene->position.y = -1;
-	scene->orientation.x = -1;
-	scene->orientation.y = -1;
+	scene->pos.x = -1;
+	scene->pos.y = -1;
+	scene->dir.x = -1;
+	scene->dir.y = -1;
 	return (scene);
 }
 
@@ -69,31 +69,34 @@ int			get_map(t_scene *scene, char*join)
 				scene->map[line][col] = map[line][col];
 			else if (map[line][col] == ' ')
 				scene->map[line][col] = '0';
-			else if (ft_in_charset(map[line][col], "NSEW") && scene->position.x == -1)
+			else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
 			{
 				scene->map[line][col] = '0';
-				scene->position.x = line;
-				scene->position.y = col;
+				scene->pos.x = line;
+				scene->pos.y = col;
 				if (map[line][col] == 'N')
 				{
-					scene->orientation.x = 0;
-					scene->orientation.y = -1;
+					scene->dir.x = 0;
+					scene->dir.y = -1;
 				}
 				else if (map[line][col] == 'S')
 				{
-					scene->orientation.x = 0;
-					scene->orientation.y = 1;
+					scene->dir.x = 0;
+					scene->dir.y = 1;
 				}
 				else if (map[line][col] == 'E')
 				{
-					scene->orientation.x = 1;
-					scene->orientation.y = 0;
+					scene->dir.x = 1;
+					scene->dir.y = 0;
 				}
 				else if (map[line][col] == 'W')
 				{
-					scene->orientation.x = -1;
-					scene->orientation.y = 0;
+					scene->dir.x = -1;
+					scene->dir.y = 0;
 				}
+				scene->plane.x = scene->pos.x;
+				scene->plane.y = scene->pos.y;
+				rotation(&scene->plane, 90);
 			}
 			else
 				print_err_and_exit("Bad map format", PARSE_ERROR);

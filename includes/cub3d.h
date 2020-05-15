@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/15 19:50:44 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 20:31:40 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,9 @@ typedef struct		s_scene
 	t_rgb			*ceilling_color;
 	char			**map;
 	t_couple 		size;
-	t_pos			position;
-	t_pos			orientation;
+	t_pos			pos;
+	t_pos			dir;
+	t_pos			plane;
 }					t_scene;
 
 typedef struct		s_window
@@ -135,7 +136,7 @@ typedef struct		s_window
 # define SPRITE 4
 //ft_putchar('e');
 
-t_scene		*get_scene(const int argc, const char *argv[]);
+t_scene	*get_scene(const int argc, const char *argv[]);
 
 void	set_resolution(t_scene *scene, char **data);
 void	set_texture(t_scene *scene, char **data, int code);
@@ -147,10 +148,14 @@ int		rgb_to_int(t_rgb rgb);
 
 char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
+void	free_tab(void **tab);
+void	rotation(t_pos *dir, float angle);
 
 void	print_err_and_exit(char *str, int err);
-void	free_tab(void **tab);
 
-void			save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
+void	save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
+
+void	make_img(t_img *img, t_scene *scene);
+
 
 #endif

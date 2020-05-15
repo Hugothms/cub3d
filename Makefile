@@ -6,7 +6,7 @@
 #    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hugothms          #+#    #+#              #
-#    Updated: 2020/05/08 20:02:30 by hugothms         ###   ########.fr        #
+#    Updated: 2020/05/15 20:11:58 by hugothms         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ NAME = cub3d
 			srcs/color.c			\
 			srcs/get_next_line.c	\
 			srcs/main.c 			\
+			srcs/make_img.c 		\
 			srcs/parse.c 			\
 			srcs/save_bmp.c			\
 			srcs/utils.c 			\

@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/15 19:58:42 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 20:33:22 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int		close_function(const t_window *w)
 
 void	refresh(const t_window *w)
 {
-	printf("pos%.01f:%.01f\torient%.01f:%.01f\n", w->scene->position.x, w->scene->position.y, w->scene->orientation.x, w->scene->orientation.y);
+	printf("pos%.01f:%.01f\torient%.01f:%.01f\n", w->scene->pos.x, w->scene->pos.y, w->scene->dir.x, w->scene->dir.y);
+	make_img(w->img, w->scene);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
 }
@@ -55,28 +56,24 @@ int		key_function(const int keycode, const t_window *w)
 		close_function(w);
 	else if (keycode == UP)
 	{
-		w->scene->position.x += w->scene->orientation.x ;
-		w->scene->position.y += w->scene->orientation.y ;
+		w->scene->pos.x += w->scene->dir.x ;
+		w->scene->pos.y += w->scene->dir.y ;
 		refresh(w);
 	}
 	else if (keycode == DOWN)
 	{
-		w->scene->position.x -= w->scene->orientation.x ;
-		w->scene->position.y -= w->scene->orientation.y ;
+		w->scene->pos.x -= w->scene->dir.x ;
+		w->scene->pos.y -= w->scene->dir.y ;
 		refresh(w);
 	}
 	else if (keycode == LEFT)
 	{
-		x = w->scene->orientation.x;
-		w->scene->orientation.x = x * cos(THETA) - w->scene->orientation.y * sin(THETA);
-		w->scene->orientation.y = x * sin(THETA) + w->scene->orientation.y * cos(THETA);
+		rotation(&w->scene->dir, THETA);
 		refresh(w);
 	}
 	else if (keycode == RIGHT)
 	{
-		x = w->scene->orientation.x;
-		w->scene->orientation.x = x * cos(-THETA) - w->scene->orientation.y * sin(-THETA);
-		w->scene->orientation.y = x * sin(-THETA) + w->scene->orientation.y * cos(-THETA);
+		rotation(&w->scene->dir, -THETA);
 		refresh(w);
 	}
 	else if (keycode == KEY_S)
