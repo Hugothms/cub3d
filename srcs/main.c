@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/15 12:21:46 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/15 19:58:42 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,49 @@ int		close_function(const t_window *w)
 	exit(0);
 }
 
+void	refresh(const t_window *w)
+{
+	printf("pos%.01f:%.01f\torient%.01f:%.01f\n", w->scene->position.x, w->scene->position.y, w->scene->orientation.x, w->scene->orientation.y);
+	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
+	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
+}
+
 int		key_function(const int keycode, const t_window *w)
 {
 	char	filename[35];
 	clock_t	start, end;
+	float x;
 
 	printf("%i\n", keycode);
 	if (keycode == ESC)
 		close_function(w);
+	else if (keycode == UP)
+	{
+		w->scene->position.x += w->scene->orientation.x ;
+		w->scene->position.y += w->scene->orientation.y ;
+		refresh(w);
+	}
+	else if (keycode == DOWN)
+	{
+		w->scene->position.x -= w->scene->orientation.x ;
+		w->scene->position.y -= w->scene->orientation.y ;
+		refresh(w);
+	}
 	else if (keycode == LEFT)
 	{
-		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-		mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
+		x = w->scene->orientation.x;
+		w->scene->orientation.x = x * cos(THETA) - w->scene->orientation.y * sin(THETA);
+		w->scene->orientation.y = x * sin(THETA) + w->scene->orientation.y * cos(THETA);
+		refresh(w);
 	}
 	else if (keycode == RIGHT)
 	{
-		mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-		//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img2->img_ptr, 0, 0);
+		x = w->scene->orientation.x;
+		w->scene->orientation.x = x * cos(-THETA) - w->scene->orientation.y * sin(-THETA);
+		w->scene->orientation.y = x * sin(-THETA) + w->scene->orientation.y * cos(-THETA);
+		refresh(w);
 	}
-	if (keycode == KEY_S)
+	else if (keycode == KEY_S)
 	{
 		start = clock();
 		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->resolution);
