@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/15 20:32:11 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/16 14:01:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int			get_map(t_scene *scene, char*join)
 					scene->dir.x = -1;
 					scene->dir.y = 0;
 				}
-				scene->plane.x = scene->pos.x;
-				scene->plane.y = scene->pos.y;
-				rotation(&scene->plane, 90);
+				scene->plane.x = scene->dir.x * 0.66;
+				scene->plane.y = scene->dir.y * 0.66;
+				rotation(&scene->plane, 1.570796);
 			}
 			else
 				print_err_and_exit("Bad map format", PARSE_ERROR);
