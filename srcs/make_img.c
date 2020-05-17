@@ -6,27 +6,46 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/16 15:29:47 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/17 12:29:10 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void		ft_put_line(unsigned char *data, int line, t_couple delim, int wall_color, t_couple resolution)
+void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
 {
-	int	i;
 	int	(*tab)[resolution.w][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
+	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
+}
+
+void		ft_put_line(unsigned char *data, int line, t_couple delim, int wall_color, t_couple resolution)
+{
+	int			i;
+	t_couple	pixel;
+	
 	i = 0;
 	printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
 	while (i < delim.h)
-		*tab[i++][line] = CEILING_COLOR; // set the pixel at the coord x,y with the color value
+	{
+		pixel.h = i++;
+		pixel.w = line;
+		ft_put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	}
 	while (i < delim.w)
-		*tab[i++][line] = wall_color; // set the pixel at the coord x,y with the color value
+	{
+		pixel.h = i++;
+		pixel.w = line;
+		ft_put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
+	}
 	while (i < resolution.h)
-		*tab[i++][line] = FLOOR_COLOR; // set the pixel at the coord x,y with the color value
-	
+	{
+		pixel.h = i++;
+		pixel.w = line;
+		ft_put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
+}
+
 }
 
 void	make_img(t_img *img, t_scene *scene)
@@ -111,7 +130,7 @@ void	make_img(t_img *img, t_scene *scene)
 			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
 
 		//Calculate height of line to draw on screen
-		printf("res.h: %d\nperp:%d\n", scene->resolution.h, perpWallDist);
+		printf("res.h: %d\nperp:%f\n", scene->resolution.h, perpWallDist);
 		int lineHeight = (scene->resolution.h / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe

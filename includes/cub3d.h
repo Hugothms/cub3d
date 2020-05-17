@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/16 15:16:34 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/17 12:27:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define MALLOC_ERROR -5
 
 # define THETA 0.01745329
-# define CEILING_COLOR int_to_rgb(0,0,0)
-# define FLOOR_COLOR int_to_rgb(0,0,0)
+# define CEILING_COLOR 0
+# define FLOOR_COLOR 0
 
 /*
 ** Keycodes and screen size LINUX and MAC
