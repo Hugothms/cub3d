@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/16 14:03:17 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/17 19:49:18 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,22 @@ int		key_function(const int keycode, const t_window *w)
 		close_function(w);
 	else if (keycode == UP)
 	{
-		w->scene->pos.x += w->scene->dir.x ;
-		w->scene->pos.y += w->scene->dir.y ;
+		w->scene->pos.x += w->scene->dir.x * SPEED_MOVE;
+		w->scene->pos.y += w->scene->dir.y * SPEED_MOVE;
+		// if (w->scene->pos.x > w->scene->size.h)
+		// 	w->scene->pos.x = w->scene->size.h;
+		// if (w->scene->pos.y > w->scene->size.w)
+		// 	w->scene->pos.y = w->scene->size.w;
 		refresh(w);
 	}
 	else if (keycode == DOWN)
 	{
-		w->scene->pos.x -= w->scene->dir.x ;
-		w->scene->pos.y -= w->scene->dir.y ;
+		w->scene->pos.x -= w->scene->dir.x * SPEED_MOVE;
+		w->scene->pos.y -= w->scene->dir.y * SPEED_MOVE;
+		// if (w->scene->pos.x > w->scene->size.h)
+		// 	w->scene->pos.x = w->scene->size.h;
+		// if (w->scene->pos.y > w->scene->size.w)
+		// 	w->scene->pos.y = w->scene->size.w;
 		refresh(w);
 	}
 	else if (keycode == LEFT)

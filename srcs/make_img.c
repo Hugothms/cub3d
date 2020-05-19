@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/17 11:05:32 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/17 19:45:11 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ void		ft_put_line(unsigned char *data, int line, t_couple delim, int wall_color,
 	t_couple	pixel;
 	
 	i = 0;
-	printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
+	// printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
 	while (i < delim.h)
 	{
 		pixel.h = i++;
 		pixel.w = line;
-		//printf("%d\t",i);
 		ft_put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
 	}
 	while (i < delim.w)
@@ -125,22 +124,22 @@ void	make_img(t_img *img, t_scene *scene)
 			if(scene->map[mapX][mapY] > 0) hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
-		printf("stepX: %d\t\tstepY:%d\n", stepX, stepY);
-		printf("rayDirX: %f\trayDirY:%f\n", rayDirX, rayDirY);
-		printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
-		printf("side:%d\n", side);
-		if(side == 0)
+		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
+		// printf("stepX: %d\t\tstepY:%d\n", stepX, stepY);
+		// printf("rayDirX: %f\trayDirY:%f\n", rayDirX, rayDirY);
+		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
+		// printf("side:%d\n", side);
+		// if(side == 0)
 			perpWallDist = (mapX - scene->pos.x + (1 - stepX) / 2.) / rayDirX;
-		else
-			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
+		// else
+		// 	perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
 
 		//Calculate height of line to draw on screen
-		printf("res.h: %d\tperp:%f\n", scene->resolution.h, perpWallDist);
+		// printf("res.h: %d\tperp:%f\n", scene->resolution.h, perpWallDist);
 		int lineHeight = (scene->resolution.h / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		printf("lineHeight: %d\n", lineHeight);
+		// printf("lineHeight: %d\n", lineHeight);
 		int drawStart = -lineHeight / 2 + scene->resolution.h / 2;
 		if(drawStart < 0)drawStart = 0;
 		int drawEnd = lineHeight / 2 + scene->resolution.h / 2;
@@ -163,8 +162,8 @@ void	make_img(t_img *img, t_scene *scene)
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
 		t_couple delim;
-		delim.h = drawStart;
-		delim.w = drawEnd;
+		delim.h = drawStart < scene->resolution.h ? drawStart : 0;
+		delim.w = drawEnd < scene->resolution.w ? drawEnd : 0;
 		ft_put_line(img->data, x, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
 
