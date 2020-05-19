@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/19 11:28:49 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/19 12:37:28 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void		*init_scene(t_scene *scene)
 	scene->pos.y = -1;
 	scene->dir.x = -1;
 	scene->dir.y = -1;
+	scene->move.a_on = 0;
+	scene->move.d_on = 0;
+	scene->move.s_on = 0;
+	scene->move.w_on = 0;
 	return (scene);
 }
 
