@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/19 12:25:55 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/20 16:53:27 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,12 @@ void	print_err_and_exit(char *str, int err);
 void	save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
 
 void	make_img(t_img *img, t_scene *scene);
+
+int		key_release(int keycode, t_move *move);
+int		key_push(int keycode, t_move *move);
+int		key_function(const int keycode, const t_window *w);
+void		check_key_on(t_scene *scene);
+
 
 
 #endif

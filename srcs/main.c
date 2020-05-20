@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/19 12:35:41 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/20 16:50:22 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,167 +36,15 @@ int		close_function(const t_window *w)
 	free_scene(w->scene);
 	exit(0);
 }
-void 		move_up(t_scene *scene)
-{
-	scene->pos.x += scene->dir.x * SPEED_MOVE;
-	scene->pos.y += scene->dir.y * SPEED_MOVE;
-	// if (scene->pos.x > scene->size.h)
-	// 	scene->pos.x = scene->size.h;
-	// if (scene->pos.y > scene->size.w)
-	// 	scene->pos.y = scene->size.w;
-}
-
-void 		move_down(t_scene *scene)
-{
-	scene->pos.x -= scene->dir.x * SPEED_MOVE;
-	scene->pos.y -= scene->dir.y * SPEED_MOVE;
-	// if (scene->pos.x > scene->size.h)
-	// 	scene->pos.x = scene->size.h;
-	// if (scene->pos.y > scene->size.w)
-	// 	scene->pos.y = scene->size.w;
-}
-
-void 		move_left(t_scene *scene)
-{
-	rotation(&scene->dir, THETA);
-	rotation(&scene->plane, THETA);
-}
-
-void 		move_right(t_scene *scene)
-{
-	rotation(&scene->dir, -THETA);
-	rotation(&scene->plane, -THETA);
-}
-
-void		check_key_on(t_scene *scene)
-{
-	if (scene->move.w_on == 1)
-		move_up(scene);
-	if (scene->move.s_on == 1)
-		move_down(scene);
-	if (scene->move.a_on == 1)
-		move_left(scene);
-	if (scene->move.d_on == 1)
-		move_right(scene);
-	// if (scene->move.g_on == 1)
-	// 	rotate_g_dr(scene, KEY_G);
-	// if (scene->move.dr_on == 1)
-	// 	rotate_g_dr(scene, KEY_DR);
-}
 
 int	refresh(const t_window *w)
 {
+	printf("refresh\n");
 	printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->scene->pos.x, w->scene->pos.y, w->scene->dir.x, w->scene->dir.y, w->scene->plane.x, w->scene->plane.y);
 	check_key_on(w->scene);
 	make_img(w->img, w->scene);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
-	return (0);
-}
-
-int		key_release(int keycode, t_move *move)
-{
-	if (keycode == (AZERTY ? KEY_Z : KEY_W))
-		move->w_on = 0;
-	if (keycode == (AZERTY ? KEY_S : KEY_S))
-		move->s_on = 0;
-	if (keycode == (AZERTY ? KEY_Q : KEY_A))
-		move->a_on = 0;
-	if (keycode == (AZERTY ? KEY_D : KEY_D))
-		move->d_on = 0;
-	// if (keycode == G)
-	// 	move->g_on = 0;
-	// if (keycode == DR)
-	// 	move->dr_on = 0;
-	return (0);
-}
-
-int		key_push(int keycode, t_move *move)
-{
-	if (keycode == (AZERTY ? KEY_Z : KEY_W))
-		move->w_on = 1;
-	if (keycode == (AZERTY ? KEY_S : KEY_S))
-		move->s_on = 1;
-	if (keycode == (AZERTY ? KEY_Q : KEY_A))
-		move->a_on = 1;
-	if (keycode == (AZERTY ? KEY_D : KEY_D))
-		move->d_on = 1;
-	// if (keycode == G)
-	// 	move->g_on = 1;
-	// if (keycode == DR)
-	// 	move->dr_on = 1;
-	// if (keycode == 17 && move->dm == 0)
-	// 	move->dm = 1;
-	// else if (keycode == 17 && move->dm == 1)
-	// 	move->dm = 0;
-	return (0);
-}
-
-// void		key_hook(int keycode, t_scene *scene)
-// {
-// 	if (keycode == 53)
-// 		close_prog(scene);
-// 	if (keycode == 78 && scene->spe.rot_spe + RS > 0.0051)
-// 		scene->spe.rot_spe -= 0.005;
-// 	if (keycode == 69 && scene->spe.rot_spe + RS < 0.25)
-// 		scene->spe.rot_spe += 0.005;
-// 	if (keycode == 125 && scene->spe.mov_spe + MS > 0.05)
-// 		scene->spe.mov_spe -= 0.01;
-// 	if (keycode == 126 && scene->spe.mov_spe + MS < 0.5)
-// 		scene->spe.mov_spe += 0.01;
-// 	if (keycode == KEY_S)
-// 		save(cub);
-// }
-
-int		key_function(const int keycode, const t_window *w)
-{
-	char	filename[35];
-	clock_t	start, end;
-	float x;
-
-	printf("%i\n", keycode);
-	key_push(keycode, &w->scene->move);
-	if (keycode == ESC)
-		close_function(w);
-	else if (keycode == UP)
-	{
-		w->scene->pos.x += w->scene->dir.x * SPEED_MOVE;
-		w->scene->pos.y += w->scene->dir.y * SPEED_MOVE;
-		// if (w->scene->pos.x > w->scene->size.h)
-		// 	w->scene->pos.x = w->scene->size.h;
-		// if (w->scene->pos.y > w->scene->size.w)
-		// 	w->scene->pos.y = w->scene->size.w;
-		refresh(w);
-	}
-	else if (keycode == DOWN)
-	{
-		w->scene->pos.x -= w->scene->dir.x * SPEED_MOVE;
-		w->scene->pos.y -= w->scene->dir.y * SPEED_MOVE;
-		// if (w->scene->pos.x > w->scene->size.h)
-		// 	w->scene->pos.x = w->scene->size.h;
-		// if (w->scene->pos.y > w->scene->size.w)
-		// 	w->scene->pos.y = w->scene->size.w;
-		refresh(w);
-	}
-	else if (keycode == LEFT)
-	{
-		rotation(&w->scene->dir, THETA);
-		rotation(&w->scene->plane, THETA);
-		refresh(w);
-	}
-	else if (keycode == RIGHT)
-	{
-		rotation(&w->scene->dir, -THETA);
-		rotation(&w->scene->plane, -THETA);
-		refresh(w);
-	}
-	else if (keycode == (AZERTY ? KEY_S : KEY_S))
-	{
-		start = clock();
-		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->resolution);
-		end = clock();
-		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	}
 	return (0);
 }
 
@@ -240,6 +88,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->scene = scene;
+	printf("get_controls_loop\n");
 	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close	
 		mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 		//mlx_hook(mlx->win_ptr, 2, 1L << 0, key_hook, scene);
@@ -276,6 +125,7 @@ int		main(const int argc, const char *argv[])
 	else if (argc == 3)
 	{
 		char filename[35];
+		make_img(img, scene);
 		start = clock();
 		save_bmp(screenshot_datetime(filename), img->data, scene->resolution);
 		end = clock();
