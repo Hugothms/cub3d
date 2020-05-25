@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/20 16:50:22 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/25 12:22:02 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_scene(t_scene *scene)
 
 int		close_function(const t_window *w)
 {
+	printf("close\n");
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	//free(mlx);
@@ -91,9 +92,11 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	printf("get_controls_loop\n");
 	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close	
 		mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
-		//mlx_hook(mlx->win_ptr, 2, 1L << 0, key_hook, scene);
-	mlx_key_hook(mlx->win_ptr, key_function, window);
-	mlx_loop_hook(mlx->mlx_ptr,	refresh, window);
+		mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
+	//mlx_key_hook(mlx->win_ptr, key_function, window);
+	ft_putstr("before loop\n");
+	mlx_loop_hook(mlx->mlx_ptr, refresh, window);
+	//mlx_loop(mlx->mlx_ptr);
 }
 
 int		main(const int argc, const char *argv[])
@@ -120,6 +123,7 @@ int		main(const int argc, const char *argv[])
 		char *title = ft_strdup(argv[1]);
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, title)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
+		free(title);
 		get_controls_loop(mlx, img, scene);
 	}
 	else if (argc == 3)
