@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/25 12:38:23 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/25 12:40:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,9 @@ void	make_img(t_img *img, t_scene *scene);
 int		key_release(int keycode, t_move *move);
 int		key_push(int keycode, t_move *move);
 int		key_function(const int keycode, const t_window *w);
-void		check_key_on(t_scene *scene);
+void	check_key_on(t_scene *scene);
 
-
+int		close_function(const t_window *w);
+int		refresh(const t_window *w);
 
 #endif
