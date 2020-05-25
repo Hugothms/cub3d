@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/20 16:53:27 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/25 12:38:23 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ typedef struct		s_rgb
 
 typedef struct		s_move
 {
-	int 			w_on;
-	int 			s_on;
-	int 			a_on;
-	int 			d_on;
+	int 			up;
+	int 			down;
+	int 			left;
+	int 			right;
 	int 			g_on;
 	int 			dr_on;
 	int 			dm;

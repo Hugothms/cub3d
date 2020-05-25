@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/20 16:53:13 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/25 12:38:22 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int		key_release(int keycode, t_move *move)
 {
 	printf("key_release\n");
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
-		move->w_on = 0;
+		move->up = 0;
 	if (keycode == (AZERTY ? KEY_S : KEY_S))
-		move->s_on = 0;
+		move->down = 0;
 	if (keycode == (AZERTY ? KEY_Q : KEY_A))
-		move->a_on = 0;
+		move->left = 0;
 	if (keycode == (AZERTY ? KEY_D : KEY_D))
-		move->d_on = 0;
+		move->right = 0;
 	// if (keycode == G)
 	// 	move->g_on = 0;
 	// if (keycode == DR)
@@ -34,13 +34,13 @@ int		key_push(int keycode, t_move *move)
 {
 	printf("key_push\n");
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
-		move->w_on = 1;
+		move->up = 1;
 	if (keycode == (AZERTY ? KEY_S : KEY_S))
-		move->s_on = 1;
+		move->down = 1;
 	if (keycode == (AZERTY ? KEY_Q : KEY_A))
-		move->a_on = 1;
+		move->left = 1;
 	if (keycode == (AZERTY ? KEY_D : KEY_D))
-		move->d_on = 1;
+		move->right = 1;
 	// if (keycode == G)
 	// 	move->g_on = 1;
 	// if (keycode == DR)
