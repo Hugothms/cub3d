@@ -6,13 +6,13 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/17 19:45:11 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/26 11:14:45 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
+void		put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
 {
 	int	(*tab)[resolution.w][1]; // prepare the cast
 
@@ -20,7 +20,17 @@ void		ft_put_pixel(unsigned char *data, t_couple pixel, int color, t_couple reso
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
 }
 
-void		ft_put_line(unsigned char *data, int line, t_couple delim, int wall_color, t_couple resolution)
+void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
+{
+	while (length-- >0)
+	{
+		printf("pixel\n");
+		put_pixel(data, pos, color, resolution); // set the pixel at the coord x,y with the color value
+		pos.h++;
+	}
+}
+
+void		draw_wall(unsigned char *data, int line, t_couple delim, int wall_color, t_couple resolution)
 {
 	int			i;
 	t_couple	pixel;
@@ -31,22 +41,23 @@ void		ft_put_line(unsigned char *data, int line, t_couple delim, int wall_color,
 	{
 		pixel.h = i++;
 		pixel.w = line;
-		ft_put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
+		put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
 	}
 	while (i < delim.w)
 	{
 		pixel.h = i++;
 		pixel.w = line;
-		ft_put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
+		put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
 	}
 	while (i < resolution.h)
 	{
 		pixel.h = i++;
 		pixel.w = line;
-		ft_put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
+		put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	}
 }
 
-}
+
 
 void	make_img(t_img *img, t_scene *scene)
 {
@@ -164,7 +175,7 @@ void	make_img(t_img *img, t_scene *scene)
 		t_couple delim;
 		delim.h = drawStart < scene->resolution.h ? drawStart : 0;
 		delim.w = drawEnd < scene->resolution.w ? drawEnd : 0;
-		ft_put_line(img->data, x, delim, rgb_to_int(*color), scene->resolution);
+		draw_wall(img->data, x, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
 
 		x++;
