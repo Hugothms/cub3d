@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/26 10:56:49 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/30 19:04:55 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 
 # define THETA 0.01745329
 # define SPEED_MOVE 0.1
-# define CEILING_COLOR 0
-# define FLOOR_COLOR 0
+# define CEILING_COLOR 2105444
+# define FLOOR_COLOR 2105376
 # define FOV 0.66
 /*
 ** Keycodes and screen size LINUX and MAC

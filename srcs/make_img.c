@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/26 11:14:45 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/30 19:20:49 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	make_img(t_img *img, t_scene *scene)
 	int x;
 
 	x = 0;
-
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
@@ -74,7 +73,6 @@ void	make_img(t_img *img, t_scene *scene)
 		double cameraX = 2 * x / (double)scene->resolution.w - 1; //x-coordinate in camera space
 		double rayDirX = scene->dir.x + scene->plane.x * cameraX;
 		double rayDirY = scene->dir.y + scene->plane.y * cameraX;
-
 
 		int mapX = (int)scene->pos.x;
 		int mapY = (int)scene->pos.y;
@@ -140,33 +138,34 @@ void	make_img(t_img *img, t_scene *scene)
 		// printf("rayDirX: %f\trayDirY:%f\n", rayDirX, rayDirY);
 		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
 		// printf("side:%d\n", side);
-		// if(side == 0)
+		if(side == 0)
 			perpWallDist = (mapX - scene->pos.x + (1 - stepX) / 2.) / rayDirX;
-		// else
-		// 	perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
-
-		//Calculate height of line to draw on screen
+		else
+			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
 		// printf("res.h: %d\tperp:%f\n", scene->resolution.h, perpWallDist);
+		
+		//Calculate height of line to draw on screen
 		int lineHeight = (scene->resolution.h / perpWallDist);
+		// printf("lineHeight: %d\n", lineHeight);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		// printf("lineHeight: %d\n", lineHeight);
 		int drawStart = -lineHeight / 2 + scene->resolution.h / 2;
-		if(drawStart < 0)drawStart = 0;
+		if(drawStart < 0)
+			drawStart = 0;
 		int drawEnd = lineHeight / 2 + scene->resolution.h / 2;
-		if(drawEnd >= scene->resolution.h)drawEnd = scene->resolution.h - 1;
+		if(drawEnd >= scene->resolution.h)
+			drawEnd = scene->resolution.h - 1;
 
 		//choose wall color
 		t_rgb *color;
 		switch(scene->map[mapX][mapY])
 		{
-			case 1:color = int_to_rgb(255,0,0);break; //red
-			case 2:color = int_to_rgb(255,255,0);break; //green
-			case 3:color = int_to_rgb(255,0,255); break; //blue
-			case 4:color = int_to_rgb(0,255,0);break; //white
+			case '1':color = int_to_rgb(255,0,0);break; //red
+			case '2':color = int_to_rgb(255,255,0);break; //green
+			case '3':color = int_to_rgb(255,0,255); break; //blue
+			case '4':color = int_to_rgb(0,255,0);break; //white
 			default: color = int_to_rgb(0,0,255); break; //yellow
 		}
-
 		// //give x and y sides different brightness
 		// if(side == 1) {color = color / 2;}
 
@@ -174,7 +173,7 @@ void	make_img(t_img *img, t_scene *scene)
 //		verLine(x, drawStart, drawEnd, color);
 		t_couple delim;
 		delim.h = drawStart < scene->resolution.h ? drawStart : 0;
-		delim.w = drawEnd < scene->resolution.w ? drawEnd : 0;
+		delim.w = drawEnd < scene->resolution.h ? drawEnd : 0;
 		draw_wall(img->data, x, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
 

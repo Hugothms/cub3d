@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/26 08:41:38 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/05/30 19:06:30 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		key_release(int keycode, t_move *move)
 {
-	printf("key_release\n");
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 0;
 	if (keycode == (AZERTY ? KEY_S : KEY_S))
@@ -32,7 +31,6 @@ int		key_release(int keycode, t_move *move)
 
 int		key_push(int keycode, t_move *move)
 {
-	printf("key_push\n");
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 1;
 	if (keycode == (AZERTY ? KEY_S : KEY_S))
@@ -74,7 +72,6 @@ int		key_function(const int keycode, const t_window *w)
 	clock_t	start, end;
 	float x;
 
-	printf("key_function\n");
 	printf("%i\n", keycode);
 	key_push(keycode, &w->scene->move);
 	if (keycode == ESC)
