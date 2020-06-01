@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/30 19:20:49 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/01 12:06:37 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,23 @@ void		put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolut
 
 void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
 {
-	while (length-- >0)
+	while (length-- > 0)
 	{
-		printf("pixel\n");
 		put_pixel(data, pos, color, resolution); // set the pixel at the coord x,y with the color value
 		pos.h++;
+	}
+}
+
+void		draw_square(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
+{
+	int i;
+	
+	i = 0;
+	while (i < length)
+	{
+		draw_vertical_line(data, pos, length, color, resolution); // set the pixel at the coord x,y with the color value
+		pos.w++;
+		i++;
 	}
 }
 
@@ -57,7 +69,34 @@ void		draw_wall(unsigned char *data, int line, t_couple delim, int wall_color, t
 	}
 }
 
+void 	draw_minimap(t_img *img, t_scene *scene)
+{
+	int col;
+	int line;
+	int len;
+	t_couple pos;
 
+	col = 0;
+	while (col < scene->size.h)
+	{
+		line = 0;
+		len = ft_strlen(scene->map[col]);
+		while (line < len)
+		{
+			if (scene->map[col][line] != '0')
+			{
+				pos.h = 20 + line * SIZE_MINIMAP;
+				pos.w = 20 + col * SIZE_MINIMAP;
+				draw_square(img->data, pos, SIZE_MINIMAP, 16581375, scene->resolution);
+			}
+			line++;
+		}
+		col++;
+	}
+	pos.h = 20 + scene->pos.y * SIZE_MINIMAP;
+	pos.w = 20 + scene->pos.x * SIZE_MINIMAP;
+	draw_square(img->data, pos, SIZE_MINIMAP, 65025, scene->resolution);
+}
 
 void	make_img(t_img *img, t_scene *scene)
 {
@@ -130,7 +169,7 @@ void	make_img(t_img *img, t_scene *scene)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(scene->map[mapX][mapY] > 0) hit = 1;
+			if(scene->map[mapX][mapY] != '0') hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
@@ -164,7 +203,7 @@ void	make_img(t_img *img, t_scene *scene)
 			case '2':color = int_to_rgb(255,255,0);break; //green
 			case '3':color = int_to_rgb(255,0,255); break; //blue
 			case '4':color = int_to_rgb(0,255,0);break; //white
-			default: color = int_to_rgb(0,0,255); break; //yellow
+			default: color = int_to_rgb(0,0,0); break; //yellow
 		}
 		// //give x and y sides different brightness
 		// if(side == 1) {color = color / 2;}
@@ -179,4 +218,5 @@ void	make_img(t_img *img, t_scene *scene)
 
 		x++;
 	}
+	draw_minimap(img, scene);
 }

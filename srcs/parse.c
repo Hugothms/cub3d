@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/25 12:38:47 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/01 11:39:50 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int			get_map(t_scene *scene, char*join)
 	free(join);
 	line = 0;
 	scene->size.h = ft_tab_size(map);
+	scene->size.w = max_len_tab(map);
 	if (!(scene->map = malloc(scene->size.h * sizeof(char*))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while (line < scene->size.h)

@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/15 20:31:51 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/01 11:44:41 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ int     ft_tab_size(char **tab)
     while (tab[i])
         i++;
     return (i);
+}
+
+int     max_len_tab(char **tab)
+{
+    int	i;
+	int	len;
+	int	max;
+    
+	if (!tab)
+        return (0);
+    i = 0;
+    max = 0;
+	while (tab[i])
+	{
+        len = ft_strlen(tab[i]);
+		max = (len > max ? len : max);
+		i++;
+	}
+	return (max);
 }
 
 void	free_tab(void **tab)

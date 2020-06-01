@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/30 19:04:55 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/01 11:54:14 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define CEILING_COLOR 2105444
 # define FLOOR_COLOR 2105376
 # define FOV 0.66
+# define SIZE_MINIMAP 5
+
 /*
 ** Keycodes and screen size LINUX and MAC
 */
@@ -170,6 +172,7 @@ int		rgb_to_int(t_rgb rgb);
 
 char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
+int     max_len_tab(char **tab);
 void	free_tab(void **tab);
 void	rotation(t_pos *dir, float angle);
 
