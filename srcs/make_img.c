@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/01 12:06:37 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/02 08:23:57 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int colo
 		pos.h++;
 	}
 }
+
+// void		draw_line(unsigned char *data, t_couple start, t_couple end, int color, t_couple resolution)
+// {
+	
+// }
 
 void		draw_square(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
 {
@@ -87,7 +92,7 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 			{
 				pos.h = 20 + line * SIZE_MINIMAP;
 				pos.w = 20 + col * SIZE_MINIMAP;
-				draw_square(img->data, pos, SIZE_MINIMAP, 16581375, scene->resolution);
+				draw_square(img->data, pos, SIZE_MINIMAP, 16777215, scene->resolution);
 			}
 			line++;
 		}
@@ -95,7 +100,10 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 	}
 	pos.h = 20 + scene->pos.y * SIZE_MINIMAP;
 	pos.w = 20 + scene->pos.x * SIZE_MINIMAP;
-	draw_square(img->data, pos, SIZE_MINIMAP, 65025, scene->resolution);
+	draw_square(img->data, pos, SIZE_MINIMAP, 11184810, scene->resolution);
+	t_couple pos2;
+	pos2.h = 20 + scene->pos.y * SIZE_MINIMAP;;
+	// draw_line(img->data, pos, pos2, 11184810, scene->resolution);
 }
 
 void	make_img(t_img *img, t_scene *scene)
@@ -169,7 +177,8 @@ void	make_img(t_img *img, t_scene *scene)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(scene->map[mapX][mapY] != '0') hit = 1;
+			if(scene->map[mapX][mapY] != '0')
+				hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
