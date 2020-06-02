@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/01 11:44:41 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/02 09:21:41 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*screenshot_datetime(char res[])
 	tmp = ft_itoa_width(tm.tm_sec, 2);
 	ft_memcpy(res + 28, tmp, 2);
 	free(tmp);
-	return (*res);
+	return (res);
 }
 
 int     ft_tab_size(char **tab)
