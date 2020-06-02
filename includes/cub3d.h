@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/01 13:11:49 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/02 09:04:44 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ typedef struct		s_rgb
 	int				g;
 	int				b;
 }					t_rgb;
+
+typedef struct		s_draw
+{
+	t_couple start;
+	t_couple end;
+}					t_draw;
 
 typedef struct		s_move
 {

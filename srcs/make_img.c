@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/02 08:23:57 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/02 09:20:07 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,32 @@ void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int colo
 	}
 }
 
-// void		draw_line(unsigned char *data, t_couple start, t_couple end, int color, t_couple resolution)
-// {
-	
-// }
+void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_couple resolution)
+{
+	int	i;
+	int	j;
+
+	i = abs(draw.end.h - draw.start.h);
+	j = abs(draw.end.w - draw.start.w);
+	if (i > j)
+	{
+		j = 1;
+		i /= j;
+	}
+	else
+	{
+		i = 1;
+		j /= i;
+	}
+	printf("%d:%d", i, j);
+	while (draw.start.h && draw.start.h < scene->size.h && draw.start.w && draw.start.w < scene->size.w)
+	{
+		printf("pixel\n");
+		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
+		draw.start.h += i;
+		draw.start.w += j;
+	}	
+}
 
 void		draw_square(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
 {
@@ -98,12 +120,13 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 		}
 		col++;
 	}
-	pos.h = 20 + scene->pos.y * SIZE_MINIMAP;
-	pos.w = 20 + scene->pos.x * SIZE_MINIMAP;
-	draw_square(img->data, pos, SIZE_MINIMAP, 11184810, scene->resolution);
-	t_couple pos2;
-	pos2.h = 20 + scene->pos.y * SIZE_MINIMAP;;
-	// draw_line(img->data, pos, pos2, 11184810, scene->resolution);
+	t_draw draw;
+	draw.start.h = 20 + scene->pos.y * SIZE_MINIMAP;
+	draw.start.w = 20 + scene->pos.x * SIZE_MINIMAP;
+	draw_square(img->data, draw.start, SIZE_MINIMAP, 11184810, scene->resolution);
+	draw.end.h = 20 + (scene->pos.y + scene->dir.y * 10) * SIZE_MINIMAP;;
+	draw.end.w = 20 + (scene->pos.x + scene->dir.x * 10) * SIZE_MINIMAP;;
+	draw_line(img->data, scene, draw, 11184810, scene->resolution);
 }
 
 void	make_img(t_img *img, t_scene *scene)
