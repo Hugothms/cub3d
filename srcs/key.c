@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 22:50:13 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:04:25 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int		key_release(int keycode, t_move *move)
 {
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 0;
-	if (keycode == (AZERTY ? KEY_S : KEY_S))
+	if (keycode == (KEY_S))
 		move->down = 0;
 	if (keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->left = 0;
-	if (keycode == (AZERTY ? KEY_D : KEY_D))
+	if (keycode == (KEY_D))
 		move->right = 0;
-	if (keycode == (AZERTY ? KEY_A : KEY_Q))
+	if (keycode == (ARROW_LEFT))
 		move->turn_left = 0;
-	if (keycode == (AZERTY ? KEY_E : KEY_E))
+	if (keycode == (ARROW_RIGHT))
 		move->turn_right = 0;
 	// if (keycode == G)
 	// 	move->g_on = 0;
@@ -37,15 +37,15 @@ int		key_push(int keycode, t_move *move)
 {
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 1;
-	if (keycode == (AZERTY ? KEY_S : KEY_S))
+	if (keycode == (KEY_S))
 		move->down = 1;
 	if (keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->left = 1;
-	if (keycode == (AZERTY ? KEY_D : KEY_D))
+	if (keycode == (KEY_D))
 		move->right = 1;
-	if (keycode == (AZERTY ? KEY_A : KEY_Q))
+	if (keycode == (ARROW_LEFT))
 		move->turn_left = 1;
-	if (keycode == (AZERTY ? KEY_E : KEY_E))
+	if (keycode == (ARROW_RIGHT))
 		move->turn_right = 1;
 	// if (keycode == G)
 	// 	move->g_on = 1;
@@ -91,23 +91,33 @@ int		key_function(const int keycode, const t_window *w)
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	}
-	else if (keycode == UP || keycode == KEY_Z)
+	else if (keycode == ARROW_UP || keycode == KEY_Z)
 	{
 		move_up(w->scene);
 		refresh(w);
 	}
-	else if (keycode == DOWN || keycode == KEY_S)
+	else if (keycode == ARROW_DOWN || keycode == KEY_S)
 	{
 		move_down(w->scene);
 		refresh(w);
 	}
-	else if (keycode == LEFT || keycode == KEY_Q)
+	else if (keycode ==  KEY_Q)
+	{
+		move_left(w->scene);
+		refresh(w);
+	}
+	else if (keycode == KEY_D)
+	{
+		move_right(w->scene);
+		refresh(w);
+	}
+	else if (keycode == ARROW_LEFT || keycode == KEY_A)
 	{
 		rotation(&w->scene->dir, THETA);
 		rotation(&w->scene->plane, THETA);
 		refresh(w);
 	}
-	else if (keycode == RIGHT || keycode == KEY_D)
+	else if (keycode == ARROW_RIGHT || keycode == KEY_E)
 	{
 		rotation(&w->scene->dir, -THETA);
 		rotation(&w->scene->plane, -THETA);

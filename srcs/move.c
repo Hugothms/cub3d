@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:50:32 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 22:51:06 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:03:40 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void 		move_down(t_scene *scene)
 
 void 		move_left(t_scene *scene)
 {
-	// if (scene->map[(int)(scene->plane.x + scene->dir.x * SPEED_MOVE)][(int)scene->plane.y] == '0')
-	// 	scene->plane.x += scene->dir.x * SPEED_MOVE;
-	// if (scene->map[(int)scene->plane.x][(int)(scene->plane.y + scene->dir.y * SPEED_MOVE)] == '0')
-	// 	scene->plane.y += scene->dir.y * SPEED_MOVE;
+	if (scene->map[(int)(scene->pos.x + scene->plane.x * SPEED_MOVE)][(int)scene->pos.y] == '0')
+		scene->pos.x += scene->plane.x * SPEED_MOVE;
+	if (scene->map[(int)scene->pos.x][(int)(scene->pos.y + scene->plane.y * SPEED_MOVE)] == '0')
+		scene->pos.y += scene->plane.y * SPEED_MOVE;
 }
 
 void 		move_right(t_scene *scene)
 {
-	// if (scene->map[(int)(scene->plane.x - scene->dir.x * SPEED_MOVE)][(int)scene->plane.y] == '0')
-	// 	scene->plane.x -= scene->dir.x * SPEED_MOVE;
-	// if (scene->map[(int)scene->plane.x][(int)(scene->plane.y - scene->dir.y * SPEED_MOVE)] == '0')
-	// 	scene->plane.y -= scene->dir.y * SPEED_MOVE;
+	if (scene->map[(int)(scene->pos.x - scene->plane.x * SPEED_MOVE)][(int)scene->pos.y] == '0')
+		scene->pos.x -= scene->plane.x * SPEED_MOVE;
+	if (scene->map[(int)scene->pos.x][(int)(scene->pos.y - scene->plane.y * SPEED_MOVE)] == '0')
+		scene->pos.y -= scene->plane.y * SPEED_MOVE;
 }
 
 void 		turn_left(t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 22:33:19 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:01:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,41 +48,41 @@
 ** Keycodes and screen size LINUX and MAC
 */
 # ifndef LINUX
-#  define AZERTY	1
-#  define ESC		65307
-#  define LEFT		65361
-#  define RIGHT		65363
-#  define UP		65362
-#  define DOWN		65364
-#  define KEY_A		97
-#  define KEY_E		101
-#  define KEY_D		100
-#  define KEY_Q		113
-#  define KEY_S		115
-#  define KEY_W		119
-#  define KEY_Z		122
+#  define AZERTY		1
+#  define ESC			65307
+#  define ARROW_LEFT	65361
+#  define ARROW_RIGHT	65363
+#  define ARROW_UP		65362
+#  define ARROW_DOWN	65364
+#  define KEY_A			97
+#  define KEY_E			101
+#  define KEY_D			100
+#  define KEY_Q			113
+#  define KEY_S			115
+#  define KEY_W			119
+#  define KEY_Z			122
 # else
-#  define AZERTY	0
-#  define ESC		53
-#  define LEFT		123
-#  define RIGHT		124
-#  define UP		126
-#  define DOWN		125
-#  define KEY_A		0
-#  define KEY_S		1
-#  define KEY_D		2
-#  define KEY_Q		12
-#  define KEY_W		13
-#  define KEY_E		14
-#  define KEY_O		31
-#  define KEY_U		32
-#  define KEY_I		34
-#  define KEY_L		37
-#  define KEY_J		38
-#  define KEY_K		40
-#  define KEY_SPACE	49
-#  define KEY_PLUS	69
-#  define KEY_MINUS	78
+#  define AZERTY		0
+#  define ESC			53
+#  define ARROW_LEFT	123
+#  define ARROW_RIGHT	124
+#  define ARROW_UP		126
+#  define ARROW_DOWN	125
+#  define KEY_A			0
+#  define KEY_S			1
+#  define KEY_D			2
+#  define KEY_Q			12
+#  define KEY_W			13
+#  define KEY_E			14
+#  define KEY_O			31
+#  define KEY_U			32
+#  define KEY_I			34
+#  define KEY_L			37
+#  define KEY_J			38
+#  define KEY_K			40
+#  define KEY_SPACE		49
+#  define KEY_PLUS		69
+#  define KEY_MINUS		78
 # endif
 
 typedef struct		s_mlx
