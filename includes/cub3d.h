@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 15:41:30 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:07:03 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define FLOOR_COLOR 2105376
 # define FOV 0.66
 # define SIZE_MINIMAP 5
+# define POS_COLOR 11184810
+
 
 /*
 ** Keycodes and screen size LINUX and MAC

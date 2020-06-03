@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 15:38:42 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:17:54 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,22 @@ void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_c
 {
 	int ymax;
 	int xmax;
+	t_couple	pos;
 
 	ymax = 20 + scene->size.h * SIZE_MINIMAP;
 	xmax = 20 + ft_strlen(scene->map[(int)scene->pos.x]) * SIZE_MINIMAP;
 	printf("draw%d:%d\n", draw.start.h,draw.start.w );
 	printf("max%d:%d\n", ymax, xmax );
-	while (draw.start.h > 20 && draw.start.h < xmax && draw.start.w > 20 && draw.start.w < ymax)
+	pos.h = draw.start.h;
+	pos.w = draw.start.w;
+	while (draw.start.h > 20 && draw.start.h < ymax && draw.start.w > 20 && draw.start.w < xmax)
 	{
-		printf("pixel\n");
+		//printf("%d:%d\n", draw.start.h, draw.start.w);
 		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
-		draw.start.h += draw.end.h;
-		draw.start.w += draw.end.w;
+		pos.h += draw.end.h;
+		pos.w += draw.end.w;
+		draw.start.h = pos.h;
+		draw.start.w = pos.w;
 	}	
 }
 
@@ -118,10 +123,10 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 	t_draw draw;
 	draw.start.w = 20 + scene->pos.y * SIZE_MINIMAP;
 	draw.start.h = 20 + scene->pos.x * SIZE_MINIMAP;
-	draw_square(img->data, draw.start, SIZE_MINIMAP, 11184810, scene->resolution);
+	draw_square(img->data, draw.start, SIZE_MINIMAP, POS_COLOR, scene->resolution);
 	draw.end.w = scene->dir.y;
 	draw.end.h = scene->dir.x;
-	// draw_line(img->data, scene, draw, 11184810, scene->resolution);
+	// draw_line(img->data, scene, draw, POS_COLOR, scene->resolution);
 }
 
 void	make_img(t_img *img, t_scene *scene)
@@ -222,13 +227,11 @@ void	make_img(t_img *img, t_scene *scene)
 
 		//choose wall color
 		t_rgb *color;
-		switch(scene->map[mapX][mapY])
+		switch(side)
 		{
-			case '1':color = int_to_rgb(255,0,0);break; //red
-			case '2':color = int_to_rgb(255,255,0);break; //green
-			case '3':color = int_to_rgb(255,0,255); break; //blue
-			case '4':color = int_to_rgb(0,255,0);break; //white
-			default: color = int_to_rgb(0,0,0); break; //yellow
+			case 0:color = int_to_rgb(0,255,255);break;
+			case 1:color = int_to_rgb(255,0,255);break;
+			default: color = int_to_rgb(0,255,0); break;
 		}
 		// //give x and y sides different brightness
 		// if(side == 1) {color = color / 2;}
@@ -238,8 +241,16 @@ void	make_img(t_img *img, t_scene *scene)
 		t_couple delim;
 		delim.h = drawStart < scene->resolution.h ? drawStart > 0 ? drawStart : 0 : 0;
 		delim.w = drawEnd < scene->resolution.h ? drawEnd > 0 ? drawEnd : 0 : 0;
-		draw_wall(img->data, scene->resolution.w - x, delim, rgb_to_int(*color), scene->resolution);
+		draw_wall(img->data, scene->resolution.w - x - 1, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
+		
+		t_draw draw;
+		draw.start.w = 20 + scene->pos.y * SIZE_MINIMAP;
+		draw.start.h = 20 + scene->pos.x * SIZE_MINIMAP;
+		draw_square(img->data, draw.start, SIZE_MINIMAP, POS_COLOR, scene->resolution);
+		draw.end.w = scene->dir.y;
+		draw.end.h = scene->dir.x;
+		//draw_line(img->data, scene, draw, POS_COLOR,scene->resolution);
 		x++;
 	}
 	draw_minimap(img, scene);
