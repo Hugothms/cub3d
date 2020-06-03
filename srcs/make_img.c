@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 14:11:52 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:33:12 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_c
 	{
 		printf("pixel\n");
 		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
-		draw.start.h += scene->dir.x;
-		draw.start.w += scene->dir.y;
+		draw.start.h += draw.end.h;
+		draw.start.w += draw.end.w;
 	}	
 }
 
@@ -60,31 +60,35 @@ void		draw_square(unsigned char *data, t_couple pos, int length, int color, t_co
 	}
 }
 
-void		draw_wall(unsigned char *data, int line, t_couple delim, int wall_color, t_couple resolution)
+void		draw_wall(unsigned char *data, int line, t_couple delim, int color, t_couple resolution)
 {
 	int			i;
 	t_couple	pixel;
 	
-	i = 0;
+	pixel.w = line;
 	// printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
-	while (i < delim.h)
-	{
-		pixel.h = i++;
-		pixel.w = line;
-		put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
-	}
-	while (i < delim.w)
-	{
-		pixel.h = i++;
-		pixel.w = line;
-		put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
-	}
-	while (i < resolution.h)
-	{
-		pixel.h = i++;
-		pixel.w = line;
-		put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
-	}
+	// i = 0;
+	pixel.h = 0;
+	draw_vertical_line(data, pixel, delim.h, CEILING_COLOR, resolution);
+	pixel.h += delim.h;
+	draw_vertical_line(data, pixel, delim.w - delim.h, color, resolution);
+	pixel.h += delim.w - delim.h;
+	draw_vertical_line(data, pixel, resolution.h - delim.w - 1, FLOOR_COLOR, resolution);
+	// while (i < delim.h)
+	// {
+	// 	pixel.h = i++;
+	// 	put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	// }
+	// while (i < delim.w)
+	// {
+	// 	pixel.h = i++;
+	// 	put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
+	// }
+	// while (i < resolution.h)
+	// {
+	// 	pixel.h = i++;
+	// 	put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	// }
 }
 
 void 	draw_minimap(t_img *img, t_scene *scene)
@@ -103,8 +107,8 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 		{
 			if (scene->map[col][line] != '0')
 			{
-				pos.h = 20 + line * SIZE_MINIMAP;
-				pos.w = 20 + col * SIZE_MINIMAP;
+				pos.w = 20 + line * SIZE_MINIMAP;
+				pos.h = 20 + col * SIZE_MINIMAP;
 				draw_square(img->data, pos, SIZE_MINIMAP, 16777215, scene->resolution);
 			}
 			line++;
@@ -112,12 +116,12 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 		col++;
 	}
 	t_draw draw;
-	draw.start.h = 20 + scene->pos.y * SIZE_MINIMAP;
-	draw.start.w = 20 + scene->pos.x * SIZE_MINIMAP;
+	draw.start.w = 20 + scene->pos.y * SIZE_MINIMAP;
+	draw.start.h = 20 + scene->pos.x * SIZE_MINIMAP;
 	draw_square(img->data, draw.start, SIZE_MINIMAP, 11184810, scene->resolution);
-	draw.end.h = 20 + (scene->pos.y + scene->dir.y * 10) * SIZE_MINIMAP;;
-	draw.end.w = 20 + (scene->pos.x + scene->dir.x * 10) * SIZE_MINIMAP;;
-	draw_line(img->data, scene, draw, 11184810, scene->resolution);
+	draw.end.w = scene->dir.y;
+	draw.end.h = scene->dir.x;
+	// draw_line(img->data, scene, draw, 11184810, scene->resolution);
 }
 
 void	make_img(t_img *img, t_scene *scene)
@@ -188,6 +192,7 @@ void	make_img(t_img *img, t_scene *scene)
 				side = 1;
 			}
 			//Check if ray has hit a wall
+			// printf("map%d:%d\n", mapX, mapY);
 			if(scene->map[mapX][mapY] != '0')
 				hit = 1;
 		}
@@ -231,11 +236,10 @@ void	make_img(t_img *img, t_scene *scene)
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
 		t_couple delim;
-		delim.h = drawStart < scene->resolution.h ? drawStart : 0;
-		delim.w = drawEnd < scene->resolution.h ? drawEnd : 0;
+		delim.h = drawStart < scene->resolution.h ? drawStart > 0 ? drawStart : 0 : 0;
+		delim.w = drawEnd < scene->resolution.h ? drawEnd > 0 ? drawEnd : 0 : 0;
 		draw_wall(img->data, x, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
-
 		x++;
 	}
 	draw_minimap(img, scene);
