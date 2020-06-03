@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 16:07:03 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 22:33:19 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@
 # define FLOOR_COLOR 2105376
 # define FOV 0.66
 # define SIZE_MINIMAP 5
-# define POS_COLOR 11184810
+
+# define GREY 11184810
+# define RED 16711680
+
 
 
 /*
@@ -118,8 +121,8 @@ typedef struct		s_rgb
 
 typedef struct		s_draw
 {
-	t_couple start;
-	t_couple end;
+	t_couple	start;
+	t_pos		end;
 }					t_draw;
 
 typedef struct		s_move
@@ -128,10 +131,8 @@ typedef struct		s_move
 	int 			down;
 	int 			left;
 	int 			right;
-	int 			g_on;
-	int 			dr_on;
-	int 			dm;
-	int 			shot;
+	int 			turn_left;
+	int 			turn_right;
 }					t_move;
 
 typedef struct		s_scene
@@ -197,5 +198,13 @@ void	check_key_on(t_scene *scene);
 
 int		close_function(const t_window *w);
 int		refresh(const t_window *w);
+
+
+void 		move_up(t_scene *scene);
+void 		move_down(t_scene *scene);
+void 		move_left(t_scene *scene);
+void 		move_right(t_scene *scene);
+void 		turn_left(t_scene *scene);
+void 		turn_right(t_scene *scene);
 
 #endif
