@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/03 15:30:39 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:36:38 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,22 @@ int			get_map(t_scene *scene, char*join)
 				scene->map[line][col] = '0';
 				scene->pos.x = line + 0.5;
 				scene->pos.y = col + 0.5;
-				if (map[line][col] == 'N')
+				if (map[line][col] == 'E')
 				{
 					scene->dir.x = 0;
 					scene->dir.y = -1;
 				}
-				else if (map[line][col] == 'S')
+				else if (map[line][col] == 'W')
 				{
 					scene->dir.x = 0;
 					scene->dir.y = 1;
 				}
-				else if (map[line][col] == 'E')
+				else if (map[line][col] == 'S')
 				{
 					scene->dir.x = 1;
 					scene->dir.y = 0;
 				}
-				else if (map[line][col] == 'W')
+				else if (map[line][col] == 'N')
 				{
 					scene->dir.x = -1;
 					scene->dir.y = 0;
