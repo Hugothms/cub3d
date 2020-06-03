@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 14:45:16 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:41:30 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define MLX_ERROR -4
 # define MALLOC_ERROR -5
 
-# define THETA 0.01745329
-# define SPEED_MOVE 0.1
+# define THETA 0.03
+# define SPEED_MOVE 0.15
 # define CEILING_COLOR 6185465
 # define FLOOR_COLOR 2105376
 # define FOV 0.66
