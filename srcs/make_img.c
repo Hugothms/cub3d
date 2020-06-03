@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/02 09:20:07 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 11:39:28 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,16 @@ void	make_img(t_img *img, t_scene *scene)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(scene->map[mapX][mapY] != '0')
-				hit = 1;
+			// printf("%d:%d\n", mapX, mapY);
+			// if (mapX && mapX < scene->size.h)
+			// {
+			// 	if (mapY && mapY < ft_strlen(scene->map[mapX]))
+			// 	{
+					// printf("%d:%d\n", mapX, mapY);
+					if(scene->map[mapX][mapY] != '0')
+						hit = 1;
+				// }
+			// }
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);

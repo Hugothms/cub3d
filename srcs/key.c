@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/05/30 19:06:30 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 11:33:40 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ int		key_function(const int keycode, const t_window *w)
 		close_function(w);
 	else if (keycode == UP)
 	{
-		w->scene->pos.x += w->scene->dir.x * SPEED_MOVE;
-		w->scene->pos.y += w->scene->dir.y * SPEED_MOVE;
+		if (w->scene->map[(int)(w->scene->pos.x + w->scene->dir.x * SPEED_MOVE)][(int)w->scene->pos.y] == '0')
+			w->scene->pos.x += w->scene->dir.x * SPEED_MOVE;
+		if (w->scene->map[(int)w->scene->pos.x][(int)(w->scene->pos.y + w->scene->dir.y * SPEED_MOVE)] == '0')
+			w->scene->pos.y += w->scene->dir.y * SPEED_MOVE;
 		// if (w->scene->pos.x > w->scene->size.h)
 		// 	w->scene->pos.x = w->scene->size.h;
 		// if (w->scene->pos.y > w->scene->size.w)
