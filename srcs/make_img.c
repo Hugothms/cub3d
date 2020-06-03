@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 11:59:46 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 14:11:52 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,19 @@ void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int colo
 
 void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_couple resolution)
 {
-	int	i;
-	int	j;
+	int ymax;
+	int xmax;
 
-	i = abs(draw.end.h - draw.start.h);
-	j = abs(draw.end.w - draw.start.w);
-	if (i > j)
-	{
-		j = 1;
-		i /= j;
-	}
-	else
-	{
-		i = 1;
-		j /= i;
-	}
-	printf("%d:%d", i, j);
-	while (draw.start.h && draw.start.h < scene->size.h && draw.start.w && draw.start.w < scene->size.w)
+	ymax = 20 + scene->size.h * SIZE_MINIMAP;
+	xmax = 20 + ft_strlen(scene->map[(int)scene->pos.x]) * SIZE_MINIMAP;
+	printf("draw%d:%d\n", draw.start.h,draw.start.w );
+	printf("max%d:%d\n", ymax, xmax );
+	while (draw.start.h > 20 && draw.start.h < xmax && draw.start.w > 20 && draw.start.w < ymax)
 	{
 		printf("pixel\n");
 		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
-		draw.start.h += i;
-		draw.start.w += j;
+		draw.start.h += scene->dir.x;
+		draw.start.w += scene->dir.y;
 	}	
 }
 
@@ -134,9 +125,6 @@ void	make_img(t_img *img, t_scene *scene)
 	int x;
 
 	x = 0;
-	double time = 0; //time of current frame
-	double oldTime = 0; //time of previous frame
-
 	while (x < scene->resolution.w)
 	{
 		//calculate ray position and direction
@@ -200,16 +188,8 @@ void	make_img(t_img *img, t_scene *scene)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			// printf("%d:%d\n", mapX, mapY);
-			// if (mapX && mapX < scene->size.h)
-			// {
-			// 	if (mapY && mapY < ft_strlen(scene->map[mapX]))
-			// 	{
-					// printf("%d:%d\n", mapX, mapY);
-					if(scene->map[mapX][mapY] != '0')
-						hit = 1;
-				// }
-			// }
+			if(scene->map[mapX][mapY] != '0')
+				hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
