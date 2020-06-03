@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 11:42:45 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:39:06 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ int		key_function(const int keycode, const t_window *w)
 	}
 	else if (keycode == LEFT)
 	{
-		rotation(&w->scene->dir, -THETA);
-		rotation(&w->scene->plane, -THETA);
+		rotation(&w->scene->dir, THETA);
+		rotation(&w->scene->plane, THETA);
 		refresh(w);
 	}
 	else if (keycode == RIGHT)
 	{
-		rotation(&w->scene->dir, THETA);
-		rotation(&w->scene->plane, THETA);
+		rotation(&w->scene->dir, -THETA);
+		rotation(&w->scene->plane, -THETA);
 		refresh(w);
 	}
 	else if (keycode == (AZERTY ? KEY_S : KEY_S))

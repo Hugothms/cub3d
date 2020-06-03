@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 15:33:12 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:38:42 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ void	make_img(t_img *img, t_scene *scene)
 		t_couple delim;
 		delim.h = drawStart < scene->resolution.h ? drawStart > 0 ? drawStart : 0 : 0;
 		delim.w = drawEnd < scene->resolution.h ? drawEnd > 0 ? drawEnd : 0 : 0;
-		draw_wall(img->data, x, delim, rgb_to_int(*color), scene->resolution);
+		draw_wall(img->data, scene->resolution.w - x, delim, rgb_to_int(*color), scene->resolution);
 		free(color);
 		x++;
 	}
