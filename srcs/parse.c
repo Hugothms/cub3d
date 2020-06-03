@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/01 11:39:50 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:30:39 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int			get_map(t_scene *scene, char*join)
 			else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
 			{
 				scene->map[line][col] = '0';
-				scene->pos.x = line;
-				scene->pos.y = col;
+				scene->pos.x = line + 0.5;
+				scene->pos.y = col + 0.5;
 				if (map[line][col] == 'N')
 				{
 					scene->dir.x = 0;
@@ -117,7 +117,7 @@ void		parse_map(t_scene *scene, int fd)
 	char	*line;
 	char	*join;
 	char	*tmp;
-	int		i;
+	int		ret;
 	int		col;
 
 	while (get_next_line(fd, &line) == 1)
@@ -132,8 +132,10 @@ void		parse_map(t_scene *scene, int fd)
 	tmp = join;
 	join = ft_strjoin(join, "\n");
 	free(tmp);
-	while (get_next_line(fd, &line) == 1)
+	ret = 1;
+	while (ret == 1)
 	{
+		ret = get_next_line(fd, &line);
 		tmp = join;
 		join = ft_strjoin(join, line);
 		free(tmp);
@@ -142,9 +144,6 @@ void		parse_map(t_scene *scene, int fd)
 		free(tmp);
 		free(line);
 	}
-	free(line);
-	// ft_putstr("join\n");
-	// ft_putstr(join);
 	get_map(scene, join);
 	//check_map(scene->map);
 }
