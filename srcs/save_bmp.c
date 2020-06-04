@@ -6,59 +6,59 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/05/04 11:38:42 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 20:06:09 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-unsigned char	*file_header_bmp(int filesize)
+char	*file_header_bmp(const int filesize)
 {
-	unsigned char	*bmpfileheader;
+	char	*bmpfileheader;
 
-	if(!(bmpfileheader = (unsigned char*) malloc(14 * sizeof(unsigned char))))
+	if (!(bmpfileheader = malloc(14 * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_memcpy(bmpfileheader, (char[]){'B','M', 0,0,0,0, 0,0, 0,0, 54,0,0,0}, 14);
-	bmpfileheader[2] = (unsigned char)(filesize);
-	bmpfileheader[3] = (unsigned char)(filesize >> 8);
-	bmpfileheader[4] = (unsigned char)(filesize >> 16);
-	bmpfileheader[5] = (unsigned char)(filesize >> 24);
+	bmpfileheader[2] = filesize;
+	bmpfileheader[3] = filesize >> 8;
+	bmpfileheader[4] = filesize >> 16;
+	bmpfileheader[5] = filesize >> 24;
 	return (bmpfileheader);
 }
 
-unsigned char	*info_header_bmp(t_couple resolution)
+char	*info_header_bmp(const t_couple resolution)
 {
-	unsigned char	*bmpinfoheader;
+	char	*bmpinfoheader;
 
-	if(!(bmpinfoheader = (unsigned char*) malloc(40 * sizeof(unsigned char))))
+	if (!(bmpinfoheader = malloc(40 * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_memcpy(bmpinfoheader, (char[]){40,0,0,0, 0,0,0,0, 0,0,0,0, 1,0, 32,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0}, 40);
-	bmpinfoheader[4] = (unsigned char)(resolution.w);
-	bmpinfoheader[5] = (unsigned char)(resolution.w >> 8);
-	bmpinfoheader[6] = (unsigned char)(resolution.w >> 16);
-	bmpinfoheader[7] = (unsigned char)(resolution.w >> 24);
-	bmpinfoheader[8] = (unsigned char)(resolution.h);
-	bmpinfoheader[9] = (unsigned char)(resolution.h >> 8);
-	bmpinfoheader[10] = (unsigned char)(resolution.h >> 16);
-	bmpinfoheader[11] = (unsigned char)(resolution.h >> 24);
+	bmpinfoheader[4] = resolution.w;
+	bmpinfoheader[5] = resolution.w >> 8;
+	bmpinfoheader[6] = resolution.w >> 16;
+	bmpinfoheader[7] = resolution.w >> 24;
+	bmpinfoheader[8] = resolution.h;
+	bmpinfoheader[9] = resolution.h >> 8;
+	bmpinfoheader[10] = resolution.h >> 16;
+	bmpinfoheader[11] = resolution.h >> 24;
 	return (bmpinfoheader);
 }
 
-void			write_data(int f, const unsigned char *data, t_couple resolution, const int filesize)
+void			write_data(const int f, const char *data, t_couple resolution, const int filesize)
 {
 	int 			line;
 
 	line = resolution.h;
-	while(--line + 1)
+	while (--line + 1)
 		write(f, data + resolution.w * line * 4, resolution.w * 4);
 }
 
-void			save_bmp(const char *filename, const unsigned char *data, const t_couple resolution)
+void			save_bmp(const char *filename, const char *data, const t_couple resolution)
 {
-	int				filesize;
-	int				f;
-	unsigned char	*bmpfileheader;
-	unsigned char	*bmpinfoheader;
+	int		filesize;
+	int		f;
+	char	*bmpfileheader;
+	char	*bmpinfoheader;
 
 	filesize = 14 + 40 + 3 * resolution.w * resolution.h;
 	f = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0755);
