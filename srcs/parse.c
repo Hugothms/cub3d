@@ -54,7 +54,7 @@ void print_map_color(char **map, t_couple couple, t_couple size)
 	printf("couple%d:%d\n", couple.h, couple.w);
 	int i = 0;
 	int j;
-	while(i < size.h)
+	while (i < size.h)
 	{
 		j=0;
 		while (map[i][j])
@@ -117,7 +117,7 @@ void		check_map(char **map, t_pos pos, t_couple size)
 	
 	couple.h = (int)pos.x;
 	couple.w = (int)pos.y;
-	if(!recurs_map(map, couple, size))
+	if (!recurs_map(map, couple, size))
 		print_err_and_exit("Map not closed", PARSE_ERROR);
 }
 
@@ -268,7 +268,7 @@ t_scene		*parse(int fd)
 	}
 	parse_map(s, fd);
 	// int i = 0;
-	// while(i < scene->size.h)
+	// while (i < scene->size.h)
 	// {
 	// 	ft_putstr(scene->map[i++]);
 	// 	ft_putchar('\n');

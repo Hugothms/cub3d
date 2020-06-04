@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 16:22:37 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 19:55:41 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct		s_img
  	int				bits_per_pixel;
 	int				size_line;
 	int				endian;
-	unsigned char	*data;
+	char			*data;
 }					t_img;
 
 typedef struct		s_couple
@@ -187,7 +187,7 @@ void	rotate(t_pos *dir, float angle);
 
 void	print_err_and_exit(char *str, int err);
 
-void	save_bmp(const char *filename, const unsigned char *data, const t_couple resolution);
+void	save_bmp(const char *filename, const char *data, const t_couple resolution);
 
 void	make_img(t_img *img, t_scene *scene);
 

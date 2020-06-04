@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 16:22:39 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 20:07:15 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_img	*init_img(t_mlx *mlx, t_couple *resolution)
 		resolution->h = h;
 	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution->w, resolution->h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
-	if (!(img->data = (unsigned char*)mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
+	if (!(img->data = mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	return (img);
 }
@@ -82,7 +82,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 {
 	t_window	*window;
 
-	if(!(window = malloc(sizeof(*window))))
+	if (!(window = malloc(sizeof(*window))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	window->mlx = mlx;
 	window->img = img;

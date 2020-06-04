@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 16:21:31 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 20:01:45 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_c
 	pos.y = draw.start.w;
 	// while (draw.start.h > 20 && draw.start.h < ymax && draw.start.w > 20 && draw.start.w < xmax)
 	int i = 20;
-	while(i--)
+	while (i--)
 	{
 		//printf("%d:%d\n", draw.start.h, draw.start.w);
 		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
@@ -150,7 +150,7 @@ void	make_img(t_img *img, t_scene *scene)
 		int hit = 0; //was there a wall hit?
 		int side; //was a NS or a EW wall hit?
 		//calculate step and initial sideDist
-		if(rayDirX < 0)
+		if (rayDirX < 0)
 		{
 			stepX = -1;
 			sideDistX = (scene->pos.x - mapX) * deltaDistX;
@@ -160,7 +160,7 @@ void	make_img(t_img *img, t_scene *scene)
 			stepX = 1;
 			sideDistX = (mapX + 1.0 - scene->pos.x) * deltaDistX;
 		}
-		if(rayDirY < 0)
+		if (rayDirY < 0)
 		{
 			stepY = -1;
 			sideDistY = (scene->pos.y - mapY) * deltaDistY;
@@ -174,7 +174,7 @@ void	make_img(t_img *img, t_scene *scene)
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
-			if(sideDistX < sideDistY)
+			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
 				mapX += stepX;
@@ -194,7 +194,7 @@ void	make_img(t_img *img, t_scene *scene)
 			}
 			//Check if ray has hit a wall
 			// printf("map%d:%d\n", mapX, mapY);
-			if(scene->map[mapX][mapY] != '0')
+			if (scene->map[mapX][mapY] != '0')
 				hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
@@ -203,7 +203,7 @@ void	make_img(t_img *img, t_scene *scene)
 		// printf("rayDirX: %f\trayDirY:%f\n", rayDirX, rayDirY);
 		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
 		// printf("side:%d\n", side);
-		if(side % 2 == 0)
+		if (side % 2 == 0)
 			perpWallDist = (mapX - scene->pos.x + (1 - stepX) / 2.) / rayDirX;
 		else
 			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
@@ -214,10 +214,10 @@ void	make_img(t_img *img, t_scene *scene)
 		// printf("lineHeight: %d\n", lineHeight);
 		//calculate lowest and highest pixel to fill in current stripe
 		int drawStart = -lineHeight / 2 + scene->res.h / 2;
-		if(drawStart < 0)
+		if (drawStart < 0)
 			drawStart = 0;
 		int drawEnd = lineHeight / 2 + scene->res.h / 2;
-		if(drawEnd >= scene->res.h)
+		if (drawEnd >= scene->res.h)
 			drawEnd = scene->res.h - 1;
 		//choose wall color
 		t_rgb *color;
@@ -230,7 +230,7 @@ void	make_img(t_img *img, t_scene *scene)
 			default: color = int_to_rgb(255,0,0); break;
 		}
 		// //give x and y sides different brightness
-		// if(side == 1) {color = color / 2;}
+		// if (side == 1) {color = color / 2;}
 
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
