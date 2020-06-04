@@ -223,12 +223,36 @@ void		parse_map(t_scene *scene, int fd)
 	check_map(scene->map, scene->pos, scene->size);
 }
 
+set_all(t_scene *s, char *line)
+{
+	char	**data;
+
+	data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
+	if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && s->res.w == -1)
+		set_resolution(s, data);
+	else if (check_line(line, data, "NO", NB_ELEM_TEX) && !s->tex[NORTH])
+		set_texture(s, data, NORTH);
+	else if (check_line(line, data, "SO", NB_ELEM_TEX) && !s->tex[SOUTH])
+		set_texture(s, data, SOUTH);
+	else if (check_line(line, data, "WE", NB_ELEM_TEX) && !s->tex[WEST])
+		set_texture(s, data, WEST);
+	else if (check_line(line, data, "EA", NB_ELEM_TEX) && !s->tex[EAST])
+		set_texture(s, data, EAST);
+	else if (check_line(line, data, "S", NB_ELEM_TEX) && !s->tex[SPRITE])
+		set_texture(s, data, SPRITE);
+	else if (check_line(line, data, "F", NB_ELEM_COLOR) && !s->floor)
+		set_color(s, data, 0);
+	else if (check_line(line, data, "C", NB_ELEM_COLOR) && !s->ceil)
+		set_color(s, data, 1);
+	free(line);
+	free_tab((void**)data);
+}
+
 t_scene		*parse(int fd)
 {
 	t_scene	*s;
 	char	*line;
 	int		ret;
-	char	**data;
 
 	if (!(s = malloc(sizeof(*s))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
@@ -238,25 +262,7 @@ t_scene		*parse(int fd)
 	{
 		// ft_putstr(line);
 		// ft_putchar('\n');
-		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && s->res.w == -1)
-			set_resolution(s, data);
-		else if (check_line(line, data, "NO", NB_ELEM_TEX) && !s->tex[NORTH])
-			set_texture(s, data, NORTH);
-		else if (check_line(line, data, "SO", NB_ELEM_TEX) && !s->tex[SOUTH])
-			set_texture(s, data, SOUTH);
-		else if (check_line(line, data, "WE", NB_ELEM_TEX) && !s->tex[WEST])
-			set_texture(s, data, WEST);
-		else if (check_line(line, data, "EA", NB_ELEM_TEX) && !s->tex[EAST])
-			set_texture(s, data, EAST);
-		else if (check_line(line, data, "S", NB_ELEM_TEX) && !s->tex[SPRITE])
-			set_texture(s, data, SPRITE);
-		else if (check_line(line, data, "F", NB_ELEM_COLOR) && !s->floor)
-			set_color(s, data, 0);
-		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !s->ceil)
-			set_color(s, data, 1);
-		free(line);
-		free_tab((void**)data);
+		set_all(s, line);
 		if (s->res.w && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST] && s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
