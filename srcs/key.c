@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 23:29:01 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:21:23 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		key_function(const int keycode, const t_window *w)
 	else if (keycode == KEY_W)
 	{
 		start = clock();
-		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->resolution);
+		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->res);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	}

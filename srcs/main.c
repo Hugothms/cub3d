@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 16:09:24 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:22:39 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	free_scene(t_scene *scene)
 	free(scene->map);
 	i = 0;
 	while (i < NB_TEXTURES)
-		free(scene->textures[i++]);
-	free(scene->textures);
-	free(scene->ceilling_color);
-	free(scene->floor_color);
+		free(scene->tex[i++]);
+	free(scene->tex);
+	free(scene->ceil);
+	free(scene->floor);
 }
 
 int		close_function(const t_window *w)
@@ -115,13 +115,13 @@ int		main(const int argc, const char *argv[])
 	end = clock();
 	printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	start = clock();
-	img = init_img(mlx, &scene->resolution);
+	img = init_img(mlx, &scene->res);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	if (argc == 2)
 	{
 		char *title = ft_strdup(argv[1]);
-		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->resolution.w, scene->resolution.h, title)))
+		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->res.w, scene->res.h, title)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
 		free(title);
 		get_controls_loop(mlx, img, scene);
@@ -131,7 +131,7 @@ int		main(const int argc, const char *argv[])
 		char filename[35];
 		make_img(img, scene);
 		start = clock();
-		save_bmp(screenshot_datetime(filename), img->data, scene->resolution);
+		save_bmp(screenshot_datetime(filename), img->data, scene->res);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 		free_scene(scene);

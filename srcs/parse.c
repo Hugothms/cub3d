@@ -1,30 +1,30 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/04 16:16:55 by hugothms         ###   ########.fr       */
-/*                                                                            */
+/*	*/
+/*	:::	  ::::::::   */
+/*   parse.c	:+:	  :+:	:+:   */
+/*	+:+ +:+	 +:+	 */
+/*   By: hugothms <hugothms@student.42.fr>	  +#+  +:+	   +#+	*/
+/*	+#+#+#+#+#+   +#+	   */
+/*   Created: 2020/01/09 12:21:27 by hthomas	   #+#	#+#	 */
+/*   Updated: 2020/06/04 16:16:55 by hugothms	 ###   ########.fr	   */
+/*	*/
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 void		*init_scene(t_scene *scene)
 {
-	scene->resolution.w = -1;
-	scene->resolution.h = -1;
-	if (!(scene->textures = malloc(NB_TEXTURES * sizeof(char*))))
+	scene->res.w = -1;
+	scene->res.h = -1;
+	if (!(scene->tex = malloc(NB_TEXTURES * sizeof(char*))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	scene->textures[NORTH] = NULL;
-	scene->textures[SOUTH] = NULL;
-	scene->textures[WEST] = NULL;
-	scene->textures[EAST] = NULL;
-	scene->textures[SPRITE]= NULL;
-	scene->floor_color = NULL;
-	scene->ceilling_color = NULL;
+	scene->tex[NORTH] = NULL;
+	scene->tex[SOUTH] = NULL;
+	scene->tex[WEST] = NULL;
+	scene->tex[EAST] = NULL;
+	scene->tex[SPRITE]= NULL;
+	scene->floor = NULL;
+	scene->ceil = NULL;
 	scene->map = NULL;
 	scene->size.w = -1;
 	scene->size.h = -1;
@@ -225,49 +225,49 @@ void		parse_map(t_scene *scene, int fd)
 
 t_scene		*parse(int fd)
 {
-	t_scene	*scene;
+	t_scene	*s;
 	char	*line;
 	int		ret;
 	char	**data;
 
-	if (!(scene = malloc(sizeof(*scene))))
+	if (!(s = malloc(sizeof(*s))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if (!(init_scene(scene)))
+	if (!(init_scene(s)))
 		return (NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		// ft_putstr(line);
 		// ft_putchar('\n');
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && scene->resolution.w == -1)
-			set_resolution(scene, data);
-		else if (check_line(line, data, "NO", NB_ELEM_TEXTURE) && !scene->textures[NORTH])
-			set_texture(scene, data, NORTH);
-		else if (check_line(line, data, "SO", NB_ELEM_TEXTURE) && !scene->textures[SOUTH])
-			set_texture(scene, data, SOUTH);
-		else if (check_line(line, data, "WE", NB_ELEM_TEXTURE) && !scene->textures[WEST])
-			set_texture(scene, data, WEST);
-		else if (check_line(line, data, "EA", NB_ELEM_TEXTURE) && !scene->textures[EAST])
-			set_texture(scene, data, EAST);
-		else if (check_line(line, data, "S", NB_ELEM_TEXTURE) && !scene->textures[SPRITE])
-			set_texture(scene, data, SPRITE);
-		else if (check_line(line, data, "F", NB_ELEM_COLOR) && !scene->floor_color)
-			set_color(scene, data, 0);
-		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !scene->ceilling_color)
-			set_color(scene, data, 1);
+		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && s->res.w == -1)
+			set_resolution(s, data);
+		else if (check_line(line, data, "NO", NB_ELEM_TEX) && !s->tex[NORTH])
+			set_texture(s, data, NORTH);
+		else if (check_line(line, data, "SO", NB_ELEM_TEX) && !s->tex[SOUTH])
+			set_texture(s, data, SOUTH);
+		else if (check_line(line, data, "WE", NB_ELEM_TEX) && !s->tex[WEST])
+			set_texture(s, data, WEST);
+		else if (check_line(line, data, "EA", NB_ELEM_TEX) && !s->tex[EAST])
+			set_texture(s, data, EAST);
+		else if (check_line(line, data, "S", NB_ELEM_TEX) && !s->tex[SPRITE])
+			set_texture(s, data, SPRITE);
+		else if (check_line(line, data, "F", NB_ELEM_COLOR) && !s->floor)
+			set_color(s, data, 0);
+		else if (check_line(line, data, "C", NB_ELEM_COLOR) && !s->ceil)
+			set_color(s, data, 1);
 		free(line);
 		free_tab((void**)data);
-		if (scene->resolution.w && scene->textures[NORTH] && scene->textures[SOUTH] && scene->textures[WEST] && scene->textures[EAST] && scene->textures[SPRITE] && scene->floor_color && scene->ceilling_color)
+		if (s->res.w && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST] && s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
-	parse_map(scene, fd);
+	parse_map(s, fd);
 	// int i = 0;
 	// while(i < scene->size.h)
 	// {
 	// 	ft_putstr(scene->map[i++]);
 	// 	ft_putchar('\n');
 	// }
-	return (scene);
+	return (s);
 }
 
 t_scene		*get_scene(const int argc, const char *argv[])
@@ -275,7 +275,7 @@ t_scene		*get_scene(const int argc, const char *argv[])
 	int			fd;
 	t_scene		*scene;
 
-    if (argc < 2 || argc > 3)
+	if (argc < 2 || argc > 3)
 		print_err_and_exit("Wrong number of argument", 1);
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".cub", 4))
 		print_err_and_exit("First argument must be a '.cub' file", 1);

@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 22:23:39 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:21:31 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void 	draw_minimap(t_img *img, t_scene *scene)
 			{
 				pos.w = 20 + line * SIZE_MINIMAP;
 				pos.h = 20 + col * SIZE_MINIMAP;
-				draw_square(img->data, pos, SIZE_MINIMAP, 16777215, scene->resolution);
+				draw_square(img->data, pos, SIZE_MINIMAP, 16777215, scene->res);
 			}
 			line++;
 		}
@@ -129,10 +129,10 @@ void	make_img(t_img *img, t_scene *scene)
 	int x;
 
 	x = 0;
-	while (x < scene->resolution.w)
+	while (x < scene->res.w)
 	{
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)scene->resolution.w - 1; //x-coordinate in camera space
+		double cameraX = 2 * x / (double)scene->res.w - 1; //x-coordinate in camera space
 		double rayDirX = scene->dir.x + scene->plane.x * cameraX;
 		double rayDirY = scene->dir.y + scene->plane.y * cameraX;
 		int mapX = (int)scene->pos.x;
@@ -210,15 +210,15 @@ void	make_img(t_img *img, t_scene *scene)
 		// printf("res.h: %d\tperp:%f\n", scene->resolution.h, perpWallDist);
 		
 		//Calculate height of line to draw on screen
-		int lineHeight = (scene->resolution.h / perpWallDist);
+		int lineHeight = (scene->res.h / perpWallDist);
 		// printf("lineHeight: %d\n", lineHeight);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + scene->resolution.h / 2;
+		int drawStart = -lineHeight / 2 + scene->res.h / 2;
 		if(drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + scene->resolution.h / 2;
-		if(drawEnd >= scene->resolution.h)
-			drawEnd = scene->resolution.h - 1;
+		int drawEnd = lineHeight / 2 + scene->res.h / 2;
+		if(drawEnd >= scene->res.h)
+			drawEnd = scene->res.h - 1;
 		//choose wall color
 		t_rgb *color;
 		switch (side)
@@ -235,20 +235,20 @@ void	make_img(t_img *img, t_scene *scene)
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
 		t_couple delim;
-		delim.h = drawStart < scene->resolution.h ? drawStart > 0 ? drawStart : 0 : 0;
-		delim.w = drawEnd < scene->resolution.h ? drawEnd > 0 ? drawEnd : 0 : 0;
-		draw_wall(img->data, scene->resolution.w - x - 1, delim, rgb_to_int(*color), scene->resolution);
+		delim.h = drawStart < scene->res.h ? drawStart > 0 ? drawStart : 0 : 0;
+		delim.w = drawEnd < scene->res.h ? drawEnd > 0 ? drawEnd : 0 : 0;
+		draw_wall(img->data, scene->res.w - x - 1, delim, rgb_to_int(*color), scene->res);
 		free(color);
 		
 		t_draw draw;
 		draw.start.w = 20 + scene->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
 		draw.start.h = 20 + scene->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-		draw_square(img->data, draw.start, SIZE_MINIMAP, RED, scene->resolution);
+		draw_square(img->data, draw.start, SIZE_MINIMAP, RED, scene->res);
 		draw.start.w += SIZE_MINIMAP / 2;
 		draw.start.h += SIZE_MINIMAP / 2;
 		draw.end.x = scene->dir.y;
 		draw.end.y = scene->dir.x;
-		draw_line(img->data, scene, draw, RED, scene->resolution);
+		draw_line(img->data, scene, draw, RED, scene->res);
 		x++;
 	}
 	draw_minimap(img, scene);

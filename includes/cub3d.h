@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 11:14:50 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:22:37 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,10 @@ typedef struct		s_move
 
 typedef struct		s_scene
 {
-	t_couple		resolution;
-	char			**textures;
-	t_rgb			*floor_color;
-	t_rgb			*ceilling_color;
+	t_couple		res;
+	char			**tex;
+	t_rgb			*floor;
+	t_rgb			*ceil;
 	char			**map;
 	t_couple 		size;
 	t_pos			pos;
@@ -159,7 +159,7 @@ typedef struct		s_window
 # define NB_TEXTURES 5
 # define WHITE_SPACES " \t"
 # define NB_ELEM_RESOLUTION 3
-# define NB_ELEM_TEXTURE 2
+# define NB_ELEM_TEX 2
 # define NB_ELEM_COLOR 2
 
 # define NORTH 0
