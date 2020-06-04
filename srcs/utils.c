@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/02 09:21:41 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 11:14:50 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
-void	rotation(t_pos *dir, float angle)
+void	rotate(t_pos *dir, float angle)
 {
 	float	x;
 	

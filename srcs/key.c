@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 23:04:25 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/03 23:29:01 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ int		key_release(int keycode, t_move *move)
 		move->turn_left = 0;
 	if (keycode == (ARROW_RIGHT))
 		move->turn_right = 0;
-	// if (keycode == G)
-	// 	move->g_on = 0;
-	// if (keycode == DR)
-	// 	move->dr_on = 0;
 	return (0);
 }
 
@@ -47,14 +43,6 @@ int		key_push(int keycode, t_move *move)
 		move->turn_left = 1;
 	if (keycode == (ARROW_RIGHT))
 		move->turn_right = 1;
-	// if (keycode == G)
-	// 	move->g_on = 1;
-	// if (keycode == DR)
-	// 	move->dr_on = 1;
-	// if (keycode == 17 && move->dm == 0)
-	// 	move->dm = 1;
-	// else if (keycode == 17 && move->dm == 1)
-	// 	move->dm = 0;
 	return (0);
 }
 
@@ -113,14 +101,14 @@ int		key_function(const int keycode, const t_window *w)
 	}
 	else if (keycode == ARROW_LEFT || keycode == KEY_A)
 	{
-		rotation(&w->scene->dir, THETA);
-		rotation(&w->scene->plane, THETA);
+		rotate(&w->scene->dir, THETA);
+		rotate(&w->scene->plane, THETA);
 		refresh(w);
 	}
 	else if (keycode == ARROW_RIGHT || keycode == KEY_E)
 	{
-		rotation(&w->scene->dir, -THETA);
-		rotation(&w->scene->plane, -THETA);
+		rotate(&w->scene->dir, -THETA);
+		rotate(&w->scene->plane, -THETA);
 		refresh(w);
 	}
 	return (0);

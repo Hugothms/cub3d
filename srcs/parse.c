@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/03 15:36:38 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 12:49:46 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,46 @@ int			check_line(char *line, char **data, char *type, int nb_elements)
 	return (0);
 }
 
-int			get_map(t_scene *scene, char*join)
+int		recurs_map(char **map, t_couple couple, t_couple size)
+{
+	int ok[4];
+	
+	ok[0] = 1;
+	ok[1] = 1;
+	ok[2] = 1;
+	ok[3] = 1;
+	map[couple.h][couple.w] = '0';
+	if (!couple.h || !couple.w || couple.h == size.h || couple.w == size.w)
+		return (0);
+	couple.h -= 1;
+	if (map[couple.h][couple.w] == '8')
+		ok[0] = recurs_map(map, couple, size);
+	couple.h += 1;
+	couple.w -= 1;
+	if (map[couple.h][couple.w] == '8')
+		ok[1] = recurs_map(map, couple, size);
+	couple.w += 1;
+	couple.h += 1;
+	if (map[couple.h][couple.w] == '8')
+		ok[2] = recurs_map(map, couple, size);
+	couple.h -= 1;
+	couple.w += 1;
+	if (map[couple.h][couple.w] == '8')
+		ok[3] = recurs_map(map, couple, size);
+	return (ok[0] && ok[1] && ok[2] && ok[3]);
+}
+
+void		check_map(char **map, t_pos pos, t_couple size)
+{
+	t_couple	couple;
+	
+	couple.h = (int)pos.x;
+	couple.w = (int)pos.y;
+	if(!recurs_map(map, couple, size))
+		print_err_and_exit("Map not closed", PARSE_ERROR);
+}
+
+int			get_map(t_scene *scene, char *join)
 {
 	int 	line;
 	int		col;
@@ -64,16 +103,19 @@ int			get_map(t_scene *scene, char*join)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while (line < scene->size.h)
 	{
-		if (!(scene->map[line] = malloc((ft_strlen(map[line]) + 1) * sizeof(char))))
+		if (!(scene->map[line] = malloc((scene->size.w + 1) * sizeof(char))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		scene->map[line][ft_strlen(map[line])] = '\0';
+		ft_memset(scene->map[line], '8', scene->size.w);
+		scene->map[line][scene->size.w] = '\0';
 		col = 0;
 		while (map[line][col])
 		{
-			if (ft_in_charset(map[line][col], "012"))
+			if (ft_in_charset(map[line][col], "12"))
 				scene->map[line][col] = map[line][col];
+			else if (map[line][col] == '0')
+				scene->map[line][col] = '8';
 			else if (map[line][col] == ' ')
-				scene->map[line][col] = '0';
+				scene->map[line][col] = '8';
 			else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
 			{
 				scene->map[line][col] = '0';
@@ -101,7 +143,7 @@ int			get_map(t_scene *scene, char*join)
 				}
 				scene->plane.x = scene->dir.x * FOV;
 				scene->plane.y = scene->dir.y * FOV;
-				rotation(&scene->plane, 1.570796);
+				rotate(&scene->plane, 1.570796);
 			}
 			else
 				print_err_and_exit("Bad map format", PARSE_ERROR);
@@ -145,7 +187,7 @@ void		parse_map(t_scene *scene, int fd)
 		free(line);
 	}
 	get_map(scene, join);
-	//check_map(scene->map);
+	check_map(scene->map, scene->pos, scene->size);
 }
 
 t_scene		*parse(int fd)

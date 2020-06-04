@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 23:01:21 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 11:14:50 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
 void	free_tab(void **tab);
-void	rotation(t_pos *dir, float angle);
+void	rotate(t_pos *dir, float angle);
 
 void	print_err_and_exit(char *str, int err);
 

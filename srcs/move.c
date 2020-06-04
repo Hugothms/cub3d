@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:50:32 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/03 23:03:40 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 11:14:50 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void 		move_right(t_scene *scene)
 
 void 		turn_left(t_scene *scene)
 {
-	rotation(&scene->dir, THETA);
-	rotation(&scene->plane, THETA);
+	rotate(&scene->dir, THETA);
+	rotate(&scene->plane, THETA);
 }
 
 void 		turn_right(t_scene *scene)
 {
-	rotation(&scene->dir, -THETA);
-	rotation(&scene->plane, -THETA);
+	rotate(&scene->dir, -THETA);
+	rotate(&scene->plane, -THETA);
 }
 
 void		check_key_on(t_scene *scene)
