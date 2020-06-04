@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/04 16:13:52 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:16:55 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,9 +236,9 @@ t_scene		*parse(int fd)
 		return (NULL);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		ft_putstr(line);
+		// ft_putstr(line);
+		// ft_putchar('\n');
 		data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-		ft_putchar('\n');
 		if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && scene->resolution.w == -1)
 			set_resolution(scene, data);
 		else if (check_line(line, data, "NO", NB_ELEM_TEXTURE) && !scene->textures[NORTH])
@@ -261,12 +261,12 @@ t_scene		*parse(int fd)
 			break;
 	}
 	parse_map(scene, fd);
-	int i = 0;
-	while(i < scene->size.h)
-	{
-		ft_putstr(scene->map[i++]);
-		ft_putchar('\n');
-	}
+	// int i = 0;
+	// while(i < scene->size.h)
+	// {
+	// 	ft_putstr(scene->map[i++]);
+	// 	ft_putchar('\n');
+	// }
 	return (scene);
 }
 
