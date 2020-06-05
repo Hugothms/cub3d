@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/05 22:06:21 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/05 23:25:24 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ typedef struct		s_scene
 	t_couple		res;
 	char			**tex;
 	t_texture		*textures[5];
-	void 			*textures2[5];
 	t_rgb			*floor;
 	t_rgb			*ceil;
 	char			**map;

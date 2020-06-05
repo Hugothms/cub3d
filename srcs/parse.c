@@ -257,8 +257,12 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 	i = 0;
 	while (i < NB_TEXTURES)
 	{
-		s->textures[i] = malloc(sizeof(t_texture));
+		//printf("A%p\n", s->textures[i]->img_ptr);
+		if(!(s->textures[i] = malloc(sizeof(t_texture))))
+			print_err_and_exit("Malloc failed", MALLOC_ERROR);
+		printf("Z%p\n", s->textures[i]->img_ptr);
 		s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h));
+		printf("E%p\n", s->textures[i]->img_ptr);
 		i++;
 	}
 }
