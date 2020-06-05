@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/05 09:38:20 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/05 23:13:17 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	free_scene(t_scene *scene)
 	free(scene->map);
 	i = 0;
 	while (i < NB_TEXTURES)
-		free(scene->tex[i++]);
+	{
+		free(scene->tex[i]);
+		free(scene->textures[i++]);
+	}
 	free(scene->tex);
 	free(scene->ceil);
 	free(scene->floor);
@@ -121,6 +124,7 @@ int		main(const int argc, const char *argv[])
 	img = init_img(mlx, &scene->res);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	parse_textures(mlx, scene);
 	if (argc == 2)
 	{
 		char *title = ft_strdup(argv[1]);

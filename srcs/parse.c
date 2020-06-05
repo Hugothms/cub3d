@@ -250,6 +250,19 @@ void	set_all(t_scene *s, char *line)
 	free_tab((void**)data);
 }
 
+void		parse_textures(t_mlx *mlx, t_scene *s)
+{
+	int	i;
+
+	i = 0;
+	while (i < NB_TEXTURES)
+	{
+		s->textures[i] = malloc(sizeof(t_texture));
+		s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h));
+		i++;
+	}
+}
+
 t_scene		*parse(int fd)
 {
 	t_scene	*s;
@@ -265,7 +278,7 @@ t_scene		*parse(int fd)
 		// ft_putstr(line);
 		// ft_putchar('\n');
 		set_all(s, line);
-		if (s->res.w && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST] && s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
+		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST] && s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
 	parse_map(s, fd);

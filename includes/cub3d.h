@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 19:55:41 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/05 22:06:21 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 /*
 ** Keycodes and screen size LINUX and MAC
 */
-# ifndef LINUX
+# ifndef Linux
 #  define AZERTY		1
 #  define ESC			65307
 #  define ARROW_LEFT	65361
@@ -85,21 +85,6 @@
 #  define KEY_MINUS		78
 # endif
 
-typedef struct		s_mlx
-{
-	void			*mlx_ptr;
-	void			*win_ptr;
-}					t_mlx;
-
-typedef struct		s_img
-{
-	void			*img_ptr;
- 	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-	char			*data;
-}					t_img;
-
 typedef struct		s_couple
 {
 	int				w;
@@ -125,6 +110,27 @@ typedef struct		s_draw
 	t_pos		end;
 }					t_draw;
 
+typedef struct		s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_mlx;
+
+typedef struct		s_img
+{
+	void			*img_ptr;
+	char			*data;
+ 	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+}					t_img;
+
+typedef struct		s_texture
+{
+	void			*img_ptr;
+	t_couple		size;
+}					t_texture;
+
 typedef struct		s_move
 {
 	int 			up;
@@ -139,6 +145,8 @@ typedef struct		s_scene
 {
 	t_couple		res;
 	char			**tex;
+	t_texture		*textures[5];
+	void 			*textures2[5];
 	t_rgb			*floor;
 	t_rgb			*ceil;
 	char			**map;
@@ -167,8 +175,8 @@ typedef struct		s_window
 # define WEST 2
 # define EAST 3
 # define SPRITE 4
-//ft_putchar('e');
 
+void	parse_textures(t_mlx *mlx, t_scene *s);
 t_scene	*get_scene(const int argc, const char *argv[]);
 
 void	set_resolution(t_scene *scene, char **data);
