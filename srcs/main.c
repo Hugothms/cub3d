@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/04 20:07:15 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/05 09:38:20 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ void	free_scene(t_scene *scene)
 	free(scene->tex);
 	free(scene->ceil);
 	free(scene->floor);
+	free(scene);
 }
 
 int		close_function(const t_window *w)
 {
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
+	mlx_destroy_image(w->mlx->mlx_ptr, w->img->img_ptr);
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-	//free(mlx);
+	free(w->mlx);
+	free(w->img);
 	free_scene(w->scene);
 	exit(0);
 }
@@ -88,9 +91,9 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->img = img;
 	window->scene = scene;
 	printf("get_controls_loop\n");
-	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close	
-		mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
-		mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
+	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close
+	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
+	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
 	//mlx_key_hook(mlx->win_ptr, key_function, window);
 	ft_putstr("before loop\n");
 	// mlx_loop_hook(mlx->mlx_ptr, refresh, window);
