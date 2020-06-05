@@ -6,7 +6,7 @@
 #    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hugothms          #+#    #+#              #
-#    Updated: 2020/06/04 15:24:27 by hugothms         ###   ########.fr        #
+#    Updated: 2020/06/05 23:00:37 by hugothms         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ endif
 
 all : compilelibft compilelibmlx $(NAME)
 
-$(NAME) : $(--OBJSLIBFT) $(--OBJS)
+$(NAME) : $(--OBJS)
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $^ $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
 
 compilelibft :
