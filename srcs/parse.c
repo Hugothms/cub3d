@@ -223,7 +223,7 @@ void		parse_map(t_scene *scene, int fd)
 	check_map(scene->map, scene->pos, scene->size);
 }
 
-set_all(t_scene *s, char *line)
+void	set_all(t_scene *s, char *line)
 {
 	char	**data;
 
@@ -244,6 +244,8 @@ set_all(t_scene *s, char *line)
 		set_color(s, data, 0);
 	else if (check_line(line, data, "C", NB_ELEM_COLOR) && !s->ceil)
 		set_color(s, data, 1);
+	else if (ft_strcmp(data[0], "iamcheating"))
+		print_err_and_exit("Parsing invalid line", PARSE_ERROR);
 	free(line);
 	free_tab((void**)data);
 }
