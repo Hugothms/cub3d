@@ -258,10 +258,17 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 	while (i < NB_TEXTURES)
 	{
 		//printf("A%p\n", s->textures[i]->img_ptr);
-		if(!(s->textures[i] = malloc(sizeof(t_texture))))
+		if(!(s->textures[i] = malloc(sizeof(t_img))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		printf("Z%p\n", s->textures[i]->img_ptr);
-		s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h));
+		printf("img%p\n", s->textures[i]->img_ptr);
+		printf("mlx%p\n", mlx->mlx_ptr);
+		printf("tex%s\n", s->tex[i]);
+		printf("siz%d\n", s->textures[i]->size.w);
+		printf("xpm%p\n", mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h)));
+		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
+			print_err_and_exit("Minilibx error", MLX_ERROR);
+		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr, &s->textures[i]->bits_per_pixel, &s->textures[i]->size_line, &s->textures[i]->endian)))
+			print_err_and_exit("Minilibx error", MLX_ERROR);
 		printf("E%p\n", s->textures[i]->img_ptr);
 		i++;
 	}

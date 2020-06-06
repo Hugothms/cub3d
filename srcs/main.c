@@ -6,7 +6,7 @@
 /*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/05 23:26:15 by hugothms         ###   ########.fr       */
+/*   Updated: 2020/06/06 16:00:44 by hugothms         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	free_scene(t_scene *scene)
 	while (i < NB_TEXTURES)
 	{
 		free(scene->tex[i]);
-		free(scene->textures[i++]);
+		//free(scene->textures[i]);
+		i++;
 	}
 	free(scene->tex);
 	free(scene->ceil);
@@ -50,7 +51,7 @@ int	refresh(const t_window *w)
 	make_img(w->img, w->scene);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
-	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->scene->textures[1]->img_ptr, 100, 100);
+	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->scene->textures[NORTH]->img_ptr, 100, 100);
 	return (0);
 }
 
@@ -125,7 +126,7 @@ int		main(const int argc, const char *argv[])
 	img = init_img(mlx, &scene->res);
 	end = clock();
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-	parse_textures(mlx, scene);
+	//parse_textures(mlx, scene);
 	if (argc == 2)
 	{
 		char *title = ft_strdup(argv[1]);

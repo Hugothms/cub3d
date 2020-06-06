@@ -1,11 +1,11 @@
 R 1000 600
 
-NO ./scenes/textures/north_texture.xpm
-SO ./scenes/textures/south_texture.xpm
-WE ./scenes/textures/west_texture.xpm
-EA ./scenes/textures/east_texture.xpm
+NO ./scenes/textures/red_brick.xpm
+SO ./scenes/textures/red_brick.xpm
+WE ./scenes/textures/red_brick.xpm
+EA ./scenes/textures/red_brick.xpm
 
-S ./scenes/textures/sprite_texture.xpm
+S ./scenes/textures/red_brick.xpm
 
 
 F 220,100,0
