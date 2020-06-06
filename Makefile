@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+         #
+#    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/04 09:45:09 by hugothms          #+#    #+#              #
-#    Updated: 2020/06/05 23:00:37 by hugothms         ###   ########.fr        #
+#    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
+#    Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,11 @@ NAME = cub3d
 --SRCS =	srcs/error.c			\
 			srcs/color.c			\
 			srcs/get_next_line.c	\
-			srcs/key.c 			\
+			srcs/key.c 				\
 			srcs/main.c 			\
 			srcs/make_img.c 		\
 			srcs/move.c 			\
+			srcs/move2.c 			\
 			srcs/parse.c 			\
 			srcs/save_bmp.c			\
 			srcs/utils.c 			\

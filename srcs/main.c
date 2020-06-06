@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 09:32:30 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/06 16:00:44 by hugothms         ###   ########.fr       */
+/*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
+/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ int		close_function(const t_window *w)
 	free(w->img);
 	free_scene(w->scene);
 	exit(0);
-}
-
-int	refresh(const t_window *w)
-{
-	// printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->scene->pos.x, w->scene->pos.y, w->scene->dir.x, w->scene->dir.y, w->scene->plane.x, w->scene->plane.y);
-	check_key_on(w->scene);
-	make_img(w->img, w->scene);
-	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
-	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->scene->textures[NORTH]->img_ptr, 100, 100);
-	return (0);
 }
 
 t_mlx	*malloc_mlx_init(void)
@@ -95,15 +84,14 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->scene = scene;
-	printf("get_controls_loop\n");
 	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close
 	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
 	//mlx_key_hook(mlx->win_ptr, key_function, window);
-	ft_putstr("before loop\n");
-	// mlx_loop_hook(mlx->mlx_ptr, refresh, window);
 	make_img(window->img, window->scene);
 	mlx_put_image_to_window(window->mlx->mlx_ptr, window->mlx->win_ptr, window->img->img_ptr, 0, 0);
+	ft_putstr("claire\n");
+	//mlx_loop_hook(mlx->mlx_ptr, refresh, window);
 	mlx_loop(mlx->mlx_ptr);
 }
 

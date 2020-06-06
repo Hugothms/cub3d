@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugothms <hugothms@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 09:33:37 by hugothms          #+#    #+#             */
-/*   Updated: 2020/06/06 10:53:14 by hugothms         ###   ########.fr       */
+/*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
+/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,11 +202,11 @@ int		close_function(const t_window *w);
 int		refresh(const t_window *w);
 
 
-void 		move_up(t_scene *scene);
-void 		move_down(t_scene *scene);
-void 		move_left(t_scene *scene);
-void 		move_right(t_scene *scene);
-void 		turn_left(t_scene *scene);
-void 		turn_right(t_scene *scene);
+void 		move_up(t_window *w);
+void 		move_down(t_window *w);
+void 		move_left(t_window *w);
+void 		move_right(t_window *w);
+void 		turn_left(t_window *w);
+void 		turn_right(t_window *w);
 
 #endif
