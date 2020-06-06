@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 17:52:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	refresh(const t_window *w)
 {
-	ft_putstr("hugo\n");
-	printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->scene->pos.x, w->scene->pos.y, w->scene->dir.x, w->scene->dir.y, w->scene->plane.x, w->scene->plane.y);
-	check_key_on(w->scene);
-	make_img(w->img, w->scene);
+	// printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->s->pos.x, w->s->pos.y, w->s->dir.x, w->s->dir.y, w->s->plane.x, w->s->plane.y);
+	check_key_on(w->s);
+	make_img(w->img, w->s);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
-	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->scene->textures[NORTH]->img_ptr, 100, 100);
+	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->s->textures[NORTH]->img_ptr, 100, 100);
 	return (0);
 }
 int		key_release(int keycode, t_move *move)
@@ -82,13 +81,13 @@ int		key_function(const int keycode, const t_window *w)
 	float x;
 
 	printf("%i\n", keycode);
-	key_push(keycode, &w->scene->move);
+	key_push(keycode, &w->s->move);
 	if (keycode == ESC)
 		close_function(w);
 	else if (keycode == KEY_W)
 	{
 		start = clock();
-		save_bmp(screenshot_datetime(filename), w->img->data, w->scene->res);
+		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
 		end = clock();
 		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	}

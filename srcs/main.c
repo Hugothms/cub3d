@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 17:52:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		close_function(const t_window *w)
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	free(w->mlx);
 	free(w->img);
-	free_scene(w->scene);
+	free_scene(w->s);
 	exit(0);
 }
 
@@ -83,12 +83,12 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	window->mlx = mlx;
 	window->img = img;
-	window->scene = scene;
+	window->s = scene;
 	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close
 	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
 	//mlx_key_hook(mlx->win_ptr, key_function, window);
-	make_img(window->img, window->scene);
+	make_img(window->img, window->s);
 	mlx_put_image_to_window(window->mlx->mlx_ptr, window->mlx->win_ptr, window->img->img_ptr, 0, 0);
 	ft_putstr("claire\n");
 	//mlx_loop_hook(mlx->mlx_ptr, refresh, window);

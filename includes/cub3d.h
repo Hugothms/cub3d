@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 17:52:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef struct		s_window
 {
 	t_mlx			*mlx;
 	t_img			*img;
-	t_scene			*scene;
+	t_scene			*s;
 }					t_window;
 
 # define NB_TEXTURES 5

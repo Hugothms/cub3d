@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 16:03:24 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 17:52:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void 		turn_left(t_window *w)
 {
-	rotate(&w->scene->dir, THETA);
-	rotate(&w->scene->plane, THETA);
+	rotate(&w->s->dir, THETA);
+	rotate(&w->s->plane, THETA);
 	refresh(w);
 }
 
 void 		turn_right(t_window *w)
 {
-	rotate(&w->scene->dir, -THETA);
-	rotate(&w->scene->plane, -THETA);
+	rotate(&w->s->dir, -THETA);
+	rotate(&w->s->plane, -THETA);
 	refresh(w);
 }
 
