@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*	*/
-/*	:::	  ::::::::   */
-/*   parse.c	:+:	  :+:	:+:   */
-/*	+:+ +:+	 +:+	 */
-/*   By: hthomas  <hthomas @student.42.fr>	  +#+  +:+	   +#+	*/
-/*	+#+#+#+#+#+   +#+	   */
-/*   Created: 2020/01/09 12:21:27 by hthomas	   #+#	#+#	 */
-/*   Updated: 2020/06/04 16:16:55 by hthomas 	 ###   ########.fr	   */
-/*	*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
+/*   Updated: 2020/06/07 00:03:46 by hthomas          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
@@ -49,7 +49,7 @@ int			check_line(char *line, char **data, char *type, int nb_elements)
 	return (0);
 }
 
-void print_map_color(char **map, t_couple couple, t_couple size)
+void	print_map_color(char **map, t_couple couple, t_couple size)
 {
 	printf("couple%d:%d\n", couple.h, couple.w);
 	int i = 0;
@@ -81,7 +81,7 @@ void print_map_color(char **map, t_couple couple, t_couple size)
 	sleep(1);
 }
 
-int		recurs_map(char **map, t_couple couple, t_couple size)
+int		recurs_map(char **map, t_couple c, t_couple size)
 {
 	int ok[4];
 	
@@ -90,24 +90,24 @@ int		recurs_map(char **map, t_couple couple, t_couple size)
 	ok[2] = 1;
 	ok[3] = 1;
 	//print_map_color(map, couple, size);
-	map[couple.h][couple.w] = '0';
-	if (!couple.h || !couple.w || couple.h == size.h - 1 || couple.w == size.w - 1)
+	map[c.h][c.w] = '0';
+	if (!c.h || !c.w || c.h == size.h - 1 || c.w == size.w - 1)
 		return (0);
-	couple.h -= 1;
-	if (map[couple.h][couple.w] == '8')
-		ok[0] = recurs_map(map, couple, size);
-	couple.h += 1;
-	couple.w -= 1;
-	if (map[couple.h][couple.w] == '8')
-		ok[1] = recurs_map(map, couple, size);
-	couple.w += 1;
-	couple.h += 1;
-	if (map[couple.h][couple.w] == '8')
-		ok[2] = recurs_map(map, couple, size);
-	couple.h -= 1;
-	couple.w += 1;
-	if (map[couple.h][couple.w] == '8')
-		ok[3] = recurs_map(map, couple, size);
+	c.h -= 1;
+	if (map[c.h][c.w] == '8')
+		ok[0] = recurs_map(map, c, size);
+	c.h += 1;
+	c.w -= 1;
+	if (map[c.h][c.w] == '8')
+		ok[1] = recurs_map(map, c, size);
+	c.w += 1;
+	c.h += 1;
+	if (map[c.h][c.w] == '8')
+		ok[2] = recurs_map(map, c, size);
+	c.h -= 1;
+	c.w += 1;
+	if (map[c.h][c.w] == '8')
+		ok[3] = recurs_map(map, c, size);
 	return (ok[0] && ok[1] && ok[2] && ok[3]);
 }
 
@@ -119,6 +119,66 @@ void		check_map(char **map, t_pos pos, t_couple size)
 	couple.w = (int)pos.y;
 	if (!recurs_map(map, couple, size))
 		print_err_and_exit("Map not closed", PARSE_ERROR);
+}
+
+void	set_initial_dir(t_pos *dir, char **map, int line, int col)
+{
+	if (map[line][col] == 'E')
+	{
+		dir->x = 0;
+		dir->y = -1;
+	}
+	else if (map[line][col] == 'W')
+	{
+		dir->x = 0;
+		dir->y = 1;
+	}
+	else if (map[line][col] == 'S')
+	{
+		dir->x = 1;
+		dir->y = 0;
+	}
+	else if (map[line][col] == 'N')
+	{
+		dir->x = -1;
+		dir->y = 0;
+	}
+}
+
+void	set_initial_pos(t_scene *scene, char **map, int line, int col)
+{
+				scene->map[line][col] = '0';
+				scene->pos.x = line + 0.5;
+				scene->pos.y = col + 0.5;
+				set_initial_dir(&scene->dir, map, line, col);
+				scene->plane.x = scene->dir.x * FOV;
+				scene->plane.y = scene->dir.y * FOV;
+				rotate(&scene->plane, 1.570796);
+}
+
+void	get_map2(t_scene *scene, char **map, int line)
+{
+	int	col;
+
+	if (!(scene->map[line] = malloc((scene->size.w + 1) * sizeof(char))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	ft_memset(scene->map[line], '8', scene->size.w);
+	scene->map[line][scene->size.w] = '\0';
+	col = 0;
+	while (map[line][col])
+	{
+		if (ft_in_charset(map[line][col], "12"))
+			scene->map[line][col] = map[line][col];
+		else if (map[line][col] == '0')
+			scene->map[line][col] = '8';
+		else if (map[line][col] == ' ')
+			scene->map[line][col] = '8';
+		else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
+			set_initial_pos(scene, map, line, col);
+		else
+			print_err_and_exit("Bad map format", PARSE_ERROR);
+		col++;
+	}
 }
 
 int			get_map(t_scene *scene, char *join)
@@ -136,55 +196,19 @@ int			get_map(t_scene *scene, char *join)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while (line < scene->size.h)
 	{
-		if (!(scene->map[line] = malloc((scene->size.w + 1) * sizeof(char))))
-			print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		ft_memset(scene->map[line], '8', scene->size.w);
-		scene->map[line][scene->size.w] = '\0';
-		col = 0;
-		while (map[line][col])
-		{
-			if (ft_in_charset(map[line][col], "12"))
-				scene->map[line][col] = map[line][col];
-			else if (map[line][col] == '0')
-				scene->map[line][col] = '8';
-			else if (map[line][col] == ' ')
-				scene->map[line][col] = '8';
-			else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
-			{
-				scene->map[line][col] = '0';
-				scene->pos.x = line + 0.5;
-				scene->pos.y = col + 0.5;
-				if (map[line][col] == 'E')
-				{
-					scene->dir.x = 0;
-					scene->dir.y = -1;
-				}
-				else if (map[line][col] == 'W')
-				{
-					scene->dir.x = 0;
-					scene->dir.y = 1;
-				}
-				else if (map[line][col] == 'S')
-				{
-					scene->dir.x = 1;
-					scene->dir.y = 0;
-				}
-				else if (map[line][col] == 'N')
-				{
-					scene->dir.x = -1;
-					scene->dir.y = 0;
-				}
-				scene->plane.x = scene->dir.x * FOV;
-				scene->plane.y = scene->dir.y * FOV;
-				rotate(&scene->plane, 1.570796);
-			}
-			else
-				print_err_and_exit("Bad map format", PARSE_ERROR);
-			col++;
-		}
+		get_map2(scene, map, line);
 		line++;
 	}
 	free_tab((void**)map);
+}
+
+void	join_clean(char **s1, char *s2)
+{
+	char	*tmp;
+
+	tmp = *s1;
+	*s1 = ft_strjoin(*s1, s2);
+	free(tmp);
 }
 
 void		parse_map(t_scene *scene, int fd)
@@ -193,7 +217,6 @@ void		parse_map(t_scene *scene, int fd)
 	char	*join;
 	char	*tmp;
 	int		ret;
-	int		col;
 
 	while (get_next_line(fd, &line) == 1)
 	{
@@ -204,19 +227,13 @@ void		parse_map(t_scene *scene, int fd)
 	tmp = line;
 	join = ft_strdup(line);
 	free(tmp);
-	tmp = join;
-	join = ft_strjoin(join, "\n");
-	free(tmp);
+	join_clean(&join, "\n");
 	ret = 1;
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
-		tmp = join;
-		join = ft_strjoin(join, line);
-		free(tmp);
-		tmp = join;
-		join = ft_strjoin(join, "\n");
-		free(tmp);
+		join_clean(&join, line);
+		join_clean(&join, "\n");
 		free(line);
 	}
 	get_map(scene, join);
@@ -264,10 +281,14 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		printf("mlx%p\n", mlx->mlx_ptr);
 		printf("tex%s\n", s->tex[i]);
 		printf("siz%d\n", s->textures[i]->size.w);
-		printf("xpm%p\n", mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h)));
-		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
+		printf("xpm%p\n", mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i],\
+		&(s->textures[i]->size.w), &(s->textures[i]->size.h)));
+		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,\
+		s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
-		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr, &s->textures[i]->bits_per_pixel, &s->textures[i]->size_line, &s->textures[i]->endian)))
+		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr,\
+		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,\
+		&s->textures[i]->endian)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
 		printf("E%p\n", s->textures[i]->img_ptr);
 		i++;
@@ -289,7 +310,8 @@ t_scene		*parse(int fd)
 		// ft_putstr(line);
 		// ft_putchar('\n');
 		set_all(s, line);
-		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST] && s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
+		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]\
+		&& s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
 	parse_map(s, fd);

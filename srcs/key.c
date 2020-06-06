@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 18:01:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 23:25:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,6 @@ int		key_push(int keycode, t_move *move)
 		move->turn_right = 1;
 	return (0);
 }
-
-// void		key_hook(int keycode, t_scene *scene)
-// {
-// 	if (keycode == 53)
-// 		close_prog(scene);
-// 	if (keycode == 78 && scene->spe.rot_spe + RS > 0.0051)
-// 		scene->spe.rot_spe -= 0.005;
-// 	if (keycode == 69 && scene->spe.rot_spe + RS < 0.25)
-// 		scene->spe.rot_spe += 0.005;
-// 	if (keycode == 125 && scene->spe.mov_spe + MS > 0.05)
-// 		scene->spe.mov_spe -= 0.01;
-// 	if (keycode == 126 && scene->spe.mov_spe + MS < 0.5)
-// 		scene->spe.mov_spe += 0.01;
-// 	if (keycode == KEY_S)
-// 		save(cub);
-// }
 
 int		key_function(const int keycode, const t_window *w)
 {
