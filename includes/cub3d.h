@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:58:15 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:25:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,42 +170,58 @@ typedef struct		s_window
 # define EAST 3
 # define SPRITE 4
 
-void	parse_textures(t_mlx *mlx, t_scene *s);
-t_scene	*get_scene(const int argc, const char *argv[]);
+//check_map
+void		check_map(char **map, t_pos pos, t_couple size);
 
-void	set_resolution(t_scene *scene, char **data);
-void	set_texture(t_scene *scene, char **data, int code);
-void 	set_color(t_scene *scene, char **data, int code);
-
+//color
 t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
 int		rgb_to_int(t_rgb rgb);
 
+//error
+void	print_err_and_exit(char *str, int err);
+int		close_function(const t_window *w);
+
+//key
+int		refresh(const t_window *w);
+int		key_release(int keycode, t_move *move);
+int		key_push(int keycode, t_move *move);
+int		key_function(const int keycode, const t_window *w);
+
+//make_img
+void	make_img(t_img *img, t_scene *scene);
+
+//move
+void	move_up(t_window *w);
+void	move_down(t_window *w);
+void	move_left(t_window *w);
+void	move_right(t_window *w);
+
+//move2
+void	check_key_on(t_window *w);
+void	turn_left(t_window *w);
+void	turn_right(t_window *w);
+
+//parse_map
+void	parse_map(t_scene *scene, int fd);
+
+//parse
+void	parse_textures(t_mlx *mlx, t_scene *s);
+t_scene	*get_scene(const int argc, const char *argv[]);
+
+//set_elements
+void	set_resolution(t_scene *scene, char **data);
+void	set_texture(t_scene *scene, char **data, int code);
+void	set_color(t_scene *scene, char **data, int code);
+
+//save_bmp
+void	save_bmp(const char *filename, const char *data, const t_couple r);
+
+//utils
 char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
 void	free_tab(void **tab);
 void	rotate(t_pos *dir, float angle);
-
-void	print_err_and_exit(char *str, int err);
-
-void	save_bmp(const char *filename, const char *data, const t_couple resolution);
-
-void	make_img(t_img *img, t_scene *scene);
-
-int		key_release(int keycode, t_move *move);
-int		key_push(int keycode, t_move *move);
-int		key_function(const int keycode, const t_window *w);
-void	check_key_on(t_window *w);
-
-int		close_function(const t_window *w);
-int		refresh(const t_window *w);
-
-void 		move_up(t_window *w);
-void 		move_down(t_window *w);
-void 		move_left(t_window *w);
-void 		move_right(t_window *w);
-void 		turn_left(t_window *w);
-void 		turn_right(t_window *w);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/07 00:17:57 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,16 @@ NAME = cub3d
 --LDFLAGS += -g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native #-O3
 
---SRCS =	srcs/error.c			\
+--SRCS =	srcs/check_map.c		\
 			srcs/color.c			\
+			srcs/error.c			\
 			srcs/get_next_line.c	\
 			srcs/key.c 				\
 			srcs/main.c 			\
 			srcs/make_img.c 		\
 			srcs/move.c 			\
 			srcs/move2.c 			\
+			srcs/parse_map.c 		\
 			srcs/parse.c 			\
 			srcs/save_bmp.c			\
 			srcs/utils.c 			\
