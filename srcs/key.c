@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:52:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 18:01:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	refresh(const t_window *w)
 {
 	// printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->s->pos.x, w->s->pos.y, w->s->dir.x, w->s->dir.y, w->s->plane.x, w->s->plane.y);
-	check_key_on(w->s);
+	//check_key_on(w);
 	make_img(w->img, w->s);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
@@ -24,36 +24,36 @@ int	refresh(const t_window *w)
 }
 int		key_release(int keycode, t_move *move)
 {
-	printf("release:%d\n", keycode);
+	// printf("release:%d\n", keycode);
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 0;
-	if (keycode == (KEY_S))
+	else if (keycode == (KEY_S))
 		move->down = 0;
-	if (keycode == (AZERTY ? KEY_Q : KEY_A))
+	else if (keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->left = 0;
-	if (keycode == (KEY_D))
+	else if (keycode == (KEY_D))
 		move->right = 0;
-	if (keycode == (ARROW_LEFT))
+	else if (keycode == (ARROW_LEFT))
 		move->turn_left = 0;
-	if (keycode == (ARROW_RIGHT))
+	else if (keycode == (ARROW_RIGHT))
 		move->turn_right = 0;
 	return (0);
 }
 
 int		key_push(int keycode, t_move *move)
 {
-	printf("push:%d\n", keycode);
+	// printf("push:%d\n", keycode);
 	if (keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 1;
-	if (keycode == (KEY_S))
+	else if (keycode == (KEY_S))
 		move->down = 1;
-	if (keycode == (AZERTY ? KEY_Q : KEY_A))
+	else if (keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->left = 1;
-	if (keycode == (KEY_D))
+	else if (keycode == (KEY_D))
 		move->right = 1;
-	if (keycode == (ARROW_LEFT))
+	else if (keycode == (ARROW_LEFT))
 		move->turn_left = 1;
-	if (keycode == (ARROW_RIGHT))
+	else if (keycode == (ARROW_RIGHT))
 		move->turn_right = 1;
 	return (0);
 }

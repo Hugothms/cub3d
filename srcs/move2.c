@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 16:03:24 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:52:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/06 17:58:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ void 		turn_right(t_window *w)
 	refresh(w);
 }
 
-void		check_key_on(t_scene *scene)
+void		check_key_on(t_window *w)
 {
-	if (scene->move.up == 1)
-		move_up(scene);
-	if (scene->move.down == 1)
-		move_down(scene);
-	if (scene->move.left == 1)
-		move_left(scene);
-	if (scene->move.right == 1)
-		move_right(scene);
-	if (scene->move.turn_left == 1)
-		turn_left(scene);
-	if (scene->move.turn_right == 1)
-		turn_right(scene);
+	if (w->s->move.up == 1)
+		move_up(w);
+	if (w->s->move.down == 1)
+		move_down(w);
+	if (w->s->move.left == 1)
+		move_left(w);
+	if (w->s->move.right == 1)
+		move_right(w);
+	if (w->s->move.turn_left == 1)
+		turn_left(w);
+	if (w->s->move.turn_right == 1)
+		turn_right(w);
 }
