@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 23:25:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:30:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		key_push(int keycode, t_move *move)
 	return (0);
 }
 
-int		key_function(const int keycode, const t_window *w)
+int		key_function(const int keycode, t_window *w)
 {
 	char	filename[35];
 	clock_t	start, end;

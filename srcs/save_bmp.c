@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:11:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:29:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*info_header_bmp(const t_couple resolution)
 
 void			write_data(const int f, const char *data, t_couple r)
 {
-	int 			line;
+	int			line;
 
 	line = r.h;
 	while (--line + 1)

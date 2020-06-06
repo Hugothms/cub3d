@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:28:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		draw_wall(unsigned char *data, int line, t_couple delim, int color, t_coup
 	// }
 }
 
-void 	draw_minimap(t_img *img, t_scene *scene)
+void	draw_minimap(t_img *img, t_scene *scene)
 {
 	int col;
 	int line;

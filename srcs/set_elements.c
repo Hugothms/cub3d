@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:28:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_texture(t_scene *scene, char **data, int code)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 }
 
-void 	set_color(t_scene *scene, char **data, int code)
+void	set_color(t_scene *scene, char **data, int code)
 {
 	if (code == 0)
 		scene->floor = str_to_rgb(data[NB_ELEM_COLOR - 1]);

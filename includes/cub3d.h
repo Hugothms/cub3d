@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:25:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 00:32:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 
 # define GREY 11184810
 # define RED 16711680
-
-
 
 /*
 ** Keycodes and screen size LINUX and MAC
@@ -128,12 +126,12 @@ typedef struct		s_img
 
 typedef struct		s_move
 {
-	int 			up;
-	int 			down;
-	int 			left;
-	int 			right;
-	int 			turn_left;
-	int 			turn_right;
+	int			up;
+	int			down;
+	int			left;
+	int			right;
+	int			turn_left;
+	int			turn_right;
 }					t_move;
 
 typedef struct		s_scene
@@ -171,7 +169,7 @@ typedef struct		s_window
 # define SPRITE 4
 
 //check_map
-void		check_map(char **map, t_pos pos, t_couple size);
+void	check_map(char **map, t_pos pos, t_couple size);
 
 //color
 t_rgb	*int_to_rgb(int r, int g, int b);
@@ -181,12 +179,13 @@ int		rgb_to_int(t_rgb rgb);
 //error
 void	print_err_and_exit(char *str, int err);
 int		close_function(const t_window *w);
+void	free_scene(t_scene *scene);
 
 //key
 int		refresh(const t_window *w);
 int		key_release(int keycode, t_move *move);
 int		key_push(int keycode, t_move *move);
-int		key_function(const int keycode, const t_window *w);
+int		key_function(const int keycode, t_window *w);
 
 //make_img
 void	make_img(t_img *img, t_scene *scene);
