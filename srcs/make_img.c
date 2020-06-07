@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:26:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:36:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void	draw_minimap(t_img *img, t_scene *scene)
 
 void	calcul_dda(t_dda *dda, t_scene *s, int x)
 {
-	double cameraX;
-	
+	double	cameraX;
+
 	cameraX = 2 * x / (double)s->res.w - 1; 
 	dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
 	dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
@@ -190,14 +190,18 @@ void	perform_dda(t_scene *s, t_dda *dda)
 
 void	set_draw_start_end(t_dda *dda, t_scene *s)
 {
-	double perpWallDist;
+	double	perpWallDist;
+	int		lineHeight;
+
 	if (dda->side % 2 == 0)
-		perpWallDist = (dda->coord.h - s->pos.x + (1 - dda->step.h) / 2.) / dda->rayDir.x;
+		perpWallDist = (dda->coord.h - s->pos.x +\
+		(1 - dda->step.h) / 2.) / dda->rayDir.x;
 	else
-		perpWallDist = (dda->coord.w - s->pos.y + (1 - dda->step.w) / 2.) / dda->rayDir.y;
+		perpWallDist = (dda->coord.w - s->pos.y +\
+		(1 - dda->step.w) / 2.) / dda->rayDir.y;
 	// printf("res.h: %d\tperp:%f\n", scene->res.h, perpWallDist);
 	//Calculate height of line to draw on screen
-	int	lineHeight = (s->res.h / perpWallDist);
+	lineHeight = (s->res.h / perpWallDist);
 	// printf("lineHeight: %d\n", lineHeight);
 	//calculate lowest and highest pixel to fill in current stripe
 	dda->draw.h= -lineHeight / 2 + s->res.h / 2;
@@ -206,6 +210,28 @@ void	set_draw_start_end(t_dda *dda, t_scene *s)
 	dda->draw.w = lineHeight / 2 + s->res.h / 2;
 	if (dda->draw.w >= s->res.h)
 		dda->draw.w = s->res.h - 1;
+}
+
+void	set_delim(t_dda *dda, t_scene *s)
+{
+	if (dda->draw.h < s->res.h)
+	{
+		if (dda->draw.h > 0)
+			dda->delim.h = dda->draw.h;
+		else 
+			dda->delim.h = 0;
+	}
+	else
+		dda->delim.h = 0;
+	if (dda->draw.w < s->res.h)
+	{
+		if (dda->draw.w > 0)
+			dda->delim.w = dda->draw.w;
+		else 
+			dda->delim.w = 0;
+	}
+	else
+		dda->delim.w = 0;
 }
 
 void	make_img(t_img *img, t_scene *s)
@@ -243,9 +269,9 @@ void	make_img(t_img *img, t_scene *s)
 
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, dda->draw.h dda->draw.w, color);
-		dda->delim.h = dda->draw.h< s->res.h ? dda->draw.h> 0 ? dda->draw.h: 0 : 0;
-		dda->delim.w = dda->draw.w < s->res.h ? dda->draw.w > 0 ? dda->draw.w : 0 : 0;
-		draw_wall(img->data, s->res.w - x - 1, dda->delim, rgb_to_int(*color), s->res);
+		set_delim(dda, s);
+		draw_wall(img->data, s->res.w - x - 1, dda->delim,rgb_to_int(*color),\
+		s->res);
 		free(color);
 		
 		t_draw draw;
