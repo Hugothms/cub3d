@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 10:04:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 12:09:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,31 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->s = scene;
-	mlx_hook(mlx->win_ptr, 17, 1L<<17, close_function, window); //linux close
+	mlx_hook(mlx->win_ptr, 17, 1L << 17, close_function, window); //linux close
 	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
 	//mlx_key_hook(mlx->win_ptr, key_function, window);
 	make_img(window->img, window->s);
 	mlx_put_image_to_window(window->mlx->mlx_ptr, window->mlx->win_ptr, window->img->img_ptr, 0, 0);
-	ft_putstr("claire\n");
 	//mlx_loop_hook(mlx->mlx_ptr, refresh, window);
 	mlx_loop(mlx->mlx_ptr);
+}
+
+void	start_game_loop(t_scene *scene, t_mlx *mlx, t_img *img, const char *str)
+{
+	char	*title = ft_strdup(str);
+	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->res.w, scene->res.h, title)))
+		print_err_and_exit("Minilibx error", MLX_ERROR);
+	free(title);
+	get_controls_loop(mlx, img, scene);
+}
+
+void	savetamere(t_scene *scene, t_img *img)
+{
+	char	filename[35];
+	make_img(img, scene);
+	save_bmp(screenshot_datetime(filename), img->data, scene->res);
+	free_scene(scene);
 }
 
 int		main(const int argc, const char *argv[])
@@ -68,8 +84,8 @@ int		main(const int argc, const char *argv[])
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
-	
-	clock_t start, end;
+	clock_t		start, end;
+
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
@@ -84,22 +100,8 @@ int		main(const int argc, const char *argv[])
 	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
 	//parse_textures(mlx, scene);
 	if (argc == 2)
-	{
-		char	*title = ft_strdup(argv[1]);
-		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->res.w, scene->res.h, title)))
-			print_err_and_exit("Minilibx error", MLX_ERROR);
-		free(title);
-		get_controls_loop(mlx, img, scene);
-	}
+		start_game_loop(scene, mlx, img, argv[1]);
 	else if (argc == 3)
-	{
-		char	filename[35];
-		make_img(img, scene);
-		start = clock();
-		save_bmp(screenshot_datetime(filename), img->data, scene->res);
-		end = clock();
-		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
-		free_scene(scene);
-	}
+		savetamere(scene, img);	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:16:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:56:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_map_color(char **map, t_2int couple, t_2int size)
 int		recurs_map(char **map, t_2int c, t_2int size)
 {
 	int	ok[4];
-	
+
 	ok[0] = 1;
 	ok[1] = 1;
 	ok[2] = 1;
@@ -74,10 +74,10 @@ int		recurs_map(char **map, t_2int c, t_2int size)
 	return (ok[0] && ok[1] && ok[2] && ok[3]);
 }
 
-void		check_map(char **map, t_2float pos, t_2int size)
+void	check_map(char **map, t_2float pos, t_2int size)
 {
 	t_2int	couple;
-	
+
 	couple.h = (int)pos.x;
 	couple.w = (int)pos.y;
 	if (!recurs_map(map, couple, size))

@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 10:03:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:59:57 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	refresh(const t_window *w)
+int		refresh(const t_window *w)
 {
 	// printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->s->pos.x, w->s->pos.y, w->s->dir.x, w->s->dir.y, w->s->plane.x, w->s->plane.y);
 	//check_key_on(w);
@@ -22,6 +22,7 @@ int	refresh(const t_window *w)
 	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->s->textures[NORTH]->img_ptr, 100, 100);
 	return (0);
 }
+
 int		key_release(int keycode, t_move *move)
 {
 	// printf("release:%d\n", keycode);
@@ -73,7 +74,7 @@ int		key_function(const int keycode, t_window *w)
 		start = clock();
 		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
 		end = clock();
-		printf("save_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+		printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	}
 	else if (keycode == ARROW_UP || keycode == KEY_Z)
 		move_up(w);
@@ -86,6 +87,6 @@ int		key_function(const int keycode, t_window *w)
 	else if (keycode == ARROW_LEFT || keycode == KEY_A)
 		turn_left(w);
 	else if (keycode == ARROW_RIGHT || keycode == KEY_E)
-		turn_right(w);	
+		turn_right(w);
 	return (0);
 }
