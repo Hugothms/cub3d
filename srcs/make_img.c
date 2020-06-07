@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:45:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:49:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,19 @@ void	set_delim(t_dda *dda, t_scene *s)
 		dda->delim.w = 0;
 }
 
+void	draw_pos_minimap(t_img *img, t_scene *s)
+{
+	t_draw draw;
+	draw.start.w = 20 + s->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
+	draw.start.h = 20 + s->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
+	draw_square(img->data, draw.start, SIZE_MINIMAP, RED, s->res);
+	draw.start.w += SIZE_MINIMAP / 2;
+	draw.start.h += SIZE_MINIMAP / 2;
+	draw.end.x = s->dir.y;
+	draw.end.y = s->dir.x;
+	draw_line(img->data, s, draw, RED, s->res);
+}
+
 void	make_img(t_img *img, t_scene *s)
 {
 	int		x;
@@ -264,25 +277,11 @@ void	make_img(t_img *img, t_scene *s)
 		perform_dda(s, dda);
 		set_draw_start_end(dda, s);
 		set_color_wall(dda, &color);
-		// //give x and y sides different brightness
-		// if (side == 1) {color = color / 2;}
-
-		//draw the pixels of the stripe as a vertical line
-//		verLine(x, dda->draw.h dda->draw.w, color);
 		set_delim(dda, s);
 		draw_wall(img->data, s->res.w - x - 1, dda->delim,rgb_to_int(*color),\
 		s->res);
 		free(color);
-		
-		t_draw draw;
-		draw.start.w = 20 + s->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-		draw.start.h = 20 + s->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-		draw_square(img->data, draw.start, SIZE_MINIMAP, RED, s->res);
-		draw.start.w += SIZE_MINIMAP / 2;
-		draw.start.h += SIZE_MINIMAP / 2;
-		draw.end.x = s->dir.y;
-		draw.end.y = s->dir.x;
-		draw_line(img->data, s, draw, RED, s->res);
+		draw_pos_minimap(img, s);
 		x++;
 	}
 	free(dda);
