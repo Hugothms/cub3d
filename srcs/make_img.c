@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:03:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:08:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,43 @@ void	draw_minimap(t_img *img, t_scene *scene)
 	}
 }
 
+void	calcul_dda(t_dda *dda, t_scene *s, int x)
+{
+	double cameraX;
+	
+	cameraX = 2 * x / (double)s->res.w - 1; 
+	dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
+	dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
+	dda->coord.h = (int)s->pos.x;
+	dda->coord.w = (int)s->pos.y;
+	dda->deltaDist.x = fabs(1 / dda->rayDir.x);
+	dda->deltaDist.y = fabs(1 / dda->rayDir.y);
+}
+
+void	set_side_dist(t_dda *dda, t_scene *s)
+{
+	if (dda->rayDir.x < 0)
+	{
+		dda->step.h = -1;
+		dda->sideDist.x = (s->pos.x - dda->coord.h) * dda->deltaDist.x;
+	}
+	else
+	{
+		dda->step.h = 1;
+		dda->sideDist.x = (dda->coord.h + 1.0 - s->pos.x) * dda->deltaDist.x;
+	}
+	if (dda->rayDir.y < 0)
+	{
+		dda->step.w = -1;
+		dda->sideDist.y = (s->pos.y - dda->coord.w) * dda->deltaDist.y;
+	}
+	else
+	{
+		dda->step.w = 1;
+		dda->sideDist.y = (dda->coord.w + 1.0 - s->pos.y) * dda->deltaDist.y;
+	}
+}
+
 void	perform_dda(t_scene *s, t_dda *dda, int *side)
 {
 	int	hit; //was there a wall hit?
@@ -157,10 +194,10 @@ void	perform_dda(t_scene *s, t_dda *dda, int *side)
 	}
 }
 
-
 void	make_img(t_img *img, t_scene *s)
 {
 	int		x;
+	int		side; //was a NS or a EW wall hit?
 	t_dda	*dda;
 
 	x = 0;
@@ -168,40 +205,8 @@ void	make_img(t_img *img, t_scene *s)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while (x < s->res.w)
 	{
-		//calculate ray position and direction
-		double cameraX = 2 * x / (double)s->res.w - 1; //x-coordinate in camera space
-		dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
-		dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
-		dda->coord.h = (int)s->pos.x;
-		dda->coord.w = (int)s->pos.y;
-		//length of ray from current position to next x or y-side
-		//length of ray from one x or y-side to next x or y-side
-		dda->deltaDist.x = fabs(1 / dda->rayDir.x);
-		dda->deltaDist.y = fabs(1 / dda->rayDir.y);
-		//what direction to step in x or y-direction (either +1 or -1)
-		//calculate step and initial sideDist
-		if (dda->rayDir.x < 0)
-		{
-			dda->step.h = -1;
-			dda->sideDist.x = (s->pos.x - dda->coord.h) * dda->deltaDist.x;
-		}
-		else
-		{
-			dda->step.h = 1;
-			dda->sideDist.x = (dda->coord.h + 1.0 - s->pos.x) * dda->deltaDist.x;
-		}
-		if (dda->rayDir.y < 0)
-		{
-			dda->step.w = -1;
-			dda->sideDist.y = (s->pos.y - dda->coord.w) * dda->deltaDist.y;
-		}
-		else
-		{
-			dda->step.w = 1;
-			dda->sideDist.y = (dda->coord.w + 1.0 - s->pos.y) * dda->deltaDist.y;
-		}
-		//perform DDA
-		int	side; //was a NS or a EW wall hit?
+		calcul_dda(dda, s, x);
+		set_side_dist(dda, s);
 		perform_dda(s, dda, &side);
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("dda->coord.h: %d\t\tdda->coord.w:%d\n", dda->coord.h, dda->coord.w);
