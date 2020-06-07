@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:03:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,101 +124,108 @@ void	draw_minimap(t_img *img, t_scene *scene)
 	}
 }
 
-void	make_img(t_img *img, t_scene *scene)
+void	perform_dda(t_scene *s, t_dda *dda, int *side)
 {
-	int	x;
+	int	hit; //was there a wall hit?
+
+	hit = 0;
+	while (hit == 0)
+	{
+		//jump to next map square, OR in x-direction, OR in y-direction
+		if (dda->sideDist.x < dda->sideDist.y)
+		{
+			dda->sideDist.x += dda->deltaDist.x;
+			dda->coord.h += dda->step.h;
+			if (dda->rayDir.x > 0)
+				*side = 0;
+			else
+				*side = 2;
+		}
+		else
+		{
+			dda->sideDist.y += dda->deltaDist.y;
+			dda->coord.w += dda->step.w;
+			if (dda->rayDir.y > 0)
+				*side = 1;
+			else
+				*side = 3;
+		}
+		//Check if ray has hit a wall
+		// printf("map%d:%d\n", dda->coord.h, dda->coord.w);
+		if (s->map[dda->coord.h][dda->coord.w] != '0')
+			hit = 1;
+	}
+}
+
+
+void	make_img(t_img *img, t_scene *s)
+{
+	int		x;
+	t_dda	*dda;
 
 	x = 0;
-	while (x < scene->res.w)
+	if(!(dda = malloc(sizeof(*dda))))
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	while (x < s->res.w)
 	{
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)scene->res.w - 1; //x-coordinate in camera space
-		double rayDirX = scene->dir.x + scene->plane.x * cameraX;
-		double rayDirY = scene->dir.y + scene->plane.y * cameraX;
-		int	mapX = (int)scene->pos.x;
-		int	mapY = (int)scene->pos.y;
+		double cameraX = 2 * x / (double)s->res.w - 1; //x-coordinate in camera space
+		dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
+		dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
+		dda->coord.h = (int)s->pos.x;
+		dda->coord.w = (int)s->pos.y;
 		//length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
 		//length of ray from one x or y-side to next x or y-side
-		double deltaDistX = fabs(1 / rayDirX);
-		double deltaDistY = fabs(1 / rayDirY);
-		double perpWallDist;
+		dda->deltaDist.x = fabs(1 / dda->rayDir.x);
+		dda->deltaDist.y = fabs(1 / dda->rayDir.y);
 		//what direction to step in x or y-direction (either +1 or -1)
-		int	stepX;
-		int	stepY;
-		int	hit = 0; //was there a wall hit?
-		int	side; //was a NS or a EW wall hit?
 		//calculate step and initial sideDist
-		if (rayDirX < 0)
+		if (dda->rayDir.x < 0)
 		{
-			stepX = -1;
-			sideDistX = (scene->pos.x - mapX) * deltaDistX;
+			dda->step.h = -1;
+			dda->sideDist.x = (s->pos.x - dda->coord.h) * dda->deltaDist.x;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - scene->pos.x) * deltaDistX;
+			dda->step.h = 1;
+			dda->sideDist.x = (dda->coord.h + 1.0 - s->pos.x) * dda->deltaDist.x;
 		}
-		if (rayDirY < 0)
+		if (dda->rayDir.y < 0)
 		{
-			stepY = -1;
-			sideDistY = (scene->pos.y - mapY) * deltaDistY;
+			dda->step.w = -1;
+			dda->sideDist.y = (s->pos.y - dda->coord.w) * dda->deltaDist.y;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - scene->pos.y) * deltaDistY;
+			dda->step.w = 1;
+			dda->sideDist.y = (dda->coord.w + 1.0 - s->pos.y) * dda->deltaDist.y;
 		}
 		//perform DDA
-		while (hit == 0)
-		{
-			//jump to next map square, OR in x-direction, OR in y-direction
-			if (sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				if (rayDirX > 0)
-					side = 0;
-				else
-					side = 2;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				if (rayDirY > 0)
-					side = 1;
-				else
-					side = 3;
-			}
-			//Check if ray has hit a wall
-			// printf("map%d:%d\n", mapX, mapY);
-			if (scene->map[mapX][mapY] != '0')
-				hit = 1;
-		}
+		int	side; //was a NS or a EW wall hit?
+		perform_dda(s, dda, &side);
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		// printf("mapX: %d\t\tmapY:%d\n", mapX, mapY);
-		// printf("stepX: %d\t\tstepY:%d\n", stepX, stepY);
-		// printf("rayDirX: %f\trayDirY:%f\n", rayDirX, rayDirY);
+		// printf("dda->coord.h: %d\t\tdda->coord.w:%d\n", dda->coord.h, dda->coord.w);
+		// printf("dda->step.h: %d\t\tdda->step.w:%d\n", dda->step.h, dda->step.w);
+		// printf("dda->rayDir.x: %f\tdda->rayDir.y:%f\n", dda->rayDir.x, dda->rayDir.y);
 		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
 		// printf("side:%d\n", side);
+		double perpWallDist;
 		if (side % 2 == 0)
-			perpWallDist = (mapX - scene->pos.x + (1 - stepX) / 2.) / rayDirX;
+			perpWallDist = (dda->coord.h - s->pos.x + (1 - dda->step.h) / 2.) / dda->rayDir.x;
 		else
-			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
+			perpWallDist = (dda->coord.w - s->pos.y + (1 - dda->step.w) / 2.) / dda->rayDir.y;
 		// printf("res.h: %d\tperp:%f\n", scene->res.h, perpWallDist);
 		
 		//Calculate height of line to draw on screen
-		int	lineHeight = (scene->res.h / perpWallDist);
+		int	lineHeight = (s->res.h / perpWallDist);
 		// printf("lineHeight: %d\n", lineHeight);
 		//calculate lowest and highest pixel to fill in current stripe
-		int	drawStart = -lineHeight / 2 + scene->res.h / 2;
+		int	drawStart = -lineHeight / 2 + s->res.h / 2;
 		if (drawStart < 0)
 			drawStart = 0;
-		int	drawEnd = lineHeight / 2 + scene->res.h / 2;
-		if (drawEnd >= scene->res.h)
-			drawEnd = scene->res.h - 1;
+		int	drawEnd = lineHeight / 2 + s->res.h / 2;
+		if (drawEnd >= s->res.h)
+			drawEnd = s->res.h - 1;
 		//choose wall color
 		t_rgb *color;
 		switch (side)
@@ -234,22 +241,22 @@ void	make_img(t_img *img, t_scene *scene)
 
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
-		t_2int delim;
-		delim.h = drawStart < scene->res.h ? drawStart > 0 ? drawStart : 0 : 0;
-		delim.w = drawEnd < scene->res.h ? drawEnd > 0 ? drawEnd : 0 : 0;
-		draw_wall(img->data, scene->res.w - x - 1, delim, rgb_to_int(*color), scene->res);
+		dda->delim.h = drawStart < s->res.h ? drawStart > 0 ? drawStart : 0 : 0;
+		dda->delim.w = drawEnd < s->res.h ? drawEnd > 0 ? drawEnd : 0 : 0;
+		draw_wall(img->data, s->res.w - x - 1, dda->delim, rgb_to_int(*color), s->res);
 		free(color);
 		
 		t_draw draw;
-		draw.start.w = 20 + scene->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-		draw.start.h = 20 + scene->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-		draw_square(img->data, draw.start, SIZE_MINIMAP, RED, scene->res);
+		draw.start.w = 20 + s->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
+		draw.start.h = 20 + s->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
+		draw_square(img->data, draw.start, SIZE_MINIMAP, RED, s->res);
 		draw.start.w += SIZE_MINIMAP / 2;
 		draw.start.h += SIZE_MINIMAP / 2;
-		draw.end.x = scene->dir.y;
-		draw.end.y = scene->dir.x;
-		draw_line(img->data, scene, draw, RED, scene->res);
+		draw.end.x = s->dir.y;
+		draw.end.y = s->dir.x;
+		draw_line(img->data, s, draw, RED, s->res);
 		x++;
 	}
-	draw_minimap(img, scene);
+	free(dda);
+	draw_minimap(img, s);
 }
