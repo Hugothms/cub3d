@@ -6,28 +6,28 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:28:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		check_resolution(char **data)
+int		check_res(char **data)
 {
 	return (ft_atoi_strict(data[1]) <= 0 || ft_atoi_strict(data[2]) <= 0);
 }
 
-void	set_resolution(t_scene *scene, char **data)
+void	set_res(t_scene *scene, char **data)
 {
-	t_couple	*resolution;
+	t_2int	*res;
 
-	if (check_resolution(data))
-		print_err_and_exit("resolution (R) must be 2 positive numbers", 20);
-	// if (!(resolution = malloc(sizeof(*resolution))))
+	if (check_res(data))
+		print_err_and_exit("res (R) must be 2 positive numbers", 20);
+	// if (!(res = malloc(sizeof(*res))))
 	// 	print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	resolution->w = ft_atoi_strict(data[1]);
-	resolution->h = ft_atoi_strict(data[2]);
-	scene->res = *resolution;
+	res->w = ft_atoi_strict(data[1]);
+	res->h = ft_atoi_strict(data[2]);
+	scene->res = *res;
 }
 
 void	set_texture(t_scene *scene, char **data, int code)

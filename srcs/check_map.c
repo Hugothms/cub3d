@@ -6,17 +6,17 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:16:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:17:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	print_map_color(char **map, t_couple couple, t_couple size)
+void	print_map_color(char **map, t_2int couple, t_2int size)
 {
 	printf("couple%d:%d\n", couple.h, couple.w);
-	int i = 0;
-	int j;
+	int	i = 0;
+	int	j;
 	while (i < size.h)
 	{
 		j=0;
@@ -44,9 +44,9 @@ void	print_map_color(char **map, t_couple couple, t_couple size)
 	sleep(1);
 }
 
-int		recurs_map(char **map, t_couple c, t_couple size)
+int		recurs_map(char **map, t_2int c, t_2int size)
 {
-	int ok[4];
+	int	ok[4];
 	
 	ok[0] = 1;
 	ok[1] = 1;
@@ -74,9 +74,9 @@ int		recurs_map(char **map, t_couple c, t_couple size)
 	return (ok[0] && ok[1] && ok[2] && ok[3]);
 }
 
-void		check_map(char **map, t_pos pos, t_couple size)
+void		check_map(char **map, t_2float pos, t_2int size)
 {
-	t_couple	couple;
+	t_2int	couple;
 	
 	couple.h = (int)pos.x;
 	couple.w = (int)pos.y;

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:16:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	set_all(t_scene *s, char *line)
 	char	**data;
 
 	data = ft_split_set((*line ? line : "iamcheating"), WHITE_SPACES);
-	if (check_line(line, data, "R", NB_ELEM_RESOLUTION) && s->res.w == -1)
-		set_resolution(s, data);
+	if (check_line(line, data, "R", NB_ELEM_res) && s->res.w == -1)
+		set_res(s, data);
 	else if (check_line(line, data, "NO", NB_ELEM_TEX) && !s->tex[NORTH])
 		set_texture(s, data, NORTH);
 	else if (check_line(line, data, "SO", NB_ELEM_TEX) && !s->tex[SOUTH])

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:29:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*file_header_bmp(const int filesize)
 	return (bmpfileheader);
 }
 
-char	*info_header_bmp(const t_couple resolution)
+char	*info_header_bmp(const t_2int res)
 {
 	char	*bmpinfoheader;
 
@@ -36,18 +36,18 @@ char	*info_header_bmp(const t_couple resolution)
 	ft_memcpy(bmpinfoheader, (char[]){40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \
 	1,0, 32,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \
 	0, 0, 0, 0}, 40);
-	bmpinfoheader[4] = resolution.w;
-	bmpinfoheader[5] = resolution.w >> 8;
-	bmpinfoheader[6] = resolution.w >> 16;
-	bmpinfoheader[7] = resolution.w >> 24;
-	bmpinfoheader[8] = resolution.h;
-	bmpinfoheader[9] = resolution.h >> 8;
-	bmpinfoheader[10] = resolution.h >> 16;
-	bmpinfoheader[11] = resolution.h >> 24;
+	bmpinfoheader[4] = res.w;
+	bmpinfoheader[5] = res.w >> 8;
+	bmpinfoheader[6] = res.w >> 16;
+	bmpinfoheader[7] = res.w >> 24;
+	bmpinfoheader[8] = res.h;
+	bmpinfoheader[9] = res.h >> 8;
+	bmpinfoheader[10] = res.h >> 16;
+	bmpinfoheader[11] = res.h >> 24;
 	return (bmpinfoheader);
 }
 
-void			write_data(const int f, const char *data, t_couple r)
+void			write_data(const int f, const char *data, t_2int r)
 {
 	int			line;
 
@@ -56,7 +56,7 @@ void			write_data(const int f, const char *data, t_couple r)
 		write(f, data + r.w * line * 4, r.w * 4);
 }
 
-void			save_bmp(const char *fn, const char *data, const t_couple r)
+void			save_bmp(const char *fn, const char *data, const t_2int r)
 {
 	int		filesize;
 	int		fd;

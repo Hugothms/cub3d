@@ -40,12 +40,12 @@ typedef struct	glsl_info_s
   GLuint	font_vshader;
   GLuint	font_fshader;
   GLuint	font_program;
-  GLint		loc_font_position;
+  GLint		loc_font_2floatition;
   GLint		loc_font_winhalfsize;
   GLint		loc_font_texture;
   GLint		loc_font_color;
-  GLint		loc_font_posinwin;
-  GLint		loc_font_posinatlas;
+  GLint		loc_font_2floatinwin;
+  GLint		loc_font_2floatinatlas;
   GLint		loc_font_atlassize;
 } glsl_info_t;
 

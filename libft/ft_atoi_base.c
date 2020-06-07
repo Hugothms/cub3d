@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 18:12:12 by hthomas           #+#    #+#             */
-/*   Updated: 2020/03/03 17:45:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_base(char *base)
 int	cacul_res(char *str, char *base, int size_base)
 {
 	int	i;
-	int res;
+	int	res;
 
 	i = 0;
 	res = 0;
@@ -59,7 +59,7 @@ int	cacul_res(char *str, char *base, int size_base)
 int	ft_atoi_base(char *str, char *base)
 {
 	int	sign;
-	int size_base;
+	int	size_base;
 
 	sign = 1;
 	size_base = 0;

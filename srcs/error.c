@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 23:26:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_err_and_exit(char *str, int err)
 
 void	free_scene(t_scene *scene)
 {
-	int i;
+	int	i;
 	
 	i = 0;
 	while (i < scene->size.h)

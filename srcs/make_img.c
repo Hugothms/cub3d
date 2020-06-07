@@ -6,47 +6,47 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:28:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void		put_pixel(unsigned char *data, t_couple pixel, int color, t_couple resolution)
+void	put_pixel(char *data, t_2int pixel, int color, t_2int res)
 {
-	int	(*tab)[resolution.w][1]; // prepare the cast
+	int	(*tab)[res.w][1]; // prepare the cast
 
 	tab = (void *)data; // cast for change 1 dimension array to 2 dimensions
 	*tab[pixel.h][pixel.w] = color; // set the pixel at the coord x,y with the color value
 }
 
-void		draw_vertical_line(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
+void	draw_v_line(char *data, t_2int pos, int length, int color, t_2int res)
 {
 	while (length-- > 0)
 	{
-		put_pixel(data, pos, color, resolution); // set the pixel at the coord x,y with the color value
+		put_pixel(data, pos, color, res); // set the pixel at the coord x,y with the color value
 		pos.h++;
 	}
 }
 
-void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_couple resolution)
+void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 {
-	int ymax;
-	int xmax;
-	t_pos	pos;
+	int	ymax;	
+	int	xmax;
+	t_2float	pos;
 
-	ymax = 20 + scene->size.h * SIZE_MINIMAP;
-	xmax = 20 + ft_strlen(scene->map[(int)scene->pos.x]) * SIZE_MINIMAP;
+	ymax = 20 + s->size.h * SIZE_MINIMAP;
+	xmax = 20 + ft_strlen(s->map[(int)s->pos.x]) * SIZE_MINIMAP;
 	// printf("draw%d:%d\n", draw.start.h,draw.start.w );
 	// printf("max%d:%d\n", ymax, xmax );
 	pos.x = draw.start.h;
 	pos.y = draw.start.w;
 	// while (draw.start.h > 20 && draw.start.h < ymax && draw.start.w > 20 && draw.start.w < xmax)
-	int i = 20;
+	int	i = 20;
 	while (i--)
 	{
 		//printf("%d:%d\n", draw.start.h, draw.start.w);
-		put_pixel(data, draw.start, color, resolution); // set the pixel at the coord x,y with the color value
+		put_pixel(data, draw.start, color, res); // set the pixel at the coord x,y with the color value
 		pos.x += draw.end.y;
 		pos.y += draw.end.x;
 		draw.start.h = pos.x;
@@ -54,56 +54,56 @@ void		draw_line(unsigned char *data, t_scene *scene, t_draw draw, int color, t_c
 	}	
 }
 
-void		draw_square(unsigned char *data, t_couple pos, int length, int color, t_couple resolution)
+void	draw_square(char *data, t_2int pos, int length, int color, t_2int res)
 {
-	int i;
+	int	i;
 	
 	i = 0;
 	while (i < length)
 	{
-		draw_vertical_line(data, pos, length, color, resolution); // set the pixel at the coord x,y with the color value
+		draw_v_line(data, pos, length, color, res); // set the pixel at the coord x,y with the color value
 		pos.w++;
 		i++;
 	}
 }
 
-void		draw_wall(unsigned char *data, int line, t_couple delim, int color, t_couple resolution)
+void	draw_wall(char *data, int line, t_2int delim, int color, t_2int res)
 {
 	int			i;
-	t_couple	pixel;
+	t_2int	pixel;
 	
 	pixel.w = line;
 	// printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
 	// i = 0;
 	pixel.h = 0;
-	draw_vertical_line(data, pixel, delim.h, CEILING_COLOR, resolution);
+	draw_v_line(data, pixel, delim.h, CEILING_COLOR, res);
 	pixel.h += delim.h;
-	draw_vertical_line(data, pixel, delim.w - delim.h, color, resolution);
+	draw_v_line(data, pixel, delim.w - delim.h, color, res);
 	pixel.h += delim.w - delim.h;
-	draw_vertical_line(data, pixel, resolution.h - delim.w - 1, FLOOR_COLOR, resolution);
+	draw_v_line(data, pixel, res.h - delim.w - 1, FLOOR_COLOR, res);
 	// while (i < delim.h)
 	// {
 	// 	pixel.h = i++;
-	// 	put_pixel(data, pixel, CEILING_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	// 	put_pixel(data, pixel, CEILING_COLOR, res); // set the pixel at the coord x,y with the color value
 	// }
 	// while (i < delim.w)
 	// {
 	// 	pixel.h = i++;
-	// 	put_pixel(data, pixel, wall_color, resolution); // set the pixel at the coord x,y with the color value
+	// 	put_pixel(data, pixel, wall_color, res); // set the pixel at the coord x,y with the color value
 	// }
-	// while (i < resolution.h)
+	// while (i < res.h)
 	// {
 	// 	pixel.h = i++;
-	// 	put_pixel(data, pixel, FLOOR_COLOR, resolution); // set the pixel at the coord x,y with the color value
+	// 	put_pixel(data, pixel, FLOOR_COLOR, res); // set the pixel at the coord x,y with the color value
 	// }
 }
 
 void	draw_minimap(t_img *img, t_scene *scene)
 {
-	int col;
-	int line;
-	int len;
-	t_couple pos;
+	int	col;
+	int	line;
+	int	len;
+	t_2int pos;
 
 	col = 0;
 	while (col < scene->size.h)
@@ -126,7 +126,7 @@ void	draw_minimap(t_img *img, t_scene *scene)
 
 void	make_img(t_img *img, t_scene *scene)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (x < scene->res.w)
@@ -135,8 +135,8 @@ void	make_img(t_img *img, t_scene *scene)
 		double cameraX = 2 * x / (double)scene->res.w - 1; //x-coordinate in camera space
 		double rayDirX = scene->dir.x + scene->plane.x * cameraX;
 		double rayDirY = scene->dir.y + scene->plane.y * cameraX;
-		int mapX = (int)scene->pos.x;
-		int mapY = (int)scene->pos.y;
+		int	mapX = (int)scene->pos.x;
+		int	mapY = (int)scene->pos.y;
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
@@ -145,10 +145,10 @@ void	make_img(t_img *img, t_scene *scene)
 		double deltaDistY = fabs(1 / rayDirY);
 		double perpWallDist;
 		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+		int	stepX;
+		int	stepY;
+		int	hit = 0; //was there a wall hit?
+		int	side; //was a NS or a EW wall hit?
 		//calculate step and initial sideDist
 		if (rayDirX < 0)
 		{
@@ -207,16 +207,16 @@ void	make_img(t_img *img, t_scene *scene)
 			perpWallDist = (mapX - scene->pos.x + (1 - stepX) / 2.) / rayDirX;
 		else
 			perpWallDist = (mapY - scene->pos.y + (1 - stepY) / 2.) / rayDirY;
-		// printf("res.h: %d\tperp:%f\n", scene->resolution.h, perpWallDist);
+		// printf("res.h: %d\tperp:%f\n", scene->res.h, perpWallDist);
 		
 		//Calculate height of line to draw on screen
-		int lineHeight = (scene->res.h / perpWallDist);
+		int	lineHeight = (scene->res.h / perpWallDist);
 		// printf("lineHeight: %d\n", lineHeight);
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + scene->res.h / 2;
+		int	drawStart = -lineHeight / 2 + scene->res.h / 2;
 		if (drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + scene->res.h / 2;
+		int	drawEnd = lineHeight / 2 + scene->res.h / 2;
 		if (drawEnd >= scene->res.h)
 			drawEnd = scene->res.h - 1;
 		//choose wall color
@@ -234,7 +234,7 @@ void	make_img(t_img *img, t_scene *scene)
 
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, drawStart, drawEnd, color);
-		t_couple delim;
+		t_2int delim;
 		delim.h = drawStart < scene->res.h ? drawStart > 0 ? drawStart : 0 : 0;
 		delim.w = drawEnd < scene->res.h ? drawEnd > 0 ? drawEnd : 0 : 0;
 		draw_wall(img->data, scene->res.w - x - 1, delim, rgb_to_int(*color), scene->res);

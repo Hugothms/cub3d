@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:29:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:55:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	set_initial_dir(t_pos *dir, char **map, int line, int col)
+void	set_initial_dir(t_2float *dir, char **map, int line, int col)
 {
 	if (map[line][col] == 'E')
 	{

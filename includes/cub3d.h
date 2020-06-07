@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:32:30 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-# define OPEN_ERROR -1
-# define CLOSE_ERROR -2
-# define PARSE_ERROR -3
-# define MLX_ERROR -4
-# define MALLOC_ERROR -5
+# define OPEN_ERROR		-1
+# define CLOSE_ERROR	-2
+# define PARSE_ERROR	-3
+# define MLX_ERROR		-4
+# define MALLOC_ERROR	-5
 
-# define THETA 0.03
-# define SPEED_MOVE 0.15
-# define CEILING_COLOR 6185465
-# define FLOOR_COLOR 2105376
-# define FOV 0.66
-# define SIZE_MINIMAP 5
+# define THETA			0.03
+# define SPEED_MOVE		0.15
+# define CEILING_COLOR	6185465
+# define FLOOR_COLOR	2105376
+# define FOV			0.66
+# define SIZE_MINIMAP	5
 
-# define GREY 11184810
-# define RED 16711680
+# define GREY			11184810
+# define RED			16711680
 
 /*
 ** Keycodes and screen size LINUX and MAC
@@ -83,48 +83,48 @@
 #  define KEY_MINUS		78
 # endif
 
-typedef struct		s_couple
+typedef struct	s_2int
 {
-	int				w;
-	int				h;
-}					t_couple;
+	int			w;
+	int			h;
+}				t_2int;
 
-typedef struct		s_pos
+typedef struct	s_2float
 {
-	float			x;
-	float			y;
-}					t_pos;
+	float		x;
+	float		y;
+}				t_2float;
 
-typedef struct		s_rgb
+typedef struct	s_rgb
 {
-	int				r;
-	int				g;
-	int				b;
-}					t_rgb;
+	int			r;
+	int			g;
+	int			b;
+}				t_rgb;
 
-typedef struct		s_draw
+typedef struct	s_draw
 {
-	t_couple	start;
-	t_pos		end;
-}					t_draw;
+	t_2int		start;
+	t_2float	end;
+}				t_draw;
 
-typedef struct		s_mlx
+typedef struct	s_mlx
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-}					t_mlx;
+	void		*mlx_ptr;
+	void		*win_ptr;
+}				t_mlx;
 
-typedef struct		s_img
+typedef struct	s_img
 {
-	void			*img_ptr;
-	char			*data;
- 	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-	t_couple		size;
-}					t_img;
+	void		*img_ptr;
+	char		*data;
+ 	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	t_2int		size;
+}				t_img;
 
-typedef struct		s_move
+typedef struct	s_move
 {
 	int			up;
 	int			down;
@@ -132,33 +132,33 @@ typedef struct		s_move
 	int			right;
 	int			turn_left;
 	int			turn_right;
-}					t_move;
+}				t_move;
 
-typedef struct		s_scene
+typedef struct	s_scene
 {
-	t_couple		res;
-	char			**tex;
-	t_img			*textures[5];
-	t_rgb			*floor;
-	t_rgb			*ceil;
-	char			**map;
-	t_couple 		size;
-	t_pos			pos;
-	t_pos			dir;
-	t_pos			plane;
-	t_move			move;
-}					t_scene;
+	t_2int		res;
+	char		**tex;
+	t_img		*textures[5];
+	t_rgb		*floor;
+	t_rgb		*ceil;
+	char		**map;
+	t_2int		size;
+	t_2float	pos;
+	t_2float	dir;
+	t_2float	plane;
+	t_move		move;
+}				t_scene;
 
-typedef struct		s_window
+typedef struct	s_window
 {
-	t_mlx			*mlx;
-	t_img			*img;
-	t_scene			*s;
-}					t_window;
+	t_mlx		*mlx;
+	t_img		*img;
+	t_scene		*s;
+}				t_window;
 
 # define NB_TEXTURES 5
 # define WHITE_SPACES " \t"
-# define NB_ELEM_RESOLUTION 3
+# define NB_ELEM_res 3
 # define NB_ELEM_TEX 2
 # define NB_ELEM_COLOR 2
 
@@ -169,7 +169,7 @@ typedef struct		s_window
 # define SPRITE 4
 
 //check_map
-void	check_map(char **map, t_pos pos, t_couple size);
+void	check_map(char **map, t_2float pos, t_2int size);
 
 //color
 t_rgb	*int_to_rgb(int r, int g, int b);
@@ -209,18 +209,18 @@ void	parse_textures(t_mlx *mlx, t_scene *s);
 t_scene	*get_scene(const int argc, const char *argv[]);
 
 //set_elements
-void	set_resolution(t_scene *scene, char **data);
+void	set_res(t_scene *scene, char **data);
 void	set_texture(t_scene *scene, char **data, int code);
 void	set_color(t_scene *scene, char **data, int code);
 
 //save_bmp
-void	save_bmp(const char *filename, const char *data, const t_couple r);
+void	save_bmp(const char *filename, const char *data, const t_2int r);
 
 //utils
 char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
 void	free_tab(void **tab);
-void	rotate(t_pos *dir, float angle);
+void	rotate(t_2float *dir, float angle);
 
 #endif

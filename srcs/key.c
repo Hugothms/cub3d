@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 00:30:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		key_function(const int keycode, t_window *w)
 {
 	char	filename[35];
 	clock_t	start, end;
-	float x;
+	float	x;
 
 	printf("%i\n", keycode);
 	key_push(keycode, &w->s->move);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 17:44:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:03:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int     max_len_tab(char **tab)
 
 void	free_tab(void **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -83,7 +83,7 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
-void	rotate(t_pos *dir, float angle)
+void	rotate(t_2float *dir, float angle)
 {
 	float	x;
 	

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/06 23:26:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 10:04:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_mlx	*malloc_mlx_init(void)
 	return (mlx);
 }
 
-t_img	*init_img(t_mlx *mlx, t_couple *resolution)
+t_img	*init_img(t_mlx *mlx, t_2int *res)
 {
 	t_img		*img;
 	int			w;
@@ -32,11 +32,11 @@ t_img	*init_img(t_mlx *mlx, t_couple *resolution)
 	if (!(img = malloc(sizeof(*img))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
-	if (w < resolution->w)
-		resolution->w = w;
-	if (h < resolution->h)
-		resolution->h = h;
-	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, resolution->w, resolution->h)))
+	if (w < res->w)
+		res->w = w;
+	if (h < res->h)
+		res->h = h;
+	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, res->w, res->h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(img->data = mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
@@ -85,7 +85,7 @@ int		main(const int argc, const char *argv[])
 	//parse_textures(mlx, scene);
 	if (argc == 2)
 	{
-		char *title = ft_strdup(argv[1]);
+		char	*title = ft_strdup(argv[1]);
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->res.w, scene->res.h, title)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
 		free(title);
@@ -93,7 +93,7 @@ int		main(const int argc, const char *argv[])
 	}
 	else if (argc == 3)
 	{
-		char filename[35];
+		char	filename[35];
 		make_img(img, scene);
 		start = clock();
 		save_bmp(screenshot_datetime(filename), img->data, scene->res);
