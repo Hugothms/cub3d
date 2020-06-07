@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:36:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:45:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,20 @@ void	set_draw_start_end(t_dda *dda, t_scene *s)
 		dda->draw.w = s->res.h - 1;
 }
 
+void	set_color_wall(t_dda *dda, t_rgb **color)
+{
+	if (dda->side == 0)
+		*color = int_to_rgb(0,255,255);
+	else if (dda->side == 1)
+		*color = int_to_rgb(255,0,255);
+	else if (dda->side == 2)
+		*color = int_to_rgb(255,255,0);
+	else if (dda->side == 3)
+		*color = int_to_rgb(0,255,0);
+	else
+		*color = int_to_rgb(255,0,0);
+}
+
 void	set_delim(t_dda *dda, t_scene *s)
 {
 	if (dda->draw.h < s->res.h)
@@ -238,6 +252,7 @@ void	make_img(t_img *img, t_scene *s)
 {
 	int		x;
 	t_dda	*dda;
+	t_rgb	*color;
 
 	x = 0;
 	if(!(dda = malloc(sizeof(*dda))))
@@ -247,23 +262,8 @@ void	make_img(t_img *img, t_scene *s)
 		calcul_dda(dda, s, x);
 		set_side_dist(dda, s);
 		perform_dda(s, dda);
-		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		// printf("dda->coord.h: %d\t\tdda->coord.w:%d\n", dda->coord.h, dda->coord.w);
-		// printf("dda->step.h: %d\t\tdda->step.w:%d\n", dda->step.h, dda->step.w);
-		// printf("dda->rayDir.x: %f\tdda->rayDir.y:%f\n", dda->rayDir.x, dda->rayDir.y);
-		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
-		// printf("side:%d\n", side);
 		set_draw_start_end(dda, s);
-		//choose wall color
-		t_rgb *color;
-		switch (dda->side)
-		{
-			case 0:color = int_to_rgb(0,255,255);break;
-			case 1:color = int_to_rgb(255,0,255);break;
-			case 2:color = int_to_rgb(255,255,0);break;
-			case 3:color = int_to_rgb(0,255,0);break;
-			default: color = int_to_rgb(255,0,0); break;
-		}
+		set_color_wall(dda, &color);
 		// //give x and y sides different brightness
 		// if (side == 1) {color = color / 2;}
 
