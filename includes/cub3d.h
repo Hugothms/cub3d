@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 10:57:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:24:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ typedef struct	s_dda
 	t_2int		coord;
 	t_2int		step;
 	t_2int		delim;
+	t_2int		draw;
 	t_2float	sideDist;
 	t_2float	deltaDist;
-	t_2float	rayDir;	
+	t_2float	rayDir;
+	int			side;
 }				t_dda;
 
 typedef struct	s_rgb

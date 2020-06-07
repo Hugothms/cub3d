@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:10:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:26:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	set_side_dist(t_dda *dda, t_scene *s)
 	}
 }
 
-void	perform_dda(t_scene *s, t_dda *dda, int *side)
+void	perform_dda(t_scene *s, t_dda *dda)
 {
 	int	hit; //was there a wall hit?
 
@@ -173,13 +173,13 @@ void	perform_dda(t_scene *s, t_dda *dda, int *side)
 		{
 			dda->sideDist.x += dda->deltaDist.x;
 			dda->coord.h += dda->step.h;
-			*side = ((dda->rayDir.x > 0) ? 0 : 2);
+			dda->side = ((dda->rayDir.x > 0) ? 0 : 2);
 		}
 		else
 		{
 			dda->sideDist.y += dda->deltaDist.y;
 			dda->coord.w += dda->step.w;
-			*side = ((dda->rayDir.y > 0) ? 1 : 3);
+			dda->side = ((dda->rayDir.y > 0) ? 1 : 3);
 		}
 		//Check if ray has hit a wall
 		// printf("map%d:%d\n", dda->coord.h, dda->coord.w);
@@ -188,10 +188,29 @@ void	perform_dda(t_scene *s, t_dda *dda, int *side)
 	}
 }
 
+void	set_draw_start_end(t_dda *dda, t_scene *s)
+{
+	double perpWallDist;
+	if (dda->side % 2 == 0)
+		perpWallDist = (dda->coord.h - s->pos.x + (1 - dda->step.h) / 2.) / dda->rayDir.x;
+	else
+		perpWallDist = (dda->coord.w - s->pos.y + (1 - dda->step.w) / 2.) / dda->rayDir.y;
+	// printf("res.h: %d\tperp:%f\n", scene->res.h, perpWallDist);
+	//Calculate height of line to draw on screen
+	int	lineHeight = (s->res.h / perpWallDist);
+	// printf("lineHeight: %d\n", lineHeight);
+	//calculate lowest and highest pixel to fill in current stripe
+	dda->draw.h= -lineHeight / 2 + s->res.h / 2;
+	if (dda->draw.h< 0)
+		dda->draw.h= 0;
+	dda->draw.w = lineHeight / 2 + s->res.h / 2;
+	if (dda->draw.w >= s->res.h)
+		dda->draw.w = s->res.h - 1;
+}
+
 void	make_img(t_img *img, t_scene *s)
 {
 	int		x;
-	int		side; //was a NS or a EW wall hit?
 	t_dda	*dda;
 
 	x = 0;
@@ -201,33 +220,17 @@ void	make_img(t_img *img, t_scene *s)
 	{
 		calcul_dda(dda, s, x);
 		set_side_dist(dda, s);
-		perform_dda(s, dda, &side);
+		perform_dda(s, dda);
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
 		// printf("dda->coord.h: %d\t\tdda->coord.w:%d\n", dda->coord.h, dda->coord.w);
 		// printf("dda->step.h: %d\t\tdda->step.w:%d\n", dda->step.h, dda->step.w);
 		// printf("dda->rayDir.x: %f\tdda->rayDir.y:%f\n", dda->rayDir.x, dda->rayDir.y);
 		// printf("scene->pos.x: %f\tscene->pos.y:%f\n", scene->pos.x, scene->pos.y);
 		// printf("side:%d\n", side);
-		double perpWallDist;
-		if (side % 2 == 0)
-			perpWallDist = (dda->coord.h - s->pos.x + (1 - dda->step.h) / 2.) / dda->rayDir.x;
-		else
-			perpWallDist = (dda->coord.w - s->pos.y + (1 - dda->step.w) / 2.) / dda->rayDir.y;
-		// printf("res.h: %d\tperp:%f\n", scene->res.h, perpWallDist);
-		
-		//Calculate height of line to draw on screen
-		int	lineHeight = (s->res.h / perpWallDist);
-		// printf("lineHeight: %d\n", lineHeight);
-		//calculate lowest and highest pixel to fill in current stripe
-		int	drawStart = -lineHeight / 2 + s->res.h / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int	drawEnd = lineHeight / 2 + s->res.h / 2;
-		if (drawEnd >= s->res.h)
-			drawEnd = s->res.h - 1;
+		set_draw_start_end(dda, s);
 		//choose wall color
 		t_rgb *color;
-		switch (side)
+		switch (dda->side)
 		{
 			case 0:color = int_to_rgb(0,255,255);break;
 			case 1:color = int_to_rgb(255,0,255);break;
@@ -239,9 +242,9 @@ void	make_img(t_img *img, t_scene *s)
 		// if (side == 1) {color = color / 2;}
 
 		//draw the pixels of the stripe as a vertical line
-//		verLine(x, drawStart, drawEnd, color);
-		dda->delim.h = drawStart < s->res.h ? drawStart > 0 ? drawStart : 0 : 0;
-		dda->delim.w = drawEnd < s->res.h ? drawEnd > 0 ? drawEnd : 0 : 0;
+//		verLine(x, dda->draw.h dda->draw.w, color);
+		dda->delim.h = dda->draw.h< s->res.h ? dda->draw.h> 0 ? dda->draw.h: 0 : 0;
+		dda->delim.w = dda->draw.w < s->res.h ? dda->draw.w > 0 ? dda->draw.w : 0 : 0;
 		draw_wall(img->data, s->res.w - x - 1, dda->delim, rgb_to_int(*color), s->res);
 		free(color);
 		
