@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:08:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 11:10:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,19 +173,13 @@ void	perform_dda(t_scene *s, t_dda *dda, int *side)
 		{
 			dda->sideDist.x += dda->deltaDist.x;
 			dda->coord.h += dda->step.h;
-			if (dda->rayDir.x > 0)
-				*side = 0;
-			else
-				*side = 2;
+			*side = ((dda->rayDir.x > 0) ? 0 : 2);
 		}
 		else
 		{
 			dda->sideDist.y += dda->deltaDist.y;
 			dda->coord.w += dda->step.w;
-			if (dda->rayDir.y > 0)
-				*side = 1;
-			else
-				*side = 3;
+			*side = ((dda->rayDir.y > 0) ? 1 : 3);
 		}
 		//Check if ray has hit a wall
 		// printf("map%d:%d\n", dda->coord.h, dda->coord.w);
