@@ -6,11 +6,35 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/08 19:07:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+char	*screenshot_datetime(char res[])
+{
+	time_t		t;
+	struct tm	tm;
+	char		*tmp;
+
+	t = time(NULL);
+	tm = *localtime(&t);
+	ft_memcpy(res, "Screenshot YYYY-MM-DD hh:mm:ss.bmp", 35);
+	ft_memcpy(res + 11, (tmp = ft_itoa_width(tm.tm_year + 1900, 4)), 4);
+	free(tmp);
+	ft_memcpy(res + 16, (tmp = ft_itoa_width(tm.tm_mon + 1, 2)), 2);
+	free(tmp);
+	ft_memcpy(res + 19, (tmp = ft_itoa_width(tm.tm_mday, 2)), 2);
+	free(tmp);
+	ft_memcpy(res + 22, (tmp = ft_itoa_width(tm.tm_hour, 2)), 2);
+	free(tmp);
+	ft_memcpy(res + 25, (tmp = ft_itoa_width(tm.tm_min, 2)), 2);
+	free(tmp);
+	ft_memcpy(res + 28, (tmp = ft_itoa_width(tm.tm_sec, 2)), 2);
+	free(tmp);
+	return (res);
+}
 
 char	*file_header_bmp(const int filesize)
 {

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 12:12:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/08 19:02:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ void	print_err_and_exit(char *str, int err)
 	ft_putnbr_fd(err, STDERR_FILENO);
 	ft_putstr_fd(")\n", STDERR_FILENO);
 	exit(err);
+}
+
+void	free_tab(void **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 void	free_scene(t_scene *scene)

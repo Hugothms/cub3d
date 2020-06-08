@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:24:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/08 18:59:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define GREY			11184810
 # define RED			16711680
-
+# define WHITE			16777215
 /*
 ** Keycodes and screen size LINUX and MAC
 */
@@ -187,6 +187,15 @@ void	check_map(char **map, t_2float pos, t_2int size);
 t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
 int		rgb_to_int(t_rgb rgb);
+
+//draw
+void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
+void	draw_v_line(char *data, t_2int pos, int len, int color, t_2int res);
+void	draw_wall(char *data, int line, t_2int delim, int color, t_2int res);
+
+//draw_minimap
+void	draw_minimap(t_img *img, t_scene *scene);
+void	draw_pos_minimap(t_img *img, t_scene *s);
 
 //error
 void	print_err_and_exit(char *str, int err);
