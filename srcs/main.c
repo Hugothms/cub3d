@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 12:09:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 12:13:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 void	start_game_loop(t_scene *scene, t_mlx *mlx, t_img *img, const char *str)
 {
 	char	*title = ft_strdup(str);
+
 	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->res.w, scene->res.h, title)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	free(title);
@@ -74,6 +75,7 @@ void	start_game_loop(t_scene *scene, t_mlx *mlx, t_img *img, const char *str)
 void	savetamere(t_scene *scene, t_img *img)
 {
 	char	filename[35];
+
 	make_img(img, scene);
 	save_bmp(screenshot_datetime(filename), img->data, scene->res);
 	free_scene(scene);
@@ -89,19 +91,19 @@ int		main(const int argc, const char *argv[])
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
-	printf("\nget_scene:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	printf("\nget_scene:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx = malloc_mlx_init();
 	end = clock();
-	printf("malloc_mlx_init:%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	printf("malloc_mlx_init:%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	img = init_img(mlx, &scene->res);
 	end = clock();
-	printf("init_img:\t%fs\n",((double) (end - start)) / CLOCKS_PER_SEC);
+	printf("init_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	//parse_textures(mlx, scene);
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);
 	else if (argc == 3)
-		savetamere(scene, img);	
+		savetamere(scene, img);
 	return (0);
 }

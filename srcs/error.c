@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:57:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/07 12:12:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	free_scene(t_scene *scene)
 	while (i < NB_TEXTURES)
 	{
 		free(scene->tex[i]);
-		//free(scene->textures[i]);
 		i++;
 	}
 	free(scene->tex);
