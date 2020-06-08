@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/08 18:57:05 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/08 19:21:20 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME = cub3d
 
 --SRCS =	srcs/check_map.c		\
 			srcs/color.c			\
+			srcs/dda.c				\
 			srcs/draw_minimap.c		\
 			srcs/draw.c				\
 			srcs/error.c			\

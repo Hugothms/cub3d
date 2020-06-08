@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 18:59:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/08 19:23:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,11 @@ void	check_map(char **map, t_2float pos, t_2int size);
 t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
 int		rgb_to_int(t_rgb rgb);
+
+//dda
+void	calcul_dda(t_dda *dda, t_scene *s, int x);
+void	set_side_dist(t_dda *dda, t_scene *s);
+void	perform_dda(t_scene *s, t_dda *dda);
 
 //draw
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
