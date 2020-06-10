@@ -1,7 +1,7 @@
 R 1000 600
 
 NO ./scenes/textures/red_brick.xpm
-SO ./scenes/textures/red_brick.xpm
+SO ./scenes/textures/redbrick.XPM
 WE ./scenes/textures/red_brick.xpm
 EA ./scenes/textures/red_brick.xpm
 
