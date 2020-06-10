@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 11:59:57 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/10 10:25:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,34 @@ int		refresh(const t_window *w)
 
 int		key_release(int keycode, t_move *move)
 {
-	// printf("release:%d\n", keycode);
-	if (keycode == (AZERTY ? KEY_Z : KEY_W))
+	if (keycode == ARROW_UP || keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 0;
-	else if (keycode == (KEY_S))
+	else if (keycode == ARROW_DOWN || keycode == KEY_S)
 		move->down = 0;
-	else if (keycode == (AZERTY ? KEY_Q : KEY_A))
+	else if (keycode == (AZERTY ? KEY_A : KEY_Q))
 		move->left = 0;
-	else if (keycode == (KEY_D))
+	else if (keycode == KEY_E)
 		move->right = 0;
-	else if (keycode == (ARROW_LEFT))
+	else if (keycode == ARROW_LEFT || keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->turn_left = 0;
-	else if (keycode == (ARROW_RIGHT))
+	else if (keycode == ARROW_RIGHT || keycode == KEY_D)
 		move->turn_right = 0;
 	return (0);
 }
 
 int		key_push(int keycode, t_move *move)
 {
-	// printf("push:%d\n", keycode);
-	if (keycode == (AZERTY ? KEY_Z : KEY_W))
+	if (keycode == ARROW_UP || keycode == (AZERTY ? KEY_Z : KEY_W))
 		move->up = 1;
-	else if (keycode == (KEY_S))
+	else if (keycode == ARROW_DOWN || keycode == KEY_S)
 		move->down = 1;
-	else if (keycode == (AZERTY ? KEY_Q : KEY_A))
+	else if (keycode == (AZERTY ? KEY_A : KEY_Q))
 		move->left = 1;
-	else if (keycode == (KEY_D))
+	else if (keycode == KEY_E)
 		move->right = 1;
-	else if (keycode == (ARROW_LEFT))
+	else if (keycode == ARROW_LEFT || keycode == (AZERTY ? KEY_Q : KEY_A))
 		move->turn_left = 1;
-	else if (keycode == (ARROW_RIGHT))
+	else if (keycode == ARROW_RIGHT || keycode == KEY_D)
 		move->turn_right = 1;
 	return (0);
 }
@@ -65,28 +63,27 @@ int		key_function(const int keycode, t_window *w)
 	clock_t	start, end;
 	float	x;
 
-	printf("%i\n", keycode);
 	key_push(keycode, &w->s->move);
 	if (keycode == ESC)
 		close_function(w);
-	else if (keycode == KEY_W)
+	if (keycode == KEY_W)
 	{
 		start = clock();
 		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
 		end = clock();
 		printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	}
-	else if (keycode == ARROW_UP || keycode == KEY_Z)
+	if (w->s->move.up)
 		move_up(w);
-	else if (keycode == ARROW_DOWN || keycode == KEY_S)
+	if (w->s->move.down)
 		move_down(w);
-	else if (keycode ==  KEY_Q)
+	if (w->s->move.left)
 		move_left(w);
-	else if (keycode == KEY_D)
+	if (w->s->move.right)
 		move_right(w);
-	else if (keycode == ARROW_LEFT || keycode == KEY_A)
+	if (w->s->move.turn_left)
 		turn_left(w);
-	else if (keycode == ARROW_RIGHT || keycode == KEY_E)
+	if (w->s->move.turn_right)
 		turn_right(w);
 	return (0);
 }

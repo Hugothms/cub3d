@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 09:55:30 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/10 10:36:56 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			get_map(t_scene *scene, char *join)
 		get_map2(scene, map, line);
 		line++;
 	}
+	if (scene->pos.x == -1)
+		print_err_and_exit("Initial position missing", PARSE_ERROR);
 	free_tab((void**)map);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 19:23:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/10 10:04:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define MLX_ERROR		-4
 # define MALLOC_ERROR	-5
 
-# define THETA			0.03
+# define THETA			0.05
 # define SPEED_MOVE		0.15
 # define CEILING_COLOR	6185465
 # define FLOOR_COLOR	2105376

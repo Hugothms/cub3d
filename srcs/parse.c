@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 09:59:05 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/10 10:22:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		*init_scene(t_scene *scene)
 	scene->move.right = 0;
 	scene->move.down = 0;
 	scene->move.up = 0;
+	scene->move.turn_left = 0;
+	scene->move.turn_right = 0;
 	return (scene);
 }
 

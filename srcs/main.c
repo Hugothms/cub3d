@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/07 12:13:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/10 10:19:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->img = img;
 	window->s = scene;
 	mlx_hook(mlx->win_ptr, 17, 1L << 17, close_function, window); //linux close
-	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
+	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
 	//mlx_key_hook(mlx->win_ptr, key_function, window);
 	make_img(window->img, window->s);
 	mlx_put_image_to_window(window->mlx->mlx_ptr, window->mlx->win_ptr, window->img->img_ptr, 0, 0);
