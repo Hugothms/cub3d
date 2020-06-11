@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/10 11:00:06 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/11 14:44:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,13 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		//printf("A%p\n", s->textures[i]->img_ptr);
 		if(!(s->textures[i] = malloc(sizeof(t_img))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		printf("img: %p\n", s->textures[i]->img_ptr);
-		printf("mlx: %p\n", mlx->mlx_ptr);
-		printf("tex: %s\n", s->tex[i]);
-		printf("siz: %d\n", s->textures[i]->size.w);
-		//pourquoi la ligne suivante affiche un pointeur null ?
-		// printf("xpm: %p\n", mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i],\
+		// printf("img: %p\n", s->textures[i]->img_ptr);
+		// printf("mlx: %p\n", mlx->mlx_ptr);
+		// printf("tex: %s\n", s->tex[i]);
+		// printf("siz: %d\n\n", s->textures[i]->size.w);
+		printf("\npourquoi la ligne suivante affiche un pointeur null ?\n");
+		printf("mlx_xpm_file_to_image(%p, %s, %d, %d) = %p\n", mlx->mlx_ptr,\
+		s->tex[i], s->textures[i]->size.w, s->textures[i]->size.h, mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i],\
 		&(s->textures[i]->size.w), &(s->textures[i]->size.h)));
 		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,\
 		s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
