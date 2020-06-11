@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/08 19:21:20 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/11 17:47:46 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,11 @@ NAME = cub3d
 --HEADER = $(--INCL)minirt.h
 
 --LIBFT = libft.a
---LIBFTDIR = libft/
+--LIBFTDIR = libft
 --LIBFTLINK = -L $(--LIBFTDIR) -lft
 
 --UNAME_S := $(shell uname -s)
-ifeq ($(--UNAME_S),Linux)
+ifeq ($(--UNAME_S),LINUX)
 	LIBMLXDIR	= libmlxlinux
 	MLX_INCLUDE = -lm -lXext -lX11
 	ENV			= -D LINUX

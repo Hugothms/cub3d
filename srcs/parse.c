@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/11 14:44:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/11 14:54:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		//printf("A%p\n", s->textures[i]->img_ptr);
 		if(!(s->textures[i] = malloc(sizeof(t_img))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
+		s->textures[i]->size.w = 64;
+		s->textures[i]->size.h = 64;
 		// printf("img: %p\n", s->textures[i]->img_ptr);
 		// printf("mlx: %p\n", mlx->mlx_ptr);
 		// printf("tex: %s\n", s->tex[i]);

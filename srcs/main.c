@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/11 14:44:59 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/11 17:46:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	start_game_loop(t_scene *scene, t_mlx *mlx, t_img *img, const char *str)
 	get_controls_loop(mlx, img, scene);
 }
 
-void	savetamere(t_scene *scene, t_img *img)
+void	save(t_scene *scene, t_img *img)
 {
 	char	filename[35];
 
@@ -100,10 +100,10 @@ int		main(const int argc, const char *argv[])
 	img = init_img(mlx, &scene->res);
 	end = clock();
 	// printf("init_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
-	parse_textures(mlx, scene);
+	//parse_textures(mlx, scene);
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);
 	else if (argc == 3)
-		savetamere(scene, img);
+		save(scene, img);
 	return (0);
 }
