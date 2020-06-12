@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/11 17:47:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/12 10:38:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 
 # include "../libft/libft.h"
-# ifdef LINUX
+# ifndef LINUX
 #  include "mlx.h"
 # else
 #  include "mlxlinux.h"
@@ -49,7 +49,7 @@
 /*
 ** Keycodes and screen size LINUX and MAC
 */
-# ifdef LINUX
+# ifndef LINUX
 #  define AZERTY		0
 #  define ESC			53
 #  define ARROW_LEFT	123
@@ -59,6 +59,7 @@
 #  define KEY_A			0
 #  define KEY_S			1
 #  define KEY_D			2
+#  define KEY_Z			11
 #  define KEY_Q			12
 #  define KEY_W			13
 #  define KEY_E			14
