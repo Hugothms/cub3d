@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 14:46:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 15:11:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,6 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		// printf("mlx: %p\n", mlx->mlx_ptr);
 		// printf("tex: %s\n", s->tex[i]);
 		// printf("siz: %d\n\n", s->textures[i]->size.w);
-		printf("\npourquoi la ligne suivante affiche un pointeur null ?\n");
-		printf("mlx_xpm_file_to_image(%p, %s, %d, %d) = %p\n", mlx->mlx_ptr,\
-		s->tex[i], s->textures[i]->size.w, s->textures[i]->size.h, mlx_xpm_file_to_image(mlx->mlx_ptr, s->tex[i],\
-		&(s->textures[i]->size.w), &(s->textures[i]->size.h)));
 		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,\
 		s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
@@ -105,7 +101,6 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,\
 		&s->textures[i]->endian)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
-		printf("E%p\n", s->textures[i]->img_ptr);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 19:20:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 15:32:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_delim(t_dda *dda, t_scene *s)
 	{
 		if (dda->draw.h > 0)
 			dda->delim.h = dda->draw.h;
-		else 
+		else
 			dda->delim.h = 0;
 	}
 	else
@@ -65,7 +65,7 @@ void	set_delim(t_dda *dda, t_scene *s)
 	{
 		if (dda->draw.w > 0)
 			dda->delim.w = dda->draw.w;
-		else 
+		else
 			dda->delim.w = 0;
 	}
 	else

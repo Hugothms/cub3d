@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/15 15:03:32 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/15 15:36:34 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,13 @@ NAME = cub3d
 			srcs/parse.c 			\
 			srcs/save_bmp.c			\
 			srcs/utils.c 			\
-			srcs/set_elements.c		\
-			srcs/main.c
+			srcs/set_elements.c
 
 --OBJS = $(--SRCS:.c=.o)
 --OBJSLIBFT =$(--LIBFTDIR)*.o
 
 --INCL = includes/
---HEADER = $(--INCL)minirt.h
+--HEADER = $(--INCL)cub3d.h
 
 --LIBFT = libft.a
 --LIBFTDIR = libft
@@ -67,8 +66,8 @@ endif
 
 all : compilelibft compilelibmlx $(NAME)
 
-$(NAME) : $(--OBJS)
-	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $^ $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
+$(NAME) : $(--OBJS) $(--HEADER)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
 
 compilelibft :
 	$(--MAKE) -C libft all
