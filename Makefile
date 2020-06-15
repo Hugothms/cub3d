@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/12 10:40:59 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/15 12:31:37 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,7 @@ NAME = cub3d
 			srcs/save_bmp.c			\
 			srcs/utils.c 			\
 			srcs/set_elements.c		\
-			srcs/main.c 			
-			
+			srcs/main.c
 
 --OBJS = $(--SRCS:.c=.o)
 --OBJSLIBFT =$(--LIBFTDIR)*.o
@@ -53,7 +52,7 @@ ifeq ($(--UNAME_S), Linux)
 	MLX_INCLUDE = -lm -lXext -lX11
 	ENV			= -D LINUX
 else
-	LIBMLXDIR	= libmlx
+	LIBMLXDIR	= ogl
 	MLX_INCLUDE = -framework OpenGL -framework AppKit
 	ENV			=
 endif

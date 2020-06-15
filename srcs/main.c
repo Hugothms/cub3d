@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/11 17:46:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 12:30:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_img	*init_img(t_mlx *mlx, t_2int *res)
 
 	if (!(img = malloc(sizeof(*img))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
-	if (w < res->w)
-		res->w = w;
-	if (h < res->h)
-		res->h = h;
+	// mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
+	// if (w < res->w)
+	// 	res->w = w;
+	// if (h < res->h)
+	// 	res->h = h;
 	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, res->w, res->h)))
 		print_err_and_exit("Minilibx error", MLX_ERROR);
 	if (!(img->data = mlx_get_data_addr(img->img_ptr, &(img->bits_per_pixel), &(img->size_line), &(img->endian))))

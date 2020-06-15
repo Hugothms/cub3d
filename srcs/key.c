@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/10 10:25:13 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 12:36:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		key_function(const int keycode, t_window *w)
 	clock_t	start, end;
 	float	x;
 
+	printf("%d\n", keycode);
 	key_push(keycode, &w->s->move);
 	if (keycode == ESC)
 		close_function(w);

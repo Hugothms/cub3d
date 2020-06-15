@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/12 10:38:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 12:37:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 #  define KEY_A			0
 #  define KEY_S			1
 #  define KEY_D			2
+#  define KEY_F			3
 #  define KEY_Z			11
 #  define KEY_Q			12
 #  define KEY_W			13
@@ -86,6 +87,7 @@
 #  define KEY_S			115
 #  define KEY_W			119
 #  define KEY_Z			122
+#  define KEY_F			3
 # endif
 
 typedef struct	s_2int
