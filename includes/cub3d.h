@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 12:37:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 14:46:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct	s_window
 
 # define NB_TEXTURES 5
 # define WHITE_SPACES " \t"
-# define NB_ELEM_res 3
+# define NB_ELEM_RES 3
 # define NB_ELEM_TEX 2
 # define NB_ELEM_COLOR 2
 

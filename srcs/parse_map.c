@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/10 10:36:56 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 14:51:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			get_map(t_scene *scene, char *join)
 	int	line;
 	int		col;
 	char	**map;
-	
+
 	map = ft_split(join, '\n'); //echanger map et scene->map
 	free(join);
 	line = 0;

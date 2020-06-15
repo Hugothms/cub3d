@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 12:36:15 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/15 14:55:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		key_function(const int keycode, t_window *w)
 	key_push(keycode, &w->s->move);
 	if (keycode == ESC)
 		close_function(w);
-	if (keycode == KEY_W)
+	if (keycode == KEY_F)
 	{
 		start = clock();
 		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
