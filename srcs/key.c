@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 17:35:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/16 18:10:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int		refresh(const t_window *w)
 {
-	// printf("pos %.01f:%.01f\torient %.01f:%.01f\tplane %.01f:%.01f\n", w->s->pos.x, w->s->pos.y, w->s->dir.x, w->s->dir.y, w->s->plane.x, w->s->plane.y);
-	//check_key_on(w);
 	make_img(w->img, w->s);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
-	//mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->s->textures[NORTH]->img_ptr, 100, 100);
 	return (0);
 }
 
@@ -57,23 +54,8 @@ int		key_push(int keycode, t_move *move)
 	return (0);
 }
 
-int		key_function(const int keycode, t_window *w)
+void	move(t_window *w)
 {
-	char	filename[35];
-	clock_t	start, end;
-	float	x;
-
-	printf("%d\n", keycode);
-	key_push(keycode, &w->s->move);
-	if (keycode == ESC)
-		close_function(w);
-	if (keycode == KEY_F)
-	{
-		start = clock();
-		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
-		end = clock();
-		printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
-	}
 	if (w->s->move.up)
 		move_up(w);
 	if (w->s->move.down)
@@ -86,5 +68,25 @@ int		key_function(const int keycode, t_window *w)
 		turn_left(w);
 	if (w->s->move.turn_right)
 		turn_right(w);
+}
+
+int		key_function(const int keycode, t_window *w)
+{
+	char	filename[35];
+	clock_t	start, end;
+	float	x;
+
+	// printf("%d\n", keycode);
+	key_push(keycode, &w->s->move);
+	if (keycode == ESC)
+		close_function(w);
+	if (keycode == KEY_F)
+	{
+		start = clock();
+		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
+		end = clock();
+		printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	}
+	move(w);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 17:36:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/16 17:53:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@
 # include <stdlib.h>
 # include <math.h>
 # include <errno.h>
-
 # include <unistd.h>
-
 # include "../libft/libft.h"
-# ifndef LINUX
-#  include "mlx.h"
-# else
-#  include "mlxlinux.h"
-# endif
 # include "get_next_line.h"
+# ifdef LINUX
+#  include "mlxlinux.h"
+# else
+#  include "mlx.h"
+# endif
 
 # define OPEN_ERROR		-1
 # define CLOSE_ERROR	-2
@@ -50,6 +48,21 @@
 ** Keycodes and screen size LINUX and MAC
 */
 # ifndef LINUX
+#  define AZERTY		1
+#  define ESC			65307
+#  define ARROW_LEFT	65361
+#  define ARROW_RIGHT	65363
+#  define ARROW_UP		65362
+#  define ARROW_DOWN	65364
+#  define KEY_A			97
+#  define KEY_D			100
+#  define KEY_E			101
+#  define KEY_F			102
+#  define KEY_Q			113
+#  define KEY_S			115
+#  define KEY_W			119
+#  define KEY_Z			122
+# else
 #  define AZERTY		0
 #  define ESC			53
 #  define ARROW_LEFT	123
@@ -73,21 +86,6 @@
 #  define KEY_SPACE		49
 #  define KEY_PLUS		69
 #  define KEY_MINUS		78
-# else
-#  define AZERTY		1
-#  define ESC			65307
-#  define ARROW_LEFT	65361
-#  define ARROW_RIGHT	65363
-#  define ARROW_UP		65362
-#  define ARROW_DOWN	65364
-#  define KEY_A			97
-#  define KEY_D			100
-#  define KEY_E			101
-#  define KEY_F			102
-#  define KEY_Q			113
-#  define KEY_S			115
-#  define KEY_W			119
-#  define KEY_Z			122
 # endif
 
 typedef struct	s_2int
