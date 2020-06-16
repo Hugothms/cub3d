@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 17:53:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/16 18:20:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@
 # define GREY			11184810
 # define RED			16711680
 # define WHITE			16777215
+
 /*
-** Keycodes and screen size LINUX and MAC
+** Keycodes LINUX and MAC
 */
 # ifndef LINUX
 #  define AZERTY		1

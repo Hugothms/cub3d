@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/15 15:36:34 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/16 18:11:58 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3d
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
 --LDFLAGS += -g3 -fsanitize=address
---OPTI = -Ofast -flto -march=native #-O3
+--OPTI = -Ofast -flto -march=native#-O3
 
 --SRCS =	srcs/check_map.c		\
 			srcs/color.c			\
