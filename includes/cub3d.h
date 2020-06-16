@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 17:48:41 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/16 17:36:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define MALLOC_ERROR	-5
 
 # define THETA			0.05
-# define SPEED_MOVE		2
+# define SPEED_MOVE		0.15
 # define CEILING_COLOR	6185465
 # define FLOOR_COLOR	2105376
 # define FOV			0.66
@@ -81,13 +81,13 @@
 #  define ARROW_UP		65362
 #  define ARROW_DOWN	65364
 #  define KEY_A			97
-#  define KEY_E			101
 #  define KEY_D			100
+#  define KEY_E			101
+#  define KEY_F			102
 #  define KEY_Q			113
 #  define KEY_S			115
 #  define KEY_W			119
 #  define KEY_Z			122
-#  define KEY_F			3
 # endif
 
 typedef struct	s_2int
