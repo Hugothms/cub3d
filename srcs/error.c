@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 17:37:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/17 18:53:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,18 @@ void	free_scene(t_scene *scene)
 
 int		close_function(const t_window *w)
 {
+	int	i;
+
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
 	mlx_destroy_image(w->mlx->mlx_ptr, w->img->img_ptr);
 	mlx_destroy_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
+	i = 0;
+	while (i < NB_TEXTURES)
+	{
+		mlx_destroy_image(w->mlx->mlx_ptr, w->s->textures[i]->img_ptr);
+		free(w->s->textures[i]);
+		i++;
+	}
 	free(w->mlx);
 	free(w->img);
 	free_scene(w->s);
