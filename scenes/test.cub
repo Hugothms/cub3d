@@ -1,11 +1,11 @@
 R 1000 600
 
-NO ./scenes/textures/redbrick.XPM
+NO ./scenes/textures/bluestone.XPM
 SO ./scenes/textures/redbrick.XPM
-WE ./scenes/textures/red_brick.xpm
-EA ./scenes/textures/red_brick.xpm
+WE ./scenes/textures/eagle.XPM
+EA ./scenes/textures/red_brick.XPM
 
-S ./scenes/textures/red_brick.xpm
+S ./scenes/textures/pillar.XPM
 
 
 F 220,100,0
