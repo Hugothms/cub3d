@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 21:03:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 21:07:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,
 		&s->textures[i]->endian)))
 			print_err_and_exit("Data texture", MLX_ERROR);
-		printf("%s\n", s->tex[i]);
 		i++;
 	}
 }
