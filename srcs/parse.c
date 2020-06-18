@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 15:11:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 16:27:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,14 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		//printf("A%p\n", s->textures[i]->img_ptr);
 		if(!(s->textures[i] = malloc(sizeof(t_img))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
-		s->textures[i]->size.w = 64;
-		s->textures[i]->size.h = 64;
-		// printf("img: %p\n", s->textures[i]->img_ptr);
-		// printf("mlx: %p\n", mlx->mlx_ptr);
-		// printf("tex: %s\n", s->tex[i]);
-		// printf("siz: %d\n\n", s->textures[i]->size.w);
-		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,\
+		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
 		s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
-		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr,\
-		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,\
+		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr,
+		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,
 		&s->textures[i]->endian)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
+		printf("siz: %d\n\n", s->textures[i]->size.w);
 		i++;
 	}
 }
@@ -120,7 +115,7 @@ t_scene		*parse(int fd)
 		// ft_putstr(line);
 		// ft_putchar('\n');
 		set_all(s, line);
-		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]\
+		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]
 		&& s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}

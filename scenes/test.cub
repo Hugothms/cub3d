@@ -1,9 +1,9 @@
-R 1000 600
+R 1800 1200
 
+EA ./scenes/textures/wood.XPM
+WE ./scenes/textures/redbrick.XPM
+SO ./scenes/textures/eagle.XPM
 NO ./scenes/textures/bluestone.XPM
-SO ./scenes/textures/redbrick.XPM
-WE ./scenes/textures/eagle.XPM
-EA ./scenes/textures/red_brick.XPM
 
 S ./scenes/textures/pillar.XPM
 

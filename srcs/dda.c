@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 19:21:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 15:09:15 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	calcul_dda(t_dda *dda, t_scene *s, int x)
 {
 	double	cameraX;
 
-	cameraX = 2 * x / (double)s->res.w - 1; 
+	cameraX = 2 * x / (double)s->res.w - 1;
 	dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
 	dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
 	dda->coord.h = (int)s->pos.x;

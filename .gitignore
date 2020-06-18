@@ -10,3 +10,4 @@ ressources/*
 .fuse*
 cub3d
 libft.a
+libft/libft.a
