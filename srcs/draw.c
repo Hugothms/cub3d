@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/17 21:47:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 15:28:05 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 	float	step;
 	int		color;
 	t_2int	texSize = s->textures[dda->side]->size;
-	
+
 	double	wallX;
 	if (dda->side % 2 == 0)
 		wallX = s->pos.y + dda->perpWallDist * dda->rayDir.y;
-    else
+	else
 		wallX = s->pos.x + dda->perpWallDist * dda->rayDir.x;
     wallX -= floor(wallX);
 	int texX = wallX * (double)texSize.w;
 	if(dda->side % 2 == 0 && dda->rayDir.x > 0) texX = texSize.w - texX - 1;
-	if(dda->side % 2 == 1 && dda->rayDir.y < 0) texX = texSize.w - texX - 1; 
+	if(dda->side % 2 == 1 && dda->rayDir.y < 0) texX = texSize.w - texX - 1;
 
 
 
 	step = (float)texSize.h / dda->lineHeight;
-	float	texPos = (dda->draw.h - pos.h / 2 + dda->lineHeight / 2) * step;
+	float	texPos = (dda->draw.h - s->res.h / 2 + dda->lineHeight / 2) * step;
 
 
 
@@ -59,10 +59,10 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 	//  printf("data[%d][%d]\n", (int)texPos, texX);
 	while (length-- > 0)
 	{
-		int texY = texPos > (texSize.h - 1) ? texSize.h - 1 : texPos;
+		int texY = (int)texPos & (texSize.h - 1);
 		texPos += step;
 		// printf("\ntexX	:%d\ntexY	:%d\ntexpos	:%d\n", texX, texY, (int)texPos);
-		color = s->textures[NORTH]->data[(int)(texSize.w * texPos + texX)];
+		color = s->textures[dda->side]->data[(int)(texSize.h * texY + texX)];
 		put_pixel(data, pos, color, s->res); // set the pixel at the coord x,y with the color value
 		pos.h++;
 	}
@@ -72,7 +72,7 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 {
 	int			i;
 	t_2int	pixel;
-	
+
 	pixel.w = s->res.w - dda->line - 1;
 	// printf("draw: %d:%d\nline: %d\n", draw.h, draw.w, line);
 	pixel.h = 0;
@@ -80,15 +80,8 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	pixel.h += dda->draw.h;
 	//draw_v_line(data, pixel, dda->draw.w - dda->draw.h, color, s->res);
 	draw_texture_line(data, pixel, dda, s);
-	pixel.h += dda->lineHeight;
-	draw_v_line(data, pixel, s->res.h - dda->lineHeight - 1, FLOOR_COLOR, s->res);
-
-
-
-
-
-
-
+		pixel.h += dda->draw.w - dda->draw.h;
+	draw_v_line(data, pixel, s->res.h - dda->draw.w - 1, FLOOR_COLOR, s->res);
 
 
 
