@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 17:26:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 18:19:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
 		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
 		s->tex[i], &(s->textures[i]->size.w), &(s->textures[i]->size.h))))
-			print_err_and_exit("Minilibx error", MLX_ERROR);
+			print_err_and_exit("Texture not found", MLX_ERROR);
 		if(!(s->textures[i]->data = mlx_get_data_addr(s->textures[i]->img_ptr,
 		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,
 		&s->textures[i]->endian)))
-			print_err_and_exit("Minilibx error", MLX_ERROR);
+			print_err_and_exit("Data texture", MLX_ERROR);
 		i++;
 	}
 }
@@ -108,7 +108,7 @@ t_scene		*parse(int fd)
 	if (!(s = malloc(sizeof(*s))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	if (!(init_scene(s)))
-		return (NULL);
+		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		// ft_putstr(line);
