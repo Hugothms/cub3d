@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 18:48:19 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/17 21:47:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,76 @@ void	draw_v_line(char *data, t_2int pos, int length, int color, t_2int res)
 	}
 }
 
-void	draw_wall(char *data, int line, t_2int delim, int color, t_2int res)
+void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
+{
+	int 	length;
+	float	step;
+	int		color;
+	t_2int	texSize = s->textures[dda->side]->size;
+	
+	double	wallX;
+	if (dda->side % 2 == 0)
+		wallX = s->pos.y + dda->perpWallDist * dda->rayDir.y;
+    else
+		wallX = s->pos.x + dda->perpWallDist * dda->rayDir.x;
+    wallX -= floor(wallX);
+	int texX = wallX * (double)texSize.w;
+	if(dda->side % 2 == 0 && dda->rayDir.x > 0) texX = texSize.w - texX - 1;
+	if(dda->side % 2 == 1 && dda->rayDir.y < 0) texX = texSize.w - texX - 1; 
+
+
+
+	step = (float)texSize.h / dda->lineHeight;
+	float	texPos = (dda->draw.h - pos.h / 2 + dda->lineHeight / 2) * step;
+
+
+
+	length = (dda->lineHeight < s->res.h ? dda->lineHeight : s->res.h);
+	// printf("\nlength	:%d\nlineH	:%d\nstep	:%f\n", length, dda->lineHeight, step);
+	//  printf("posh:%d\nposw:%d\ntexPos	:%f\n", pos.h, pos.w, texPos);
+	//  printf("data[%d][%d]\n", (int)texPos, texX);
+	while (length-- > 0)
+	{
+		int texY = texPos > (texSize.h - 1) ? texSize.h - 1 : texPos;
+		texPos += step;
+		// printf("\ntexX	:%d\ntexY	:%d\ntexpos	:%d\n", texX, texY, (int)texPos);
+		color = s->textures[NORTH]->data[(int)(texSize.w * texPos + texX)];
+		put_pixel(data, pos, color, s->res); // set the pixel at the coord x,y with the color value
+		pos.h++;
+	}
+}
+
+void	draw_wall(char *data, t_dda *dda, t_scene *s)
 {
 	int			i;
 	t_2int	pixel;
 	
-	pixel.w = line;
-	// printf("delim: %d:%d\nline: %d\n", delim.h, delim.w, line);
-	// i = 0;
+	pixel.w = s->res.w - dda->line - 1;
+	// printf("draw: %d:%d\nline: %d\n", draw.h, draw.w, line);
 	pixel.h = 0;
-	draw_v_line(data, pixel, delim.h, CEILING_COLOR, res);
-	pixel.h += delim.h;
-	draw_v_line(data, pixel, delim.w - delim.h, color, res);
-	pixel.h += delim.w - delim.h;
-	draw_v_line(data, pixel, res.h - delim.w - 1, FLOOR_COLOR, res);
-	// while (i < delim.h)
+	draw_v_line(data, pixel, dda->draw.h, CEILING_COLOR, s->res);
+	pixel.h += dda->draw.h;
+	//draw_v_line(data, pixel, dda->draw.w - dda->draw.h, color, s->res);
+	draw_texture_line(data, pixel, dda, s);
+	pixel.h += dda->lineHeight;
+	draw_v_line(data, pixel, s->res.h - dda->lineHeight - 1, FLOOR_COLOR, s->res);
+
+
+
+
+
+
+
+
+
+
+	// i = 0;
+	// while (i < dda->draw.h)
 	// {
 	// 	pixel.h = i++;
 	// 	put_pixel(data, pixel, CEILING_COLOR, res); // set the pixel at the coord x,y with the color value
 	// }
-	// while (i < delim.w)
+	// while (i < dda->draw.w)
 	// {
 	// 	pixel.h = i++;
 	// 	put_pixel(data, pixel, wall_color, res); // set the pixel at the coord x,y with the color value
@@ -58,4 +108,19 @@ void	draw_wall(char *data, int line, t_2int delim, int color, t_2int res)
 	// 	pixel.h = i++;
 	// 	put_pixel(data, pixel, FLOOR_COLOR, res); // set the pixel at the coord x,y with the color value
 	// }
+}
+
+
+void	set_color_wall(t_dda *dda, t_rgb **color)
+{
+	if (dda->side == 0)
+		*color = int_to_rgb(0,255,255);
+	else if (dda->side == 1)
+		*color = int_to_rgb(255,0,255);
+	else if (dda->side == 2)
+		*color = int_to_rgb(255,255,0);
+	else if (dda->side == 3)
+		*color = int_to_rgb(0,255,0);
+	else
+		*color = int_to_rgb(255,0,0);
 }

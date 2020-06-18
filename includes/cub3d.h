@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 18:20:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/17 18:39:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ typedef struct	s_dda
 	t_2float	deltaDist;
 	t_2float	rayDir;
 	int			side;
+	int			line;
+	int			lineHeight;
+	double	perpWallDist;
 }				t_dda;
 
 typedef struct	s_rgb
@@ -202,7 +205,7 @@ void	perform_dda(t_scene *s, t_dda *dda);
 //draw
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
 void	draw_v_line(char *data, t_2int pos, int len, int color, t_2int res);
-void	draw_wall(char *data, int line, t_2int delim, int color, t_2int res);
+void	draw_wall(char *data, t_dda *dda, t_scene *s);
 
 //draw_minimap
 void	draw_minimap(t_img *img, t_scene *scene);
