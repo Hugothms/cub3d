@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 16:27:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 17:26:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,
 		&s->textures[i]->endian)))
 			print_err_and_exit("Minilibx error", MLX_ERROR);
-		printf("siz: %d\n\n", s->textures[i]->size.w);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/17 18:39:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 17:46:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 /*
 ** Keycodes LINUX and MAC
 */
-# ifndef LINUX
+# ifdef LINUX
 #  define AZERTY		1
 #  define ESC			65307
 #  define ARROW_LEFT	65361
