@@ -1,11 +1,11 @@
 R 1800 1200
 
-EA ./scenes/textures/64/wood.XPM
-WE ./scenes/textures/64/redbrick.XPM
-SO ./scenes/textures/64/eagle.XPM
-NO ./scenes/textures/64/bluestone.XPM
+EA ./scenes/textures/64/wood.xpm
+WE ./scenes/textures/64/redbrick.xpm
+SO ./scenes/textures/64/eagle.xpm
+NO ./scenes/textures/64/bluestone.xpm
 
-S ./scenes/textures/64/pillar.XPM
+S ./scenes/textures/64/pillar.xpm
 
 
 F 220,100,0

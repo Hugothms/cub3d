@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 18:19:51 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/18 21:03:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 	i = 0;
 	while (i < NB_TEXTURES)
 	{
-		//printf("A%p\n", s->textures[i]->img_ptr);
 		if(!(s->textures[i] = malloc(sizeof(t_img))))
 			print_err_and_exit("Malloc failed", MALLOC_ERROR);
 		if(!(s->textures[i]->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr,
@@ -95,6 +94,7 @@ void		parse_textures(t_mlx *mlx, t_scene *s)
 		&s->textures[i]->bits_per_pixel, &s->textures[i]->size_line,
 		&s->textures[i]->endian)))
 			print_err_and_exit("Data texture", MLX_ERROR);
+		printf("%s\n", s->tex[i]);
 		i++;
 	}
 }
