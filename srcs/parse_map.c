@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 15:31:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 17:23:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void	set_initial_pos(t_scene *scene, char **map, int line, int col)
 	rotate(&scene->plane, 1.570796);
 }
 
+void	set_sprite(t_scene *scene, char **map, int line, int col)
+{
+	scene->map[line][col] = map[line][col];
+	scene->nb_sprite++;
+}
+
 void	get_map2(t_scene *scene, char **map, int line)
 {
 	int	col;
@@ -58,8 +64,10 @@ void	get_map2(t_scene *scene, char **map, int line)
 	col = 0;
 	while (map[line][col])
 	{
-		if (ft_in_charset(map[line][col], "12"))
+		if (map[line][col] == '1')
 			scene->map[line][col] = map[line][col];
+		else if (map[line][col] == '2')
+			set_sprite(scene, map, line, col);
 		else if (map[line][col] == '0')
 			scene->map[line][col] = '8';
 		else if (map[line][col] == ' ')

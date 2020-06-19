@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 15:09:15 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 17:24:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ void	set_side_dist(t_dda *dda, t_scene *s)
 	}
 }
 
+int	function(t_scene *s, t_dda *dda)
+{
+	if (s->map[dda->coord.h][dda->coord.w] == '1')
+		return (1);
+	else
+	{
+		s->sprite[dda->index_sprite].x = dda->coord.h + 0.5;
+		s->sprite[dda->index_sprite].y = dda->coord.w + 0.5;
+		dda->index_sprite++;
+		return (0);
+	}
+}
+
 void	perform_dda(t_scene *s, t_dda *dda)
 {
 	int	hit; //was there a wall hit?
@@ -72,6 +85,6 @@ void	perform_dda(t_scene *s, t_dda *dda)
 		//Check if ray has hit a wall
 		// printf("map%d:%d\n", dda->coord.h, dda->coord.w);
 		if (s->map[dda->coord.h][dda->coord.w] != '0')
-			hit = 1;
+			hit = function(s, dda);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 17:46:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 17:13:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@
 # define GREY			11184810
 # define RED			16711680
 # define WHITE			16777215
+
+# define MAX_WIDE		3840
+# define NB_TEXTURES 5
+# define WHITE_SPACES " \t"
+# define NB_ELEM_RES 3
+# define NB_ELEM_TEX 2
+# define NB_ELEM_COLOR 2
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
+# define SPRITE 4
 
 /*
 ** Keycodes LINUX and MAC
@@ -113,7 +126,8 @@ typedef struct	s_dda
 	int			side;
 	int			line;
 	int			lineHeight;
-	double	perpWallDist;
+	double		perpWallDist[MAX_WIDE];
+	int			index_sprite;
 }				t_dda;
 
 typedef struct	s_rgb
@@ -155,11 +169,18 @@ typedef struct	s_move
 	int			turn_right;
 }				t_move;
 
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	int			nb;
+}				t_sprite;
+
 typedef struct	s_scene
 {
 	t_2int		res;
 	char		**tex;
-	t_img		*textures[5];
+	t_img		*textures[NB_TEXTURES];
 	t_rgb		*floor;
 	t_rgb		*ceil;
 	char		**map;
@@ -168,6 +189,8 @@ typedef struct	s_scene
 	t_2float	dir;
 	t_2float	plane;
 	t_move		move;
+	int			nb_sprite;
+	t_sprite	*sprite;
 }				t_scene;
 
 typedef struct	s_window
@@ -176,18 +199,6 @@ typedef struct	s_window
 	t_img		*img;
 	t_scene		*s;
 }				t_window;
-
-# define NB_TEXTURES 5
-# define WHITE_SPACES " \t"
-# define NB_ELEM_RES 3
-# define NB_ELEM_TEX 2
-# define NB_ELEM_COLOR 2
-
-# define NORTH 0
-# define SOUTH 1
-# define WEST 2
-# define EAST 3
-# define SPRITE 4
 
 //check_map
 void	check_map(char **map, t_2float pos, t_2int size);
@@ -204,6 +215,7 @@ void	perform_dda(t_scene *s, t_dda *dda);
 
 //draw
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
+void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res, int entier);
 void	draw_v_line(char *data, t_2int pos, int len, int color, t_2int res);
 void	draw_wall(char *data, t_dda *dda, t_scene *s);
 
@@ -250,6 +262,9 @@ void	set_color(t_scene *scene, char **data, int code);
 
 //save_bmp
 void	save_bmp(const char *filename, const char *data, const t_2int r);
+
+//sprite
+void	do_sprite(t_img *img, t_dda *dda, t_scene *s);
 
 //utils
 char	*screenshot_datetime(char res[]);

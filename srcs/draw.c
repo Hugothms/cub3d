@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 08:35:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 17:09:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,13 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 {
 	int 	length;
 	float	step;
-	int		color;
 	t_2int	texSize = s->textures[dda->side]->size;
 
 	double	wallX;
 	if (dda->side % 2 == 0)
-		wallX = s->pos.y + dda->perpWallDist * dda->rayDir.y;
+		wallX = s->pos.y + dda->perpWallDist[dda->line] * dda->rayDir.y;
 	else
-		wallX = s->pos.x + dda->perpWallDist * dda->rayDir.x;
+		wallX = s->pos.x + dda->perpWallDist[dda->line] * dda->rayDir.x;
 	wallX -= floor(wallX);
 	int texX = wallX * (double)texSize.w;
 	if(dda->side % 2 == 0 && dda->rayDir.x > 0) texX = texSize.w - texX - 1;
@@ -62,7 +61,7 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 	{
 		int texY = (int)texPos & (texSize.h - 1);
 		texPos += step;
-		put_texture(data, pos, s->textures[dda->side]->data, s->res, texSize.w * texY + texX); 
+		put_texture(data, pos, s->textures[dda->side]->data, s->res, texSize.w * texY + texX);
 		// data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX)];
 		// data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX) + 1];
 		// data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX) + 2];

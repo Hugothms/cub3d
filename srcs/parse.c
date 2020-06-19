@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 21:07:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 16:46:14 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		*init_scene(t_scene *scene)
 	scene->ceil = NULL;
 	scene->map = NULL;
 	scene->size.w = -1;
-	scene->size.h = -1;
 	scene->pos.x = -1;
 	scene->pos.y = -1;
 	scene->dir.x = -1;
@@ -38,6 +37,7 @@ void		*init_scene(t_scene *scene)
 	scene->move.up = 0;
 	scene->move.turn_left = 0;
 	scene->move.turn_right = 0;
+	scene->nb_sprite = 0;
 	return (scene);
 }
 
