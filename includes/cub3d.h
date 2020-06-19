@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:13:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 17:40:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,13 @@ typedef struct	s_2float
 	float		y;
 }				t_2float;
 
+typedef struct	s_sprite
+{
+	double		x;
+	double		y;
+	int			nb;
+}				t_sprite;
+
 typedef struct	s_dda
 {
 	t_2int		coord;
@@ -127,6 +134,7 @@ typedef struct	s_dda
 	int			line;
 	int			lineHeight;
 	double		perpWallDist[MAX_WIDE];
+	t_sprite	*sprite;
 	int			index_sprite;
 }				t_dda;
 
@@ -169,13 +177,6 @@ typedef struct	s_move
 	int			turn_right;
 }				t_move;
 
-typedef struct	s_sprite
-{
-	double		x;
-	double		y;
-	int			nb;
-}				t_sprite;
-
 typedef struct	s_scene
 {
 	t_2int		res;
@@ -190,7 +191,6 @@ typedef struct	s_scene
 	t_2float	plane;
 	t_move		move;
 	int			nb_sprite;
-	t_sprite	*sprite;
 }				t_scene;
 
 typedef struct	s_window

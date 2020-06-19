@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:24:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 18:09:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,34 @@ void	set_side_dist(t_dda *dda, t_scene *s)
 	}
 }
 
+int	deja_vu(t_dda *dda)
+{
+	int i;
+
+	i = 0;
+	while (i < dda->index_sprite)
+	{
+		if (dda->sprite[dda->index_sprite - 1].x == dda->sprite[i].x - 0.5 &&
+		dda->sprite[dda->index_sprite - 1].y == dda->sprite[i].y - 0.5)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	function(t_scene *s, t_dda *dda)
 {
 	if (s->map[dda->coord.h][dda->coord.w] == '1')
 		return (1);
-	else
+	else if (!deja_vu(dda))
 	{
-		s->sprite[dda->index_sprite].x = dda->coord.h + 0.5;
-		s->sprite[dda->index_sprite].y = dda->coord.w + 0.5;
+		printf("dda->index_sprite:%d\n", dda->index_sprite);
+		dda->sprite[dda->index_sprite].x = dda->coord.h + 0.5;
+		dda->sprite[dda->index_sprite].y = dda->coord.w + 0.5;
+		printf("sprite trouve:%d:%d\n", dda->coord.h, dda->coord.w);
 		dda->index_sprite++;
-		return (0);
 	}
+	return (0);
 }
 
 void	perform_dda(t_scene *s, t_dda *dda)

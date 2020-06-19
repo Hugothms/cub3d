@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:29:17 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 18:06:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	sortSprites(int spriteOrder[], double spriteDistance[], int size)
 			i++;
 		}
 	}
+	i = 0;
+	while (i < size)
+	{
+		printf("i = %d\tspriteOrder[] = %d\tspriteDistance[] = %f\n", i, spriteOrder[i], spriteDistance[i]);
+		i++;
+	}
 }
 
 void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
@@ -50,23 +56,23 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 	//SPRITE CASTING
 	//sort sprites from far to close
 	//arrays used to sort the sprites
-	int spriteOrder[s->nb_sprite];
-	double spriteDistance[s->nb_sprite];
-	printf("s->nb_sprite%d\n", s->nb_sprite);
-	for(int i = 0; i < s->nb_sprite; i++)
+	int spriteOrder[dda->index_sprite];
+	double spriteDistance[dda->index_sprite];
+	printf("Je vois %d sprite(s)\n", dda->index_sprite);
+	for(int i = 0; i < dda->index_sprite; i++)
 	{
 		printf("i:%d\n", i);
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((s->pos.x - s->sprite[i].x) * (s->pos.x - s->sprite[i].x) + (s->pos.y - s->sprite[i].y) * (s->pos.y - s->sprite[i].y)); //sqrt not taken, unneeded
+		spriteDistance[i] = ((s->pos.x - dda->sprite[i].x) * (s->pos.x - dda->sprite[i].x) + (s->pos.y - dda->sprite[i].y) * (s->pos.y - dda->sprite[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, s->nb_sprite);
+	sortSprites(spriteOrder, spriteDistance, dda->index_sprite);
 
 	//after sorting the sprites, do the projection and draw them
-	for (int i = 0; i < s->nb_sprite; i++)
+	for (int i = 0; i < dda->index_sprite; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = s->sprite[spriteOrder[i]].x - s->pos.x;
-		double spriteY = s->sprite[spriteOrder[i]].y - s->pos.y;
+		double spriteX = dda->sprite[spriteOrder[i]].x - s->pos.x;
+		double spriteY = dda->sprite[spriteOrder[i]].y - s->pos.y;
 
 		//transform sprite wits->size.h the inverse camera matrix
 		// [ s->plane.x   s->dir.x ] -1                                       [ s->dir.y      -s->dir.x ]
