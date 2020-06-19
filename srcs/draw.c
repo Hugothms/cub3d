@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/18 16:05:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/19 08:35:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 	{
 		int texY = (int)texPos & (texSize.h - 1);
 		texPos += step;
-		put_texture(data, pos, s->textures[dda->side]->data, s->res, texSize.w * texY + texX); // set the pixel at the coord x,y with the color value
+		put_texture(data, pos, s->textures[dda->side]->data, s->res, texSize.w * texY + texX); 
+		// data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX)];
+		// data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX) + 1];
+		// data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX) + 2];
+		// data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 * (texSize.w * texY + texX) + 3];
 		pos.h++;
 	}
 }
