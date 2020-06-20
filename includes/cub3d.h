@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:40:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 15:43:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@
 # define CEILING_COLOR	6185465
 # define FLOOR_COLOR	2105376
 # define FOV			0.66
-# define SIZE_MINIMAP	5
+# define SIZE_MINIMAP	15
 
 # define GREY			11184810
 # define RED			16711680
 # define WHITE			16777215
+# define PINK			16727215
 
 # define MAX_WIDE		3840
 # define NB_TEXTURES 5
@@ -116,8 +117,7 @@ typedef struct	s_2float
 
 typedef struct	s_sprite
 {
-	double		x;
-	double		y;
+	t_2int		pos;
 	int			nb;
 }				t_sprite;
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:48:31 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 18:51:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 15:42:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 {
-	int	ymax;	
+	int	ymax;
 	int	xmax;
 	t_2float	pos;
 
@@ -25,7 +25,7 @@ void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 	pos.x = draw.start.h;
 	pos.y = draw.start.w;
 	// while (draw.start.h > 20 && draw.start.h < ymax && draw.start.w > 20 && draw.start.w < xmax)
-	int	i = 20;
+	int	i = 4 * SIZE_MINIMAP;
 	while (i--)
 	{
 		//printf("%d:%d\n", draw.start.h, draw.start.w);
@@ -34,13 +34,13 @@ void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 		pos.y += draw.end.x;
 		draw.start.h = pos.x;
 		draw.start.w = pos.y;
-	}	
+	}
 }
 
 void	draw_square(char *data, t_2int pos, int length, int color, t_2int res)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < length)
 	{
@@ -64,11 +64,17 @@ void	draw_minimap(t_img *img, t_scene *scene)
 		len = ft_strlen(scene->map[col]);
 		while (line < len)
 		{
-			if (scene->map[col][line] != '0')
+			if (scene->map[col][line] == '1' || scene->map[col][line] == '8')
 			{
 				pos.w = 20 + line * SIZE_MINIMAP;
 				pos.h = 20 + col * SIZE_MINIMAP;
 				draw_square(img->data, pos, SIZE_MINIMAP, WHITE, scene->res);
+			}
+			if (scene->map[col][line] == '2')
+			{
+				pos.w = 20 + line * SIZE_MINIMAP;
+				pos.h = 20 + col * SIZE_MINIMAP;
+				draw_square(img->data, pos, SIZE_MINIMAP, PINK, scene->res);
 			}
 			line++;
 		}

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 18:06:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 15:14:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sortSprites(int spriteOrder[], double spriteDistance[], int size)
 	i = 0;
 	while (i < size)
 	{
-		printf("i = %d\tspriteOrder[] = %d\tspriteDistance[] = %f\n", i, spriteOrder[i], spriteDistance[i]);
+		printf("tab[%d]\tspriteOrder[] = %d\tspriteDistance[] = %f\n", i, spriteOrder[i], spriteDistance[i]);
 		i++;
 	}
 }
@@ -61,9 +61,9 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 	printf("Je vois %d sprite(s)\n", dda->index_sprite);
 	for(int i = 0; i < dda->index_sprite; i++)
 	{
-		printf("i:%d\n", i);
+		printf("while index_sprite current:%d\n", i);
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((s->pos.x - dda->sprite[i].x) * (s->pos.x - dda->sprite[i].x) + (s->pos.y - dda->sprite[i].y) * (s->pos.y - dda->sprite[i].y)); //sqrt not taken, unneeded
+		spriteDistance[i] = ((s->pos.x - dda->sprite[i].pos.h) * (s->pos.x - dda->sprite[i].pos.h) + (s->pos.y - dda->sprite[i].pos.w) * (s->pos.y - dda->sprite[i].pos.w)); //sqrt not taken, unneeded
 	}
 	sortSprites(spriteOrder, spriteDistance, dda->index_sprite);
 
@@ -71,8 +71,8 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 	for (int i = 0; i < dda->index_sprite; i++)
 	{
 		//translate sprite position to relative to camera
-		double spriteX = dda->sprite[spriteOrder[i]].x - s->pos.x;
-		double spriteY = dda->sprite[spriteOrder[i]].y - s->pos.y;
+		double spriteX = dda->sprite[spriteOrder[i]].pos.h - s->pos.x;
+		double spriteY = dda->sprite[spriteOrder[i]].pos.w - s->pos.y;
 
 		//transform sprite wits->size.h the inverse camera matrix
 		// [ s->plane.x   s->dir.x ] -1                                       [ s->dir.y      -s->dir.x ]

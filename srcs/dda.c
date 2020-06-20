@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 18:09:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 15:28:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,35 @@ void	set_side_dist(t_dda *dda, t_scene *s)
 	}
 }
 
-int	deja_vu(t_dda *dda)
+int		deja_vu(t_dda *dda)
 {
 	int i;
 
 	i = 0;
 	while (i < dda->index_sprite)
 	{
-		if (dda->sprite[dda->index_sprite - 1].x == dda->sprite[i].x - 0.5 &&
-		dda->sprite[dda->index_sprite - 1].y == dda->sprite[i].y - 0.5)
+		// printf("same sprite ? %d:%d\n", dda->coord.h, dda->coord.w);
+		// printf("than sprite%d %d:%d\n\n", i, dda->sprite[i].pos.h, dda->sprite[i].pos.w);
+		if (dda->sprite[i].pos.h == dda->coord.h &&	dda->sprite[i].pos.w == dda->coord.w)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	function(t_scene *s, t_dda *dda)
+int		set_sprites_dda(t_scene *s, t_dda *dda)
 {
 	if (s->map[dda->coord.h][dda->coord.w] == '1')
 		return (1);
 	else if (!deja_vu(dda))
 	{
-		printf("dda->index_sprite:%d\n", dda->index_sprite);
-		dda->sprite[dda->index_sprite].x = dda->coord.h + 0.5;
-		dda->sprite[dda->index_sprite].y = dda->coord.w + 0.5;
+		// printf("dda->index_sprite:%d\n", dda->index_sprite);
+		dda->sprite[dda->index_sprite].pos.h = dda->coord.h;
+		dda->sprite[dda->index_sprite].pos.w = dda->coord.w;
 		printf("sprite trouve:%d:%d\n", dda->coord.h, dda->coord.w);
 		dda->index_sprite++;
+		printf("index_sprite = %d\n", dda->index_sprite);
+		return (0);
 	}
 	return (0);
 }
@@ -99,9 +102,8 @@ void	perform_dda(t_scene *s, t_dda *dda)
 			dda->coord.w += dda->step.w;
 			dda->side = ((dda->rayDir.y > 0) ? 1 : 3);
 		}
-		//Check if ray has hit a wall
-		// printf("map%d:%d\n", dda->coord.h, dda->coord.w);
+		//printf("map%d:%d\n", dda->coord.h, dda->coord.w);
 		if (s->map[dda->coord.h][dda->coord.w] != '0')
-			hit = function(s, dda);
+			hit = set_sprites_dda(s, dda);
 	}
 }
