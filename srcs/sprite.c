@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/20 15:14:12 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 16:49:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ void	ft_swap_double(double *a, double *b)
 	*b = c;
 }
 
-void	sortSprites(int spriteOrder[], double spriteDistance[], int size)
+void	ft_swap_sprite(t_sprite *a, t_sprite *b)
+{
+	t_sprite c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+
+void	sort_sprites(int spriteOrder[], double spriteDistance[], t_dda *dda)
 {
 	int swap;
 	int i;
@@ -32,19 +41,20 @@ void	sortSprites(int spriteOrder[], double spriteDistance[], int size)
 	{
 		i = 0;
 		swap = 0;
-		while (i < size - 1)
+		while (i < dda->index_sprite - 1)
 		{
 			if (spriteDistance[i] > spriteDistance[i + 1])
 			{
 				ft_swap_double(&spriteDistance[i], &spriteDistance[i + 1]);
 				ft_swap(&spriteOrder[i], &spriteOrder[i + 1]);
+				ft_swap_sprite(&dda->sprite[i], &dda->sprite[i + 1]);
 				swap = 1;
 			}
 			i++;
 		}
 	}
 	i = 0;
-	while (i < size)
+	while (i < dda->index_sprite)
 	{
 		printf("tab[%d]\tspriteOrder[] = %d\tspriteDistance[] = %f\n", i, spriteOrder[i], spriteDistance[i]);
 		i++;
@@ -65,7 +75,8 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 		spriteOrder[i] = i;
 		spriteDistance[i] = ((s->pos.x - dda->sprite[i].pos.h) * (s->pos.x - dda->sprite[i].pos.h) + (s->pos.y - dda->sprite[i].pos.w) * (s->pos.y - dda->sprite[i].pos.w)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, dda->index_sprite);
+	sort_sprites(spriteOrder, spriteDistance, dda);
+
 
 	//after sorting the sprites, do the projection and draw them
 	for (int i = 0; i < dda->index_sprite; i++)
@@ -122,8 +133,8 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 					int texY = ((d * s->textures[SPRITE]->size.h) / spriteHeight) / 256;
 					int color = s->textures[SPRITE]->data[s->textures[SPRITE]->size.w * texY + texX]; //get current color from the texture
 					t_2int pixel;
-					pixel.w = y;
-					pixel.h = stripe;
+					pixel.w = stripe;
+					pixel.h = y;
 					if ((color & 0x00FFFFFF) != 0)
 						put_texture(img->data, pixel, s->textures[SPRITE]->data, s->res, s->textures[SPRITE]->size.w * texY + texX); //paint pixel if it isn't black, black is the invisible color
 				}

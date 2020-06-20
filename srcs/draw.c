@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:09:43 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/20 16:32:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	draw_v_line(char *data, t_2int pos, int length, int color, t_2int res)
 	}
 }
 
+/**
+* pos.h debut
+* dda->lineHeight
+**/
 void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 {
 	int 	length;
@@ -83,7 +87,7 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	//draw_v_line(data, pixel, dda->draw.w - dda->draw.h, color, s->res);
 	draw_texture_line(data, pixel, dda, s);
 		pixel.h += dda->draw.w - dda->draw.h;
-	draw_v_line(data, pixel, s->res.h - dda->draw.w - 1, FLOOR_COLOR, s->res);
+	draw_v_line(data, pixel, s->res.h - dda->draw.w, FLOOR_COLOR, s->res);
 }
 
 
