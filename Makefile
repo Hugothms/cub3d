@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/19 17:23:55 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/23 14:23:28 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ compilelibft :
 compilelibmlx :
 	$(--MAKE) -C $(LIBMLXDIR) all
 
-%.o: %.c $(--INCL)
+%.o: %.c $(--HEADER)
 	$(--CC) -c $(--LDFLAGS) -I$(--INCL) -o $@ $<
 
 clean:

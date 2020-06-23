@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/20 15:43:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/23 14:33:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define CEILING_COLOR	6185465
 # define FLOOR_COLOR	2105376
 # define FOV			0.66
-# define SIZE_MINIMAP	15
+# define SIZE_MINIMAP	0
 
 # define GREY			11184810
 # define RED			16711680
@@ -62,7 +62,7 @@
 /*
 ** Keycodes LINUX and MAC
 */
-# ifdef LINUX
+// # ifdef LINUX
 #  define AZERTY		1
 #  define ESC			65307
 #  define ARROW_LEFT	65361
@@ -77,31 +77,31 @@
 #  define KEY_S			115
 #  define KEY_W			119
 #  define KEY_Z			122
-# else
-#  define AZERTY		0
-#  define ESC			53
-#  define ARROW_LEFT	123
-#  define ARROW_RIGHT	124
-#  define ARROW_UP		126
-#  define ARROW_DOWN	125
-#  define KEY_A			0
-#  define KEY_S			1
-#  define KEY_D			2
-#  define KEY_F			3
-#  define KEY_Z			11
-#  define KEY_Q			12
-#  define KEY_W			13
-#  define KEY_E			14
-#  define KEY_O			31
-#  define KEY_U			32
-#  define KEY_I			34
-#  define KEY_L			37
-#  define KEY_J			38
-#  define KEY_K			40
-#  define KEY_SPACE		49
-#  define KEY_PLUS		69
-#  define KEY_MINUS		78
-# endif
+// # else
+// #  define AZERTY		0
+// #  define ESC			53
+// #  define ARROW_LEFT	123
+// #  define ARROW_RIGHT	124
+// #  define ARROW_UP		126
+// #  define ARROW_DOWN	125
+// #  define KEY_A			0
+// #  define KEY_S			1
+// #  define KEY_D			2
+// #  define KEY_F			3
+// #  define KEY_Z			11
+// #  define KEY_Q			12
+// #  define KEY_W			13
+// #  define KEY_E			14
+// #  define KEY_O			31
+// #  define KEY_U			32
+// #  define KEY_I			34
+// #  define KEY_L			37
+// #  define KEY_J			38
+// #  define KEY_K			40
+// #  define KEY_SPACE		49
+// #  define KEY_PLUS		69
+// #  define KEY_MINUS		78
+// # endif
 
 typedef struct	s_2int
 {

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 15:28:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/23 14:20:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	free_tab(void **tab)
 	int	i;
 
 	i = 0;
-	// while (tab[i])
-	// 	free(tab[i++]);
+	while (tab[i])
+		free(tab[i++]);
 	free(tab);
 }
 

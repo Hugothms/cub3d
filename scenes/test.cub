@@ -1,4 +1,4 @@
-R 1800 1200
+R 800 600
 
 EA ./scenes/textures/64/wood.xpm
 WE ./scenes/textures/64/redbrick.xpm
