@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/23 14:50:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/23 19:59:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,4 @@ void	make_img(t_img *img, t_scene *s)
 	free(dda->sprite);
 	free(dda);
 	draw_minimap(img, s);
-	putchar('\n');
 }

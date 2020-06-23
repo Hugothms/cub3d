@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:48:31 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/20 15:42:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/23 20:04:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 	int	xmax;
 	t_2float	pos;
 
-	ymax = 20 + s->size.h * SIZE_MINIMAP;
-	xmax = 20 + ft_strlen(s->map[(int)s->pos.x]) * SIZE_MINIMAP;
+	ymax = 20 + s->size.h * s->res.w  / 100;
+	xmax = 20 + ft_strlen(s->map[(int)s->pos.x]) * s->res.w  / 100;
 	// printf("draw%d:%d\n", draw.start.h,draw.start.w );
 	// printf("max%d:%d\n", ymax, xmax );
 	pos.x = draw.start.h;
 	pos.y = draw.start.w;
 	// while (draw.start.h > 20 && draw.start.h < ymax && draw.start.w > 20 && draw.start.w < xmax)
-	int	i = 4 * SIZE_MINIMAP;
+	int	i = 4 * s->res.w  / 100;
 	while (i--)
 	{
 		//printf("%d:%d\n", draw.start.h, draw.start.w);
@@ -66,15 +66,15 @@ void	draw_minimap(t_img *img, t_scene *scene)
 		{
 			if (scene->map[col][line] == '1' || scene->map[col][line] == '8')
 			{
-				pos.w = 20 + line * SIZE_MINIMAP;
-				pos.h = 20 + col * SIZE_MINIMAP;
-				draw_square(img->data, pos, SIZE_MINIMAP, WHITE, scene->res);
+				pos.w = 20 + line * scene->res.w / 200;
+				pos.h = 20 + col * scene->res.w / 200;
+				draw_square(img->data, pos, scene->res.w / 200, WHITE, scene->res);
 			}
 			if (scene->map[col][line] == '2')
 			{
-				pos.w = 20 + line * SIZE_MINIMAP;
-				pos.h = 20 + col * SIZE_MINIMAP;
-				draw_square(img->data, pos, SIZE_MINIMAP, PINK, scene->res);
+				pos.w = 20 + line * scene->res.w / 200;
+				pos.h = 20 + col * scene->res.w / 200;
+				draw_square(img->data, pos, scene->res.w / 200, PINK, scene->res);
 			}
 			line++;
 		}
@@ -85,12 +85,12 @@ void	draw_minimap(t_img *img, t_scene *scene)
 void	draw_pos_minimap(t_img *img, t_scene *s)
 {
 	t_draw draw;
-	draw.start.w = 20 + s->pos.y * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-	draw.start.h = 20 + s->pos.x * SIZE_MINIMAP - SIZE_MINIMAP / 2;
-	draw_square(img->data, draw.start, SIZE_MINIMAP, RED, s->res);
-	draw.start.w += SIZE_MINIMAP / 2;
-	draw.start.h += SIZE_MINIMAP / 2;
-	draw.end.x = s->dir.y;
-	draw.end.y = s->dir.x;
+	draw.start.w = 20 + s->pos.y * s->res.w / 200 - s->res.w / 200 / 2;
+	draw.start.h = 20 + s->pos.x * s->res.w / 200 - s->res.w / 200 / 2;
+	draw_square(img->data, draw.start, s->res.w  / 200, RED, s->res);
+	draw.start.w += s->res.w / 200 / 2;
+	draw.start.h += s->res.w / 200 / 2;
+	draw.end.x = s->dir.y / 2;
+	draw.end.y = s->dir.x / 2;
 	draw_line(img->data, s, draw, RED, s->res);
 }

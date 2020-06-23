@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/20 15:28:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/23 19:59:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int		set_sprites_dda(t_scene *s, t_dda *dda)
 		// printf("dda->index_sprite:%d\n", dda->index_sprite);
 		dda->sprite[dda->index_sprite].pos.h = dda->coord.h;
 		dda->sprite[dda->index_sprite].pos.w = dda->coord.w;
-		printf("sprite trouve:%d:%d\n", dda->coord.h, dda->coord.w);
+		// printf("sprite trouve:%d:%d\n", dda->coord.h, dda->coord.w);
 		dda->index_sprite++;
-		printf("index_sprite = %d\n", dda->index_sprite);
+		// printf("index_sprite = %d\n", dda->index_sprite);
 		return (0);
 	}
 	return (0);

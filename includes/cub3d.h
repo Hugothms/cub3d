@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/23 14:33:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 00:28:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define CEILING_COLOR	6185465
 # define FLOOR_COLOR	2105376
 # define FOV			0.66
-# define SIZE_MINIMAP	0
 
 # define GREY			11184810
 # define RED			16711680
@@ -138,6 +137,19 @@ typedef struct	s_dda
 	int			index_sprite;
 }				t_dda;
 
+typedef struct	s_calc_sprite
+{
+	int			i;
+	double		transformX;
+	double		transformY;
+	int			spriteScreenX;;
+	int			spriteHeight;
+	int			drawStartY;
+	int			drawEndY;
+	int			drawStartX;
+	int			drawEndX;
+}				t_calc_sprite;
+
 typedef struct	s_rgb
 {
 	int			r;
@@ -216,6 +228,7 @@ void	perform_dda(t_scene *s, t_dda *dda);
 //draw
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
 void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res, int entier);
+void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res, int entier);
 void	draw_v_line(char *data, t_2int pos, int len, int color, t_2int res);
 void	draw_wall(char *data, t_dda *dda, t_scene *s);
 
