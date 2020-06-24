@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 12:43:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:04:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	calcul_dda(t_dda *dda, t_scene *s, int x)
 {
-	double	cameraX;
+	double	camerax;
 
-	cameraX = 2 * x / (double)s->res.w - 1;
-	dda->rayDir.x = s->dir.x + s->plane.x * cameraX;
-	dda->rayDir.y = s->dir.y + s->plane.y * cameraX;
+	camerax = 2 * x / (double)s->res.w - 1;
+	dda->rayDir.x = s->dir.x + s->plane.x * camerax;
+	dda->rayDir.y = s->dir.y + s->plane.y * camerax;
 	dda->coord.h = (int)s->pos.x;
 	dda->coord.w = (int)s->pos.y;
 	dda->deltaDist.x = fabs(1 / dda->rayDir.x);
@@ -56,7 +56,8 @@ int		deja_vu(t_dda *dda)
 	i = 0;
 	while (i < dda->index_sprite)
 	{
-		if (dda->sprite[i].pos.h == dda->coord.h &&	dda->sprite[i].pos.w == dda->coord.w)
+		if (dda->sprite[i].pos.h == dda->coord.h &&
+		dda->sprite[i].pos.w == dda->coord.w)
 			return (1);
 		i++;
 	}
@@ -79,12 +80,11 @@ int		set_sprites_dda(t_scene *s, t_dda *dda)
 
 void	perform_dda(t_scene *s, t_dda *dda)
 {
-	int	hit; //was there a wall hit?
+	int	hit;
 
 	hit = 0;
 	while (hit == 0)
 	{
-		//jump to next map square, OR in x-direction, OR in y-direction
 		if (dda->sideDist.x < dda->sideDist.y)
 		{
 			dda->sideDist.x += dda->deltaDist.x;

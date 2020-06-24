@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 12:50:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:09:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	set_draw_start_end(t_dda *dda, t_scene *s)
 {
-	// double	perpWallDist;
+	// double	perpwalldist;
 	int		drawHeight;
 
 	if (dda->side % 2 == 0)
-		dda->perpWallDist[dda->line] = (dda->coord.h - s->pos.x +\
+		dda->perpwalldist[dda->line] = (dda->coord.h - s->pos.x +\
 		(1 - dda->step.h) / 2.) / dda->rayDir.x;
 	else
-		dda->perpWallDist[dda->line] = (dda->coord.w - s->pos.y +\
+		dda->perpwalldist[dda->line] = (dda->coord.w - s->pos.y +\
 		(1 - dda->step.w) / 2.) / dda->rayDir.y;
-	dda->lineHeight = (s->res.h / dda->perpWallDist[dda->line]);
+	dda->lineHeight = (s->res.h / dda->perpwalldist[dda->line]);
 	if (dda->lineHeight > s->res.h)
 		drawHeight = s->res.h;
 	else

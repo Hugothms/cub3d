@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 13:31:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:09:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct	s_dda
 	int			side;
 	int			line;
 	int			lineHeight;
-	double		perpWallDist[MAX_WIDE];
+	double		perpwalldist[MAX_WIDE];
 	t_sprite	*sprite;
 	int			index_sprite;
 }				t_dda;
@@ -139,9 +139,8 @@ typedef struct	s_dda
 typedef struct	s_calc_sprite
 {
 	int			i;
-	double		transformX;
-	double		transformY;
-	int			spriteScrX;;
+	double		transform_y;
+	int			spritescrx;;
 	int			spriteHeight;
 	int			spriteWidth;
 	int			drawStartY;
