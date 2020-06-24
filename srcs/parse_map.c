@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 17:23:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:19:24 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,6 @@ void		get_map(t_scene *scene, char *join)
 	if (scene->pos.x == -1)
 		print_err_and_exit("Initial position missing", PARSE_ERROR);
 	free_tab((void**)map);
-}
-
-void	join_clean(char **s1, char *s2)
-{
-	char	*tmp;
-
-	tmp = *s1;
-	*s1 = ft_strjoin(*s1, s2);
-	free(tmp);
 }
 
 void		parse_map(t_scene *scene, int fd)

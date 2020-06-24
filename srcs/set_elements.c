@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 16:46:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:17:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	set_res(t_scene *scene, char **data)
 
 	if (check_res(data))
 		print_err_and_exit("res (R) must be 2 positive numbers", 20);
-	// if (!(res = malloc(sizeof(*res))))
-	// 	print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	res->w = ft_atoi_strict(data[1]);
 	res->h = ft_atoi_strict(data[2]);
 	scene->res = *res;

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 12:49:36 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:23:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,13 @@ void	rotate(t_2float *dir, float angle)
 	x = dir->x;
 	dir->x = x * cos(angle) - dir->y * sin(angle);
 	dir->y = x * sin(angle) + dir->y * cos(angle);
+}
+
+void	join_clean(char **s1, char *s2)
+{
+	char	*tmp;
+
+	tmp = *s1;
+	*s1 = ft_strjoin(*s1, s2);
+	free(tmp);
 }

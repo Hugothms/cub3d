@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:16:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:02:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:24:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
  * 			{
  * 				printf("\033[48;5;39m");
  * 				printf("%c", map[i][j]);
- * 				printf("\033[m"); 
+ * 				printf("\033[m");
  * 			}
  * 			else if (map[i][j] == '8')
  * 			{
  * 				printf("\033[48;5;213m");
  * 				printf("%c", map[i][j]);
- * 				printf("\033[m"); 
+ * 				printf("\033[m");
  * 			}
  * 			else
  * 				printf("%c", map[i][j]);

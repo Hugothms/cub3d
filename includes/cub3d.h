@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:09:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:25:57 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ void	draw_pos_minimap(t_img *img, t_scene *s);
 void	print_err_and_exit(char *str, int err);
 int		close_function(const t_window *w);
 void	free_scene(t_scene *scene);
+void	free_tab(void **tab);
 
 //key
 int		refresh(const t_window *w);
@@ -270,22 +271,29 @@ void	parse_map(t_scene *scene, int fd);
 void	parse_textures(t_mlx *mlx, t_scene *s);
 t_scene	*get_scene(const int argc, const char *argv[]);
 
+//put_pixel
+void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
+void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res,
+int entier);
+void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res,
+int entier);
+
 //set_elements
 void	set_res(t_scene *scene, char **data);
 void	set_texture(t_scene *scene, char **data, int code);
 void	set_color(t_scene *scene, char **data, int code);
 
 //save_bmp
+char	*screenshot_datetime(char res[]);
 void	save_bmp(const char *filename, const char *data, const t_2int r);
 
 //sprite
 void	do_sprite(t_img *img, t_dda *dda, t_scene *s);
 
 //utils
-char	*screenshot_datetime(char res[]);
 int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
-void	free_tab(void **tab);
 void	rotate(t_2float *dir, float angle);
+void	join_clean(char **s1, char *s2);
 
 #endif

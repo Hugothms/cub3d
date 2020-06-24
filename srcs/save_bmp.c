@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 10:43:06 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 15:04:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:18:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ char	*file_header_bmp(const int filesize)
 
 	if (!(bmpfileheader = malloc(14 * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	ft_memcpy(bmpfileheader, (char[]){'B','M', 0, 0, 0, 0, 0, 0, 0, 0,\
-										54,0, 0, 0}, 14);
+	ft_memcpy(bmpfileheader, (char[]){'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, \
+										54, 0, 0, 0}, 14);
 	bmpfileheader[2] = filesize;
 	bmpfileheader[3] = filesize >> 8;
 	bmpfileheader[4] = filesize >> 16;
@@ -58,7 +58,7 @@ char	*info_header_bmp(const t_2int res)
 	if (!(bmpinfoheader = malloc(40 * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_memcpy(bmpinfoheader, (char[]){40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \
-	1,0, 32,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \
+	1, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \
 	0, 0, 0, 0}, 40);
 	bmpinfoheader[4] = res.w;
 	bmpinfoheader[5] = res.w >> 8;
@@ -71,7 +71,7 @@ char	*info_header_bmp(const t_2int res)
 	return (bmpinfoheader);
 }
 
-void			write_data(const int f, const char *data, t_2int r)
+void	write_data(const int f, const char *data, t_2int r)
 {
 	int			line;
 
@@ -80,7 +80,7 @@ void			write_data(const int f, const char *data, t_2int r)
 		write(f, data + r.w * line * 4, r.w * 4);
 }
 
-void			save_bmp(const char *fn, const char *data, const t_2int r)
+void	save_bmp(const char *fn, const char *data, const t_2int r)
 {
 	int		filesize;
 	int		fd;
