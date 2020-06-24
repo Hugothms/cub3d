@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:48:31 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:11:52 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:42:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ void	square(t_img *img, t_scene *scene, t_2int index, int color)
 	t_2int	pos;
 	t_draw	draw;
 
-	pos.w = 20 + index.w * scene->res.w / 200;
-	pos.h = 20 + index.h * scene->res.w / 200;
-	draw.start = pos;
+	draw.start.w = 20 + index.w * scene->res.w / 200;
+	draw.start.h = 20 + index.h * scene->res.w / 200;
 	draw.length = scene->res.w / 200;
 	draw.color = color;
 	draw_square(img->data, draw, scene->res);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:40:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:42:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_swap_double(double *a, double *b)
 {
-	double c;
+	double	c;
 
 	c = *a;
 	*a = *b;
@@ -23,7 +23,7 @@ void	ft_swap_double(double *a, double *b)
 
 void	ft_swap_sprite(t_2int *a, t_2int *b)
 {
-	t_2int c;
+	t_2int	c;
 
 	c = *a;
 	*a = *b;
@@ -37,6 +37,7 @@ void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 	int		texy;
 	int		color;
 	t_draw	draw;
+	t_2int pixel;
 
 	y = cs->drawStartY;
 	while (y <= cs->drawEndY)
@@ -45,10 +46,8 @@ void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 		texy = ((d * s->textures[SPRITE]->size.h) / cs->spriteHeight) / 256;
 		color = s->textures[SPRITE]->data[s->textures[SPRITE]->size.w *
 		texy + cs->texX];
-		t_2int pixel;
-		pixel.w = s->res.w - cs->stripe - 1;
-		pixel.h = y;
-		draw.start = pixel;
+		draw.start.w = s->res.w - cs->stripe - 1;
+		draw.start.h = y;
 		draw.length = s->textures[SPRITE]->size.w * texy + cs->texX;
 		put_sprite(img->data, draw, s->textures[SPRITE]->data, s->res);
 		y++;
