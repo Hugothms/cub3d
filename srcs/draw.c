@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:09:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:10:06 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ void	draw_v_line(char *data, t_2int pos, int length, int color, t_2int res)
 	}
 }
 
-/**
-* pos.h debut
-* dda->lineHeight
-**/
 void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 {
 	int		length;

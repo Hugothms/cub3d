@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/19 15:28:30 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:13:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ void	get_controls_loop(t_mlx *mlx, t_img *img, t_scene *scene)
 	window->mlx = mlx;
 	window->img = img;
 	window->s = scene;
-	mlx_hook(mlx->win_ptr, 17, 1L << 17, close_function, window); //linux close
+	mlx_hook(mlx->win_ptr, 17, 1L << 17, close_function, window);
 	mlx_hook(mlx->win_ptr, 2, 1L << 0, key_function, window);
 	mlx_hook(mlx->win_ptr, 3, 1L << 1, key_release, &scene->move);
-	//mlx_key_hook(mlx->win_ptr, key_function, window);
 	make_img(window->img, window->s);
 	mlx_put_image_to_window(window->mlx->mlx_ptr, window->mlx->win_ptr, window->img->img_ptr, 0, 0);
-	//mlx_loop_hook(mlx->mlx_ptr, refresh, window);
 	mlx_loop(mlx->mlx_ptr);
 }
 
@@ -91,15 +89,15 @@ int		main(const int argc, const char *argv[])
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
-	// printf("\nget_scene:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	printf("\nget_scene:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx = malloc_mlx_init();
 	end = clock();
-	// printf("malloc_mlx_init:%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	printf("malloc_mlx_init:%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	img = init_img(mlx, &scene->res);
 	end = clock();
-	// printf("init_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	printf("init_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	parse_textures(mlx, scene);
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);
