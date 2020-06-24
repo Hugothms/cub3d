@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:14:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:22:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ void	set_initial_pos(t_scene *scene, char **map, int line, int col)
 	rotate(&scene->plane, 1.570796);
 }
 
-void	set_sprite(t_scene *scene, char **map, int line, int col)
-{
-	scene->map[line][col] = map[line][col];
-	scene->nb_sprite++;
-}
-
 void	get_map2(t_scene *scene, char **map, int line)
 {
 	int	col;
@@ -80,13 +74,13 @@ void	get_map2(t_scene *scene, char **map, int line)
 	}
 }
 
-void		get_map(t_scene *scene, char *join)
+void	get_map(t_scene *scene, char *join)
 {
 	int		line;
 	int		col;
 	char	**map;
 
-	map = ft_split(join, '\n'); //echanger map et scene->map
+	map = ft_split(join, '\n');
 	free(join);
 	line = 0;
 	scene->size.h = ft_tab_size(map);
@@ -103,7 +97,7 @@ void		get_map(t_scene *scene, char *join)
 	free_tab((void**)map);
 }
 
-void		parse_map(t_scene *scene, int fd)
+void	parse_map(t_scene *scene, int fd)
 {
 	char	*line;
 	char	*join;

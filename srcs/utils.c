@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:23:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:19:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,13 @@ void	join_clean(char **s1, char *s2)
 	tmp = *s1;
 	*s1 = ft_strjoin(*s1, s2);
 	free(tmp);
+}
+
+void	save(t_scene *scene, t_img *img)
+{
+	char	filename[35];
+
+	make_img(img, scene);
+	save_bmp(screenshot_datetime(filename), img->data, scene->res);
+	free_scene(scene);
 }

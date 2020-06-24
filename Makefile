@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/24 15:17:57 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/24 15:21:17 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ NAME = cub3d
 			srcs/sprite.c			\
 			srcs/sprite2.c			\
 			srcs/utils.c 			\
+			srcs/utils2.c 			\
 			srcs/set_elements.c
 
 --OBJS = $(--SRCS:.c=.o)

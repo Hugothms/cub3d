@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:13:25 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:21:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,13 @@ void	start_game_loop(t_scene *scene, t_mlx *mlx, t_img *img, const char *str)
 	get_controls_loop(mlx, img, scene);
 }
 
-void	save(t_scene *scene, t_img *img)
-{
-	char	filename[35];
-
-	make_img(img, scene);
-	save_bmp(screenshot_datetime(filename), img->data, scene->res);
-	free_scene(scene);
-}
-
 int		main(const int argc, const char *argv[])
 {
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
-	clock_t		start, end;
+	clock_t		start
+	clock_t		end;
 
 	start = clock();
 	scene = get_scene(argc, argv);

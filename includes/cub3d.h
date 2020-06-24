@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:17:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:21:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,5 +311,9 @@ int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
 void	rotate(t_2float *dir, float angle);
 void	join_clean(char **s1, char *s2);
+void	save(t_scene *scene, t_img *img);
+
+//utils2
+void	set_sprite(t_scene *scene, char **map, int line, int col);
 
 #endif
