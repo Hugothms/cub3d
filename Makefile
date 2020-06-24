@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/24 14:26:21 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/24 15:17:57 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,10 @@ NAME = cub3d
 			srcs/move2.c 			\
 			srcs/parse_map.c 		\
 			srcs/parse.c 			\
-			srcs/put_pixel.c 			\
+			srcs/put_pixel.c 		\
 			srcs/save_bmp.c			\
 			srcs/sprite.c			\
+			srcs/sprite2.c			\
 			srcs/utils.c 			\
 			srcs/set_elements.c
 

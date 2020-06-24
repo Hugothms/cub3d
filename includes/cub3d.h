@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:06:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:17:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,10 @@ char	*screenshot_datetime(char res[]);
 void	save_bmp(const char *filename, const char *data, const t_2int r);
 
 //sprite
+void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs);
+void	get_sprites(t_dda *dda, t_scene *s, int sprite_order[]);
+
+//sprite2
 void	do_sprite(t_img *img, t_dda *dda, t_scene *s);
 
 //utils
