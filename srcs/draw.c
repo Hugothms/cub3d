@@ -6,18 +6,18 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:24:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:51:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-	draw_v_line(char *data, t_2int pos, int length, int color, t_2int res)
+void	draw_v_line(char *data, t_draw draw, int color, t_2int res)
 {
-	while (length-- > 0)
+	while (draw.length-- > 0)
 	{
-		put_pixel(data, pos, color, res);
-		pos.h++;
+		put_pixel(data, draw.start, color, res);
+		draw.start.h++;
 	}
 }
 
@@ -62,12 +62,17 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 {
 	int		i;
 	t_2int	pixel;
+	t_draw	draw;
 
 	pixel.w = s->res.w - dda->line - 1;
 	pixel.h = 0;
-	draw_v_line(data, pixel, dda->draw.h, CEILING_COLOR, s->res);
+	draw.start = pixel;
+	draw.length = dda->draw.h;
+	draw_v_line(data, draw, CEILING_COLOR, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
 		pixel.h += dda->draw.w - dda->draw.h;
-	draw_v_line(data, pixel, s->res.h - dda->draw.w, FLOOR_COLOR, s->res);
+	draw.start = pixel;
+	draw.length = s->res.h - dda->draw.w;
+	draw_v_line(data, draw, FLOOR_COLOR, s->res);
 }
