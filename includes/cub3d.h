@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:29:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:38:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,6 @@ void	set_side_dist(t_dda *dda, t_scene *s);
 void	perform_dda(t_scene *s, t_dda *dda);
 
 //draw
-void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
 void	draw_v_line(char *data, t_draw draw, t_2int res);
 void	draw_wall(char *data, t_dda *dda, t_scene *s);
 
@@ -278,10 +277,8 @@ t_scene	*get_scene(const int argc, const char *argv[]);
 
 //put_pixel
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
-void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res,
-int entier);
-void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res,
-int entier);
+void	put_texture(char *data, t_draw draw, char *texdata, t_2int res);
+void	put_sprite(char *data, t_draw draw, char *texdata, t_2int res);
 
 //set_elements
 void	set_res(t_scene *scene, char **data);

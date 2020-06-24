@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:30:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:40:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	ft_swap_sprite(t_2int *a, t_2int *b)
 
 void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 {
-	int	y;
-	int	d;
-	int	texy;
-	int	color;
+	int		y;
+	int		d;
+	int		texy;
+	int		color;
+	t_draw	draw;
 
 	y = cs->drawStartY;
 	while (y <= cs->drawEndY)
@@ -47,8 +48,9 @@ void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 		t_2int pixel;
 		pixel.w = s->res.w - cs->stripe - 1;
 		pixel.h = y;
-		put_sprite(img->data, pixel, s->textures[SPRITE]->data, s->res,
-		s->textures[SPRITE]->size.w * texy + cs->texX);
+		draw.start = pixel;
+		draw.length = s->textures[SPRITE]->size.w * texy + cs->texX;
+		put_sprite(img->data, draw, s->textures[SPRITE]->data, s->res);
 		y++;
 	}
 }

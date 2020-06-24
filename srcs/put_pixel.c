@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:15:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:37:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,23 @@ void	put_pixel(char *data, t_2int pixel, int color, t_2int res)
 	*tab[pixel.h][pixel.w] = color;
 }
 
-void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res,
-int address)
+void	put_texture(char *data, t_draw draw, char *texdata, t_2int res)
 {
 	int	(*tab);
 	int	(*tabtexture);
 
 	tab = (void *)data;
 	tabtexture = (void *)texdata;
-	tab[pixel.h * res.w + pixel.w] = tabtexture[address];
+	tab[draw.start.h * res.w + draw.start.w] = tabtexture[draw.length];
 }
 
-void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res,
-int address)
+void	put_sprite(char *data, t_draw draw, char *texdata, t_2int res)
 {
 	int	(*tab);
 	int	(*tabtexture);
 
 	tab = (void *)data;
 	tabtexture = (void *)texdata;
-	if ((tabtexture[address] & 0x00FFFFFF) != 0)
-		tab[pixel.h * res.w + pixel.w] = tabtexture[address];
+	if ((tabtexture[draw.length] & 0x00FFFFFF) != 0)
+		tab[draw.start.h * res.w + draw.start.w] = tabtexture[draw.length];
 }

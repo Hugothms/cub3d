@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:10:59 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:38:50 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ void	draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
 void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 {
 	t_flemme	fl;
+	t_draw		draw;
 
 	draw_texture_line2(pos, dda, s, &fl);
 	while (fl.length-- > 0)
 	{
 		fl.texy = (int)fl.texpos & (fl.tex_size.h - 1);
 		fl.texpos += fl.step;
-		put_texture(data, pos, s->textures[dda->side]->data, s->res,
-		fl.tex_size.w * fl.texy + fl.texx);
+		draw.start = pos;
+		draw.length = fl.tex_size.w * fl.texy + fl.texx;
+		put_texture(data, draw, s->textures[dda->side]->data, s->res);
 		pos.h++;
 	}
 }
