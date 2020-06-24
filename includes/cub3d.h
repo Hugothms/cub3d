@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:48:16 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:00:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,16 @@ typedef struct	s_draw
 	t_2float	end;
 	int			length;
 }				t_draw;
+
+typedef struct	s_flemme
+{
+	int		length;
+	float	step;
+	int		texx;
+	float	texpos;
+	int		texy;
+	t_2int	tex_size;
+}				t_flemme;
 
 typedef struct	s_mlx
 {

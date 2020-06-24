@@ -6,44 +6,44 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:16:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:31:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 14:54:54 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 /*
- ** void	print_map_color(char **map, t_2int couple, t_2int size)
- ** {
- ** 	printf("couple%d:%d\n", couple.h, couple.w);
- ** 	int	i = 0;
- ** 	int	j;
- ** 	while (i < size.h)
- ** 	{
- ** 		j=0;
- ** 		while (map[i][j])
- ** 		{
- ** 			if (map[i][j] == '0')
- ** 			{
- ** 				printf("\033[48;5;39m");
- ** 				printf("%c", map[i][j]);
- ** 				printf("\033[m");
- ** 			}
- ** 			else if (map[i][j] == '8')
- ** 			{
- ** 				printf("\033[48;5;213m");
- ** 				printf("%c", map[i][j]);
- ** 				printf("\033[m");
- ** 			}
- ** 			else
- ** 				printf("%c", map[i][j]);
- ** 			j++;
- ** 		}
- ** 		i++;
- ** 		printf("\n");
- ** 	}
- ** 	sleep(1);
- ** }
+** void	print_map_color(char **map, t_2int couple, t_2int size)
+** {
+** 	printf("couple%d:%d\n", couple.h, couple.w);
+** 	int	i = 0;
+** 	int	j;
+** 	while (i < size.h)
+** 	{
+** 		j=0;
+** 		while (map[i][j])
+** 		{
+** 			if (map[i][j] == '0')
+** 			{
+** 				printf("\033[48;5;39m");
+** 				printf("%c", map[i][j]);
+** 				printf("\033[m");
+** 			}
+** 			else if (map[i][j] == '8')
+** 			{
+** 				printf("\033[48;5;213m");
+** 				printf("%c", map[i][j]);
+** 				printf("\033[m");
+** 			}
+** 			else
+** 				printf("%c", map[i][j]);
+** 			j++;
+** 		}
+** 		i++;
+** 		printf("\n");
+** 	}
+** 	sleep(1);
+** }
  */
 
 int		recurs_map(char **map, t_2int c, t_2int size)
