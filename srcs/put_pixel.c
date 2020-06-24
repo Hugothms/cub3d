@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:29:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:15:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	put_pixel(char *data, t_2int pixel, int color, t_2int res)
 	*tab[pixel.h][pixel.w] = color;
 }
 
-void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res, 
+void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res,
 int address)
 {
 	int	(*tab);

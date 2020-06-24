@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:09:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:10:59 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 
 /*
 **data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 *
-(tex_size.w * texy + texx)];
+**(tex_size.w * texy + texx)];
 **data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 *
-(tex_size.w * texy + texx) + 1];
+**(tex_size.w * texy + texx) + 1];
 **data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 *
-(tex_size.w * texy + texx) + 2];
+**(tex_size.w * texy + texx) + 2];
 **data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 *
-(tex_size.w * texy + texx) + 3];
+**(tex_size.w * texy + texx) + 3];
 */
 
 void	draw_wall(char *data, t_dda *dda, t_scene *s)
@@ -81,7 +81,7 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	draw_v_line(data, draw, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
-		pixel.h += dda->draw.w - dda->draw.h;
+	pixel.h += dda->draw.w - dda->draw.h;
 	draw.start = pixel;
 	draw.length = s->res.h - dda->draw.w;
 	draw.color = FLOOR_COLOR;

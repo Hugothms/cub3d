@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:19:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:14:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	get_map2(t_scene *scene, char **map, int line)
 
 void		get_map(t_scene *scene, char *join)
 {
-	int	line;
+	int		line;
 	int		col;
 	char	**map;
 
@@ -113,7 +113,7 @@ void		parse_map(t_scene *scene, int fd)
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (line[0])
-			break;
+			break ;
 		free(line);
 	}
 	tmp = line;

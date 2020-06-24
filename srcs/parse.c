@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 12:50:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:14:25 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		*init_scene(t_scene *scene)
 	return (scene);
 }
 
-int			check_line(char *line, char **data, char *type, int nb_elements)
+int		check_line(char *line, char **data, char *type, int nb_elements)
 {
 	if (!ft_strcmp(data[0], type))
 	{
@@ -78,7 +78,7 @@ void	set_all(t_scene *s, char *line)
 	free_tab((void**)data);
 }
 
-void		parse_textures(t_mlx *mlx, t_scene *s)
+void	parse_textures(t_mlx *mlx, t_scene *s)
 {
 	int	i;
 
@@ -110,20 +110,12 @@ t_scene		*parse(int fd)
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		// ft_putstr(line);
-		// ft_putchar('\n');
 		set_all(s, line);
 		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]
 		&& s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
 	parse_map(s, fd);
-	// int i = 0;
-	// while (i < scene->size.h)
-	// {
-	// 	ft_putstr(scene->map[i++]);
-	// 	ft_putchar('\n');
-	// }
 	return (s);
 }
 
