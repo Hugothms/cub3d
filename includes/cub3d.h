@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 00:28:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:42:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct	s_2float
 typedef struct	s_sprite
 {
 	t_2int		pos;
-	int			nb;
 }				t_sprite;
 
 typedef struct	s_dda

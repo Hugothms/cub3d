@@ -6,11 +6,29 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 00:44:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:48:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	ft_swap_double(double *a, double *b)
+{
+	double c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+
+void	ft_swap_sprite(t_sprite *a, t_sprite *b)
+{
+	t_sprite c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
 
 void	sort_sprites(int spriteOrder[], double spriteDistance[], t_dda *dda)
 {
@@ -27,9 +45,9 @@ void	sort_sprites(int spriteOrder[], double spriteDistance[], t_dda *dda)
 		{
 			if (spriteDistance[i] < spriteDistance[i + 1])
 			{
-				ft_swap(&spriteDistance[i], &spriteDistance[i + 1]);
+				ft_swap_double(&spriteDistance[i], &spriteDistance[i + 1]);
 				ft_swap(&spriteOrder[i], &spriteOrder[i + 1]);
-				ft_swap(&dda->sprite[i], &dda->sprite[i + 1]);
+				ft_swap_sprite(&dda->sprite[i], &dda->sprite[i + 1]);
 				swap = 1;
 			}
 			i++;
@@ -45,7 +63,9 @@ void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 	for(int i = 0; i < dda->index_sprite; i++)
 	{
 		spriteOrder[i] = i;
-		spriteDistance[i] = ((s->pos.x - dda->sprite[i].pos.h) * (s->pos.x - dda->sprite[i].pos.h) + (s->pos.y - dda->sprite[i].pos.w) * (s->pos.y - dda->sprite[i].pos.w));
+		spriteDistance[i] = ((s->pos.x - dda->sprite[i].pos.h) * 
+		(s->pos.x - dda->sprite[i].pos.h) + (s->pos.y - dda->sprite[i].pos.w) *
+		(s->pos.y - dda->sprite[i].pos.w));
 	}
 	sort_sprites(spriteOrder, spriteDistance, dda);
 	for (int i = 0; i < dda->index_sprite; i++)

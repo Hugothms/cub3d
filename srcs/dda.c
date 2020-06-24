@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/23 19:59:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:43:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int		deja_vu(t_dda *dda)
 	i = 0;
 	while (i < dda->index_sprite)
 	{
-		// printf("same sprite ? %d:%d\n", dda->coord.h, dda->coord.w);
-		// printf("than sprite%d %d:%d\n\n", i, dda->sprite[i].pos.h, dda->sprite[i].pos.w);
 		if (dda->sprite[i].pos.h == dda->coord.h &&	dda->sprite[i].pos.w == dda->coord.w)
 			return (1);
 		i++;
@@ -71,12 +69,9 @@ int		set_sprites_dda(t_scene *s, t_dda *dda)
 		return (1);
 	else if (!deja_vu(dda))
 	{
-		// printf("dda->index_sprite:%d\n", dda->index_sprite);
 		dda->sprite[dda->index_sprite].pos.h = dda->coord.h;
 		dda->sprite[dda->index_sprite].pos.w = dda->coord.w;
-		// printf("sprite trouve:%d:%d\n", dda->coord.h, dda->coord.w);
 		dda->index_sprite++;
-		// printf("index_sprite = %d\n", dda->index_sprite);
 		return (0);
 	}
 	return (0);
@@ -102,7 +97,6 @@ void	perform_dda(t_scene *s, t_dda *dda)
 			dda->coord.w += dda->step.w;
 			dda->side = ((dda->rayDir.y > 0) ? 1 : 3);
 		}
-		//printf("map%d:%d\n", dda->coord.h, dda->coord.w);
 		if (s->map[dda->coord.h][dda->coord.w] != '0')
 			hit = set_sprites_dda(s, dda);
 	}
