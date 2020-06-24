@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 15:16:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:16:31 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:30:44 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	sprite1(t_dda *dda, t_scene *s, t_calc_sprite *cs, int sprite_order[])
 	double invdet;
 	double transformx;
 
-	sprite_x = dda->sprite[sprite_order[cs->i]].pos.h + 0.5 - s->pos.x;
-	sprite_y = dda->sprite[sprite_order[cs->i]].pos.w + 0.5 - s->pos.y;
+	sprite_x = dda->sprite_pos[sprite_order[cs->i]].h + 0.5 - s->pos.x;
+	sprite_y = dda->sprite_pos[sprite_order[cs->i]].w + 0.5 - s->pos.y;
 	invdet = 1.0 / (s->plane.x * s->dir.y - s->dir.x * s->plane.y);
 	transformx = invdet * (s->dir.y * sprite_x - s->dir.x * sprite_y);
 	cs->transform_y = invdet * (-s->plane.y * sprite_x + s->plane.x * sprite_y);

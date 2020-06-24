@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:04:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:28:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int		deja_vu(t_dda *dda)
 	i = 0;
 	while (i < dda->index_sprite)
 	{
-		if (dda->sprite[i].pos.h == dda->coord.h &&
-		dda->sprite[i].pos.w == dda->coord.w)
+		if (dda->sprite_pos[i].h == dda->coord.h &&
+		dda->sprite_pos[i].w == dda->coord.w)
 			return (1);
 		i++;
 	}
@@ -70,8 +70,8 @@ int		set_sprites_dda(t_scene *s, t_dda *dda)
 		return (1);
 	else if (!deja_vu(dda))
 	{
-		dda->sprite[dda->index_sprite].pos.h = dda->coord.h;
-		dda->sprite[dda->index_sprite].pos.w = dda->coord.w;
+		dda->sprite_pos[dda->index_sprite].h = dda->coord.h;
+		dda->sprite_pos[dda->index_sprite].w = dda->coord.w;
 		dda->index_sprite++;
 		return (0);
 	}

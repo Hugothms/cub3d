@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:21:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:29:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		main(const int argc, const char *argv[])
 	t_scene		*scene;
 	t_mlx		*mlx;
 	t_img		*img;
-	clock_t		start
+	clock_t		start;
 	clock_t		end;
 
 	start = clock();

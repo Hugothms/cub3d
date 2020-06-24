@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:13:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:28:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	make_img(t_img *img, t_scene *s)
 
 	if (!(dda = malloc(sizeof(*dda))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if (!(dda->sprite = malloc(s->nb_sprite * sizeof(*dda->sprite))))
+	if (!(dda->sprite_pos = malloc(s->nb_sprite * sizeof(*dda->sprite_pos))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	dda->line = 0;
 	dda->index_sprite = 0;
@@ -58,7 +58,7 @@ void	make_img(t_img *img, t_scene *s)
 	}
 	if (dda->index_sprite)
 		do_sprite(img, dda, s);
-	free(dda->sprite);
+	free(dda->sprite_pos);
 	free(dda);
 	draw_minimap(img, s);
 }

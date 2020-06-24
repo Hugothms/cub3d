@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:16:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:30:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_swap_double(double *a, double *b)
 	*b = c;
 }
 
-void	ft_swap_sprite(t_sprite *a, t_sprite *b)
+void	ft_swap_sprite(t_2int *a, t_2int *b)
 {
-	t_sprite c;
+	t_2int c;
 
 	c = *a;
 	*a = *b;
@@ -70,7 +70,7 @@ void	sort_sprites(int sprite_order[], double sprite_distance[], t_dda *dda)
 			{
 				ft_swap_double(&sprite_distance[i], &sprite_distance[i + 1]);
 				ft_swap(&sprite_order[i], &sprite_order[i + 1]);
-				ft_swap_sprite(&dda->sprite[i], &dda->sprite[i + 1]);
+				ft_swap_sprite(&dda->sprite_pos[i], &dda->sprite_pos[i + 1]);
 				swap = 1;
 			}
 			i++;
@@ -87,9 +87,9 @@ void	get_sprites(t_dda *dda, t_scene *s, int sprite_order[])
 	while (i < dda->index_sprite)
 	{
 		sprite_order[i] = i;
-		sprite_distance[i] = ((s->pos.x - dda->sprite[i].pos.h) *
-		(s->pos.x - dda->sprite[i].pos.h) + (s->pos.y - dda->sprite[i].pos.w) *
-		(s->pos.y - dda->sprite[i].pos.w));
+		sprite_distance[i] = ((s->pos.x - dda->sprite_pos[i].h) *
+		(s->pos.x - dda->sprite_pos[i].h) + (s->pos.y - dda->sprite_pos[i].w) *
+		(s->pos.y - dda->sprite_pos[i].w));
 		i++;
 	}
 	sort_sprites(sprite_order, sprite_distance, dda);
