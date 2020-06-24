@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 13:14:23 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 13:31:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ typedef struct	s_calc_sprite
 	int			drawEndY;
 	int			drawStartX;
 	int			drawEndX;
+	int			texX;
+	int 		stripe;
 	
 }				t_calc_sprite;
 

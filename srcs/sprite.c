@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 13:14:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 13:31:30 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,35 +98,51 @@ void get_sprites(t_dda *dda, t_scene *s, int spriteOrder[])
 	sort_sprites(spriteOrder, spriteDistance, dda);
 }
 
+void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
+{
+	int y = cs->drawStartY;
+	while (y <= cs->drawEndY)
+	{
+		int d = (y)*256 - s->res.h * 128 + cs->spriteHeight * 128;
+		int texY = ((d * s->textures[SPRITE]->size.h) / cs->spriteHeight) / 256;
+		int color = s->textures[SPRITE]->data[s->textures[SPRITE]->size.w * texY + cs->texX];
+		t_2int pixel;
+		pixel.w = s->res.w - cs->stripe - 1;
+		pixel.h = y;
+		put_sprite(img->data, pixel, s->textures[SPRITE]->data, s->res, s->textures[SPRITE]->size.w * texY + cs->texX);
+		y++;
+	}
+}
+
+void 	sprite2(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
+{
+	cs->stripe = cs->drawStartX;
+	while (cs->stripe <= cs->drawEndX)
+	{
+		cs->texX = (int)(256 * (cs->stripe - (-cs->spriteWidth / 2 + cs->spriteScrX))
+		* s->textures[SPRITE]->size.w / cs->spriteWidth) / 256;
+		if (cs->texX < 0)
+			cs->texX = 0;
+		if (cs->transformY >= 0 && cs->stripe > 0 && cs->stripe < s->res.w &&
+		cs->transformY < dda->perpWallDist[cs->stripe])
+		{
+			print_sprite(img, dda, s, cs);
+		}
+		cs->stripe++;
+	}
+}
+
 void	do_sprite(t_img *img, t_dda *dda, t_scene *s)
 {
-	int				spriteOrder[dda->index_sprite];
+	int			spriteOrder[dda->index_sprite];
 	t_calc_sprite	cs;
-	
+
 	get_sprites(dda, s, spriteOrder);
 	cs.i = 0;
 	while (cs.i < dda->index_sprite)
 	{
 		sprite1(dda, s, &cs, spriteOrder);
-		for (int stripe = cs.drawStartX; stripe <= cs.drawEndX; stripe++)
-		{
-			int texX = (int)(256 * (stripe - (-cs.spriteWidth / 2 + cs.spriteScrX)) * s->textures[SPRITE]->size.w / cs.spriteWidth) / 256;
-			if (texX < 0)
-				texX = 0;
-			if (cs.transformY >= 0 && stripe > 0 && stripe < s->res.w && cs.transformY < dda->perpWallDist[stripe])
-			{
-				for (int y = cs.drawStartY; y <= cs.drawEndY; y++)
-				{
-					int d = (y)*256 - s->res.h * 128 + cs.spriteHeight * 128;
-					int texY = ((d * s->textures[SPRITE]->size.h) / cs.spriteHeight) / 256;
-					int color = s->textures[SPRITE]->data[s->textures[SPRITE]->size.w * texY + texX];
-					t_2int pixel;
-					pixel.w = s->res.w - stripe - 1;
-					pixel.h = y;
-					put_sprite(img->data, pixel, s->textures[SPRITE]->data, s->res, s->textures[SPRITE]->size.w * texY + texX);
-				}
-			}
-		}
+		sprite2(img, dda, s, &cs);
 		cs.i++;
 	}
 }
