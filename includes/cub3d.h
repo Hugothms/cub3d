@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:00:58 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:06:03 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct	s_draw
 	t_2int		start;
 	t_2float	end;
 	int			length;
+	int			color;
 }				t_draw;
 
 typedef struct	s_flemme
@@ -242,7 +243,7 @@ void	perform_dda(t_scene *s, t_dda *dda);
 void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
 void	put_texture(char *data, t_2int pixel, char *texdata, t_2int res, int entier);
 void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res, int entier);
-void	draw_v_line(char *data, t_draw draw, int color, t_2int res);
+void	draw_v_line(char *data, t_draw draw, t_2int res);
 void	draw_wall(char *data, t_dda *dda, t_scene *s);
 
 //draw_minimap

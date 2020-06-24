@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:48:31 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 14:52:27 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:07:47 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
+void	draw_line(char *data, t_scene *s, t_draw draw, t_2int res)
 {
 	int			ymax;
 	int			xmax;
@@ -26,7 +26,7 @@ void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 	i = 4 * s->res.w / 100;
 	while (i--)
 	{
-		put_pixel(data, draw.start, color, res);
+		put_pixel(data, draw.start, draw.color, res);
 		pos.x += draw.end.y;
 		pos.y += draw.end.x;
 		draw.start.h = pos.x;
@@ -34,14 +34,14 @@ void	draw_line(char *data, t_scene *s, t_draw draw, int color, t_2int res)
 	}
 }
 
-void	draw_square(char *data, t_draw draw, int color, t_2int res)
+void	draw_square(char *data, t_draw draw, t_2int res)
 {
 	int		i;
 
 	i = 0;
 	while (i < draw.length)
 	{
-		draw_v_line(data, draw, color, res);
+		draw_v_line(data, draw, res);
 		draw.start.w++;
 		i++;
 	}
@@ -50,14 +50,14 @@ void	draw_square(char *data, t_draw draw, int color, t_2int res)
 void	square(t_img *img, t_scene *scene, t_2int index, int color)
 {
 	t_2int	pos;
-
 	t_draw	draw;
 	
 	pos.w = 20 + index.w * scene->res.w / 200;
 	pos.h = 20 + index.h * scene->res.w / 200;
 	draw.start = pos;
 	draw.length = scene->res.w / 200;
-	draw_square(img->data, draw, color,	scene->res);
+	draw.color = color;
+	draw_square(img->data, draw, scene->res);
 }
 
 void	draw_minimap(t_img *img, t_scene *scene)
@@ -89,10 +89,12 @@ void	draw_pos_minimap(t_img *img, t_scene *s)
 	draw.start.w = 20 + s->pos.y * s->res.w / 200 - s->res.w / 200 / 2;
 	draw.start.h = 20 + s->pos.x * s->res.w / 200 - s->res.w / 200 / 2;
 	draw.length = s->res.w / 200;
-	draw_square(img->data, draw, RED, s->res);
+	draw.color = RED;
+	draw_square(img->data, draw, s->res);
 	draw.start.w += s->res.w / 200 / 2;
 	draw.start.h += s->res.w / 200 / 2;
 	draw.end.x = s->dir.y / 2;
 	draw.end.y = s->dir.x / 2;
-	draw_line(img->data, s, draw, RED, s->res);
+	draw.color = RED;
+	draw_line(img->data, s, draw, s->res);
 }

@@ -6,22 +6,22 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:02:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 15:09:42 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	draw_v_line(char *data, t_draw draw, int color, t_2int res)
+void	draw_v_line(char *data, t_draw draw, t_2int res)
 {
 	while (draw.length-- > 0)
 	{
-		put_pixel(data, draw.start, color, res);
+		put_pixel(data, draw.start, draw.color, res);
 		draw.start.h++;
 	}
 }
 
-void draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
+void	draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
 {
 	double	wallx;
 
@@ -57,10 +57,14 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 }
 
 /*
-**data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 * (tex_size.w * texy + texx)];
-**data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 * (tex_size.w * texy + texx) + 1];
-**data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 * (tex_size.w * texy + texx) + 2];
-**data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 * (tex_size.w * texy + texx) + 3];
+**data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 *
+(tex_size.w * texy + texx)];
+**data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 *
+(tex_size.w * texy + texx) + 1];
+**data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 *
+(tex_size.w * texy + texx) + 2];
+**data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 *
+(tex_size.w * texy + texx) + 3];
 */
 
 void	draw_wall(char *data, t_dda *dda, t_scene *s)
@@ -73,11 +77,13 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	pixel.h = 0;
 	draw.start = pixel;
 	draw.length = dda->draw.h;
-	draw_v_line(data, draw, CEILING_COLOR, s->res);
+	draw.color = CEILING_COLOR;
+	draw_v_line(data, draw, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
 		pixel.h += dda->draw.w - dda->draw.h;
 	draw.start = pixel;
 	draw.length = s->res.h - dda->draw.w;
-	draw_v_line(data, draw, FLOOR_COLOR, s->res);
+	draw.color = FLOOR_COLOR;
+	draw_v_line(data, draw, s->res);
 }
