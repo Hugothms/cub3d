@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:24:22 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/08 19:03:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:49:36 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		max_len_tab(char **tab)
 	int	i;
 	int	len;
 	int	max;
-	
+
 	if (!tab)
 		return (0);
 	i = 0;
@@ -46,7 +46,7 @@ int		max_len_tab(char **tab)
 void	rotate(t_2float *dir, float angle)
 {
 	float	x;
-	
+
 	x = dir->x;
 	dir->x = x * cos(angle) - dir->y * sin(angle);
 	dir->y = x * sin(angle) + dir->y * cos(angle);

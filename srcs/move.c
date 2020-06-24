@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:50:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/15 18:06:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:50:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		move_up(t_window *w)
 
 	i = 0;
 	wall = 0;
-	while(i < w->s->dir.x + 1 && i >= 0 && i < w->s->size.h)
+	while (i < w->s->dir.x + 1 && i >= 0 && i < w->s->size.h)
 	{
 		if (w->s->map[(int)(w->s->pos.x + i * SPEED_MOVE)]\
 		[(int)w->s->pos.y] != '0')

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/16 18:10:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:51:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		refresh(const t_window *w)
 {
 	make_img(w->img, w->s);
 	mlx_clear_window(w->mlx->mlx_ptr, w->mlx->win_ptr);
-	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr, 0, 0);
+	mlx_put_image_to_window(w->mlx->mlx_ptr, w->mlx->win_ptr, w->img->img_ptr,
+	0, 0);
 	return (0);
 }
 
@@ -73,10 +74,10 @@ void	move(t_window *w)
 int		key_function(const int keycode, t_window *w)
 {
 	char	filename[35];
-	clock_t	start, end;
+	clock_t	start;
+	clock_t	end;
 	float	x;
 
-	// printf("%d\n", keycode);
 	key_push(keycode, &w->s->move);
 	if (keycode == ESC)
 		close_function(w);

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 12:42:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 13:14:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,14 @@ typedef struct	s_calc_sprite
 	int			i;
 	double		transformX;
 	double		transformY;
-	int			spriteScreenX;;
+	int			spriteScrX;;
 	int			spriteHeight;
+	int			spriteWidth;
 	int			drawStartY;
 	int			drawEndY;
 	int			drawStartX;
 	int			drawEndX;
+	
 }				t_calc_sprite;
 
 typedef struct	s_rgb

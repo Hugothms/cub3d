@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 00:27:54 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:50:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	put_sprite(char *data, t_2int pixel, char *texdata, t_2int res, int entier)
 
 	tab = (void *)data;
 	tabtexture = (void *)texdata;
-	if((tabtexture[entier] & 0x00FFFFFF) != 0)
+	if ((tabtexture[entier] & 0x00FFFFFF) != 0)
 		tab[pixel.h * res.w + pixel.w] = tabtexture[entier];
 }
 
@@ -67,8 +67,8 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 		wallX = s->pos.x + dda->perpWallDist[dda->line] * dda->rayDir.x;
 	wallX -= floor(wallX);
 	int texX = wallX * (double)texSize.w;
-	if(dda->side % 2 == 0 && dda->rayDir.x > 0) texX = texSize.w - texX - 1;
-	if(dda->side % 2 == 1 && dda->rayDir.y < 0) texX = texSize.w - texX - 1;
+	if (dda->side % 2 == 0 && dda->rayDir.x > 0) texX = texSize.w - texX - 1;
+	if (dda->side % 2 == 1 && dda->rayDir.y < 0) texX = texSize.w - texX - 1;
 	step = (float)texSize.h / dda->lineHeight;
 	float	texPos = (dda->draw.h - s->res.h / 2 + dda->lineHeight / 2) * step;
 	length = (dda->lineHeight < s->res.h ? dda->lineHeight : s->res.h);

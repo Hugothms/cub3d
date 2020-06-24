@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/23 19:59:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/24 12:50:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	make_img(t_img *img, t_scene *s)
 	t_dda	*dda;
 	t_rgb	*color;
 
-	if(!(dda = malloc(sizeof(*dda))))
+	if (!(dda = malloc(sizeof(*dda))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if(!(dda->sprite = malloc(s->nb_sprite * sizeof(*dda->sprite))))
+	if (!(dda->sprite = malloc(s->nb_sprite * sizeof(*dda->sprite))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	dda->line = 0;
 	dda->index_sprite = 0;
