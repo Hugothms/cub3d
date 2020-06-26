@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:38:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/26 15:50:22 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,8 @@ typedef struct	s_scene
 	t_2int		res;
 	char		**tex;
 	t_img		*textures[NB_TEXTURES];
-	t_rgb		*floor;
-	t_rgb		*ceil;
+	int			floor;
+	int			ceil;
 	char		**map;
 	t_2int		size;
 	t_2float	pos;
@@ -228,6 +228,7 @@ void	check_map(char **map, t_2float pos, t_2int size);
 t_rgb	*int_to_rgb(int r, int g, int b);
 t_rgb	*str_to_rgb(char *str);
 int		rgb_to_int(t_rgb rgb);
+int		str_to_int(char *str);
 
 //dda
 void	calcul_dda(t_dda *dda, t_scene *s, int x);

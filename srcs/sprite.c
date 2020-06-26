@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:42:03 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/26 15:33:26 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 	int		texy;
 	int		color;
 	t_draw	draw;
-	t_2int pixel;
 
 	y = cs->drawStartY;
 	while (y <= cs->drawEndY)

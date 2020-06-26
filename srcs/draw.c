@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:43:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/26 15:51:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
 	double	wallx;
 
 	fl->tex_size = s->textures[dda->side]->size;
+	// ft_putnbr(fl->tex_size.h);
+	// ft_putchar('\n');
+	// ft_putnbr(fl->tex_size.w);
+	// ft_putchar('\n');
+	// ft_putchar('\n');
 	if (dda->side % 2 == 0)
 		wallx = s->pos.y + dda->perpwalldist[dda->line] * dda->rayDir.y;
 	else
@@ -79,13 +84,13 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	pixel.h = 0;
 	draw.start = pixel;
 	draw.length = dda->draw.h;
-	draw.color = CEILING_COLOR;
+	draw.color = s->ceil;
 	draw_v_line(data, draw, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
 	pixel.h += dda->draw.w - dda->draw.h;
 	draw.start = pixel;
 	draw.length = s->res.h - dda->draw.w;
-	draw.color = FLOOR_COLOR;
+	draw.color = s->floor;
 	draw_v_line(data, draw, s->res);
 }

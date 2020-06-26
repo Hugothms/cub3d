@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:22:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/26 15:56:21 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	get_map2(t_scene *scene, char **map, int line)
 {
 	int	col;
 
+	ft_putstr(map[0]);
+	ft_putstr(map[1]);
 	if (!(scene->map[line] = malloc((scene->size.w + 1) * sizeof(char))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	ft_memset(scene->map[line], '8', scene->size.w);
