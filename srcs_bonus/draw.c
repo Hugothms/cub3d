@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 14:04:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:12:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_v_line(char *data, t_draw draw, t_2int res)
 {
 	while (draw.length-- > 0)
 	{
-		put_pixel(data, draw.start, draw.color, res);
+		put_pixel(data, draw, draw.color, res);
 		draw.start.h++;
 	}
 }

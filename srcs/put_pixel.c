@@ -6,18 +6,18 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:37:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:13:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	put_pixel(char *data, t_2int pixel, int color, t_2int res)
+void	put_pixel(char *data, t_draw draw, int color, t_2int res)
 {
 	int	(*tab)[res.w][1];
 
 	tab = (void *)data;
-	*tab[pixel.h][pixel.w] = color;
+	*tab[draw.start.h][draw.start.w] = color;
 }
 
 void	put_texture(char *data, t_draw draw, char *texdata, t_2int res)

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:48:31 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:42:50 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:12:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_line(char *data, t_scene *s, t_draw draw, t_2int res)
 	i = 4 * s->res.w / 100;
 	while (i--)
 	{
-		put_pixel(data, draw.start, draw.color, res);
+		put_pixel(data, draw, draw.color, res);
 		pos.x += draw.end.y;
 		pos.y += draw.end.x;
 		draw.start.h = pos.x;

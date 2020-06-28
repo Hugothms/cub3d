@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 13:33:46 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:13:18 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ void	parse_textures(t_mlx *mlx, t_scene *s);
 t_scene	*get_scene(const int argc, const char *argv[]);
 
 //put_pixel
-void	put_pixel(char *data, t_2int pixel, int color, t_2int res);
+void	put_pixel(char *data, t_draw draw, int color, t_2int res);
 void	put_texture(char *data, t_draw draw, char *texdata, t_2int res);
 void	put_sprite(char *data, t_draw draw, char *texdata, t_2int res);
 
