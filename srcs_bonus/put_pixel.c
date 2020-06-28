@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:37:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:03:48 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	put_texture(char *data, t_draw draw, char *texdata, t_2int res)
 {
 	int	(*tab);
 	int	(*tabtexture);
+	int	color;
 
 	tab = (void *)data;
 	tabtexture = (void *)texdata;
-	tab[draw.start.h * res.w + draw.start.w] = tabtexture[draw.length];
+	color = tabtexture[draw.length] / (float)(draw.color + 1);
+	tab[draw.start.h * res.w + draw.start.w] = color;;
 }
 
 void	put_sprite(char *data, t_draw draw, char *texdata, t_2int res)

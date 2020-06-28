@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 13:25:25 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 14:04:32 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 		fl.texpos += fl.step;
 		draw.start = pos;
 		draw.length = fl.tex_size.w * fl.texy + fl.texx;
+		draw.color = dda->perpwalldist[dda->line];
 		put_texture(data, draw, s->textures[dda->side]->data, s->res);
 		pos.h++;
 	}
