@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:50:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:22:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:12:11 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void		move_up(t_window *w)
 {
-	if (w->s->map[(int)(w->s->pos.x + w->s->dir.x * SPEED_MOVE)]\
-	[(int)w->s->pos.y] == '0')
+	if (w->s->pos.x + w->s->dir.x * SPEED_MOVE > 0 &&
+	w->s->pos.x + w->s->dir.x * SPEED_MOVE < w->s->size.h)
 		w->s->pos.x += w->s->dir.x * SPEED_MOVE;
-	if (w->s->map[(int)w->s->pos.x]\
-	[(int)(w->s->pos.y + w->s->dir.y * SPEED_MOVE)] == '0')
+	if (w->s->pos.y + w->s->dir.y * SPEED_MOVE > 0 &&
+	w->s->pos.y + w->s->dir.y * SPEED_MOVE < w->s->size.w)
 		w->s->pos.y += w->s->dir.y * SPEED_MOVE;
 	refresh(w);
 }
@@ -62,33 +62,33 @@ void		move_up(t_window *w)
 
 void		move_down(t_window *w)
 {
-	if (w->s->map[(int)(w->s->pos.x - w->s->dir.x * SPEED_MOVE)]\
-	[(int)w->s->pos.y] == '0')
+	if (w->s->pos.x - w->s->dir.x * SPEED_MOVE > 0 &&
+	w->s->pos.x - w->s->dir.x * SPEED_MOVE < w->s->size.h)
 		w->s->pos.x -= w->s->dir.x * SPEED_MOVE;
-	if (w->s->map[(int)w->s->pos.x]\
-	[(int)(w->s->pos.y - w->s->dir.y * SPEED_MOVE)] == '0')
+	if (w->s->pos.y - w->s->dir.y * SPEED_MOVE > 0 &&
+	w->s->pos.y - w->s->dir.y * SPEED_MOVE < w->s->size.w)
 		w->s->pos.y -= w->s->dir.y * SPEED_MOVE;
 	refresh(w);
 }
 
 void		move_left(t_window *w)
 {
-	if (w->s->map[(int)(w->s->pos.x + w->s->plane.x * SPEED_MOVE)]\
-	[(int)w->s->pos.y] == '0')
+	if (w->s->pos.x + w->s->plane.x * SPEED_MOVE > 0 &&
+	w->s->pos.x + w->s->plane.x * SPEED_MOVE < w->s->size.h)
 		w->s->pos.x += w->s->plane.x * SPEED_MOVE;
-	if (w->s->map[(int)w->s->pos.x]\
-	[(int)(w->s->pos.y + w->s->plane.y * SPEED_MOVE)] == '0')
+	if (w->s->pos.y + w->s->plane.y * SPEED_MOVE > 0 &&
+	w->s->pos.y + w->s->plane.y * SPEED_MOVE < w->s->size.w)
 		w->s->pos.y += w->s->plane.y * SPEED_MOVE;
 	refresh(w);
 }
 
 void		move_right(t_window *w)
 {
-	if (w->s->map[(int)(w->s->pos.x - w->s->plane.x * SPEED_MOVE)]\
-	[(int)w->s->pos.y] == '0')
+	if (w->s->pos.x - w->s->plane.x * SPEED_MOVE > 0 &&
+	w->s->pos.x - w->s->plane.x * SPEED_MOVE < w->s->size.h)
 		w->s->pos.x -= w->s->plane.x * SPEED_MOVE;
-	if (w->s->map[(int)w->s->pos.x]\
-	[(int)(w->s->pos.y - w->s->plane.y * SPEED_MOVE)] == '0')
+	if (w->s->pos.y - w->s->plane.y * SPEED_MOVE > 0 &&
+	w->s->pos.y - w->s->plane.y * SPEED_MOVE < w->s->size.w)
 		w->s->pos.y -= w->s->plane.y * SPEED_MOVE;
 	refresh(w);
 }

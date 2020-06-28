@@ -1,4 +1,4 @@
-R 1000 700
+R 700 500
 
 EA ./scenes/textures/64/redbrick.xpm
 WE ./scenes/textures/64/greystone.xpm

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 19:20:51 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 12:48:30 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:09:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int		deja_vu(t_dda *dda)
 
 int		set_sprites_dda(t_scene *s, t_dda *dda)
 {
-	if (s->map[dda->coord.h][dda->coord.w] == '1')
+	if (s->map[dda->coord.h][dda->coord.w] == '1' ||
+	s->map[dda->coord.h][dda->coord.w] == '8')
 		return (1);
 	else if (!deja_vu(dda))
 	{
@@ -76,12 +77,6 @@ int		set_sprites_dda(t_scene *s, t_dda *dda)
 		return (0);
 	}
 	return (0);
-}
-
-int		on_border(t_2int coord, t_2int size)
-{
-	return (coord.h == 0 || coord.h == size.h ||
-	coord.w == 0 || coord.w == size.w);
 }
 
 void	perform_dda(t_scene *s, t_dda *dda)
@@ -103,9 +98,10 @@ void	perform_dda(t_scene *s, t_dda *dda)
 			dda->coord.w += dda->step.w;
 			dda->side = ((dda->rayDir.y > 0) ? 1 : 3);
 		}
-		if (s->map[dda->coord.h][dda->coord.w] != '0')
-			hit = set_sprites_dda(s, dda);
-		else if (on_border(dda->coord, s->size))
+		if (dda->coord.h < 0 || dda->coord.h == s->size.h ||
+		dda->coord.w < 0 || dda->coord.w == s->size.w)
 			hit = 1;
+		else if (s->map[dda->coord.h][dda->coord.w] != '0')
+			hit = set_sprites_dda(s, dda);
 	}
 }
