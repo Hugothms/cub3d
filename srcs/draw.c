@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 15:51:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:23:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ void	draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
 	double	wallx;
 
 	fl->tex_size = s->textures[dda->side]->size;
-	// ft_putnbr(fl->tex_size.h);
-	// ft_putchar('\n');
-	// ft_putnbr(fl->tex_size.w);
-	// ft_putchar('\n');
-	// ft_putchar('\n');
 	if (dda->side % 2 == 0)
 		wallx = s->pos.y + dda->perpwalldist[dda->line] * dda->rayDir.y;
 	else
