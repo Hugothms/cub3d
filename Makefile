@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/24 15:21:17 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/28 12:21:29 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,31 @@ NAME = cub3d
 			srcs/utils2.c 			\
 			srcs/set_elements.c
 
+--SRCS_BONUS =	srcs_bonus/check_map.c		\
+			srcs_bonus/color.c			\
+			srcs_bonus/dda.c				\
+			srcs_bonus/draw_minimap.c		\
+			srcs_bonus/draw.c				\
+			srcs_bonus/error.c			\
+			srcs_bonus/get_next_line.c	\
+			srcs_bonus/key.c 				\
+			srcs_bonus/main.c 			\
+			srcs_bonus/make_img.c 		\
+			srcs_bonus/move.c 			\
+			srcs_bonus/move2.c 			\
+			srcs_bonus/parse_map.c 		\
+			srcs_bonus/parse.c 			\
+			srcs_bonus/put_pixel.c 		\
+			srcs_bonus/save_bmp.c			\
+			srcs_bonus/sprite.c			\
+			srcs_bonus/sprite2.c			\
+			srcs_bonus/utils.c 			\
+			srcs_bonus/utils2.c 			\
+			srcs_bonus/set_elements.c
+
+
 --OBJS = $(--SRCS:.c=.o)
+--OBJS_BONUS = $(--SRCS_BONUS:.c=.o)
 --OBJSLIBFT =$(--LIBFTDIR)*.o
 
 --INCL = includes/
@@ -70,8 +94,12 @@ endif
 
 all : compilelibft compilelibmlx $(NAME)
 
-$(NAME) : $(--OBJS) $(--HEADER)
+$(NAME) : $(--OBJS) $(--HEADER) compilelibft compilelibmlx
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
+
+bonus : $(--OBJS_BONUS) $(--HEADER) compilelibft compilelibmlx
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS_BONUS) $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
+
 
 compilelibft :
 	$(--MAKE) -C libft all
@@ -86,13 +114,13 @@ clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) clean
 	# cd $(LIBMLXDIR) && $(--MAKE) clean
-	rm -rf $(--OBJS) $(--LIBFT) $(--LIBMLX)
+	rm -rf $(--OBJS) $(--OBJS_BONUS) $(--LIBFT) $(--LIBMLX)
 
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
 	# cd $(LIBMLXDIR) && $(--MAKE) fclean
-	rm -f $(NAME) a.out
+	rm -f $(NAME) a.out bonus
 
 re:		fclean all
 
@@ -123,6 +151,10 @@ re:		fclean all
 
 test: $(NAME)
 	./$< scenes/test.cub
+
+test_bonus: bonus
+	./$< scenes/test.cub
+
 
 test_save: $(NAME)
 	./$< scenes/test.cub -save
