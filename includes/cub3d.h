@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 15:50:22 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:33:46 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 # include "get_next_line.h"
-# ifdef LINUX
+// # ifdef LINUX
 #  include "mlxlinux.h"
-# else
-#  include "mlx.h"
-# endif
+// # else
+// #  include "mlx.h"
+// # endif
 
 # define OPEN_ERROR		-1
 # define CLOSE_ERROR	-2
