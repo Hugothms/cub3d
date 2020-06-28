@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 14:10:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:29:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	put_pixel(char *data, t_draw draw, int color, t_2int res)
 	int	(*tab)[res.w][1];
 
 	tab = (void *)data;
+		// printf("\n%d:%d:%d\n", (color / 256) % 256, color / (256 * 256), color % (256));
+	draw.color = draw.color / (float)((draw.color + 1) * 100);
+	*tab[draw.start.h][draw.start.w] = draw.color;
 	*tab[draw.start.h][draw.start.w] = color;
 }
 

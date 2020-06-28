@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 14:13:18 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:33:02 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,8 @@ typedef struct	s_scene
 	t_2int		res;
 	char		**tex;
 	t_img		*textures[NB_TEXTURES];
-	int			floor;
-	int			ceil;
+	t_rgb		*floor;
+	t_rgb		*ceil;
 	char		**map;
 	t_2int		size;
 	t_2float	pos;
