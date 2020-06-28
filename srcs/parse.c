@@ -6,13 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 13:24:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:31:34 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void		*init_scene(t_scene *scene)
+void	init_scene(t_scene *scene)
 {
 	scene->res.w = -1;
 	scene->res.h = -1;
@@ -38,7 +38,6 @@ void		*init_scene(t_scene *scene)
 	scene->move.turn_left = 0;
 	scene->move.turn_right = 0;
 	scene->nb_sprite = 0;
-	return (scene);
 }
 
 int		check_line(char *line, char **data, char *type, int nb_elements)
@@ -98,7 +97,7 @@ void	parse_textures(t_mlx *mlx, t_scene *s)
 	}
 }
 
-t_scene		*parse(int fd)
+t_scene	*parse(int fd)
 {
 	t_scene	*s;
 	char	*line;
@@ -106,8 +105,7 @@ t_scene		*parse(int fd)
 
 	if (!(s = malloc(sizeof(*s))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	if (!(init_scene(s)))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	init_scene(s);
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		set_all(s, line);

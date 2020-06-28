@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:20:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 16:11:11 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 13:25:31 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		str_to_int(char *str)
 {
 	int		color;
 	t_rgb	*rgb;
-	
+
 	rgb = str_to_rgb(str);
 	color = rgb_to_int(*rgb);
 	free(rgb);
