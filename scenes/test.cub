@@ -1,15 +1,15 @@
 R 1000 700
 
-EA ./scenes/textures/450/rose.xpm
-WE ./scenes/textures/494/space.xpm
+EA ./scenes/textures/64/redbrick.xpm
+WE ./scenes/textures/64/greystone.xpm
 SO ./scenes/textures/64/eagle.xpm
 NO ./scenes/textures/64/bluestone.xpm
 
 S ./scenes/textures/64/pillar.xpm
 
 
-F 220,100,0
-C 225,30,0
+F 30,30,30
+C 100,100,220
 
 
         1111111111111111111111111
