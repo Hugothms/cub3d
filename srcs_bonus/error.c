@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 18:54:35 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 15:52:21 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/28 19:35:00 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	free_scene(t_scene *scene)
 		i++;
 	}
 	free(scene->tex);
+	free(scene->ceil);
+	free(scene->floor);
 	free(scene);
 }
 

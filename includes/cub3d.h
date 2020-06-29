@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 19:33:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:08:12 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,18 +158,19 @@ typedef struct	s_draw
 {
 	t_2int		start;
 	t_2float	end;
+	float		coef;
 	int			length;
 	int			color;
 }				t_draw;
 
 typedef struct	s_flemme
 {
-	int		length;
-	float	step;
-	int		texx;
-	float	texpos;
-	int		texy;
-	t_2int	tex_size;
+	int			length;
+	float		step;
+	int			texx;
+	float		texpos;
+	int			texy;
+	t_2int		tex_size;
 }				t_flemme;
 
 typedef struct	s_mlx
@@ -306,5 +307,7 @@ void	save(t_scene *scene, t_img *img);
 
 //utils2
 void	set_sprite(t_scene *scene, char **map, int line, int col);
+t_rgb	*mult_rgb_float(t_rgb rgb, float mult);
+void	min_rgb(t_rgb *color);
 
 #endif

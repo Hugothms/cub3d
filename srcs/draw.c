@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 14:11:53 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:11:23 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	pixel.h = 0;
 	draw.start = pixel;
 	draw.length = dda->draw.h;
-	draw.color = s->ceil;
+	draw.color = rgb_to_int(*s->ceil);
 	draw_v_line(data, draw, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
 	pixel.h += dda->draw.w - dda->draw.h;
 	draw.start = pixel;
 	draw.length = s->res.h - dda->draw.w;
-	draw.color = s->floor;
+	draw.color = rgb_to_int(*s->floor);
 	draw_v_line(data, draw, s->res);
 }

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 13:31:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:11:08 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_scene(t_scene *scene)
 	scene->tex[WEST] = NULL;
 	scene->tex[EAST] = NULL;
 	scene->tex[SPRITE]= NULL;
-	scene->floor = -1;
-	scene->ceil = -1;
+	scene->floor = NULL;
+	scene->ceil = NULL;
 	scene->map = NULL;
 	scene->size.w = -1;
 	scene->pos.x = -1;
@@ -67,9 +67,9 @@ void	set_all(t_scene *s, char *line)
 		set_texture(s, data, EAST);
 	else if (check_line(line, data, "S", NB_ELEM_TEX) && !s->tex[SPRITE])
 		set_texture(s, data, SPRITE);
-	else if (check_line(line, data, "F", NB_ELEM_COLOR) && s->floor == -1)
+	else if (check_line(line, data, "F", NB_ELEM_COLOR) && !s->floor)
 		set_color(s, data, 0);
-	else if (check_line(line, data, "C", NB_ELEM_COLOR) && s->ceil == -1)
+	else if (check_line(line, data, "C", NB_ELEM_COLOR) && !s->ceil)
 		set_color(s, data, 1);
 	else if (ft_strcmp(data[0], "iamcheating"))
 		print_err_and_exit("Parsing invalid line", PARSE_ERROR);
@@ -110,7 +110,7 @@ t_scene	*parse(int fd)
 	{
 		set_all(s, line);
 		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]
-		&& s->tex[EAST] && s->tex[SPRITE] && s->floor != -1 && s->ceil != -1)
+		&& s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
 			break;
 	}
 	parse_map(s, fd);

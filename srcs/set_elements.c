@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 15:51:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:11:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	set_texture(t_scene *scene, char **data, int code)
 void	set_color(t_scene *scene, char **data, int code)
 {
 	if (code == 0)
-		scene->floor = str_to_int(data[NB_ELEM_COLOR - 1]);
+		scene->floor = str_to_rgb(data[NB_ELEM_COLOR - 1]);
 	else
-		scene->ceil = str_to_int(data[NB_ELEM_COLOR - 1]);
+		scene->ceil = str_to_rgb(data[NB_ELEM_COLOR - 1]);
 }
