@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/15 20:08:47 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:28:38 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:24:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ void	make_img(t_img *img, t_scene *s)
 		perform_dda(s, dda);
 		set_draw_start_end(dda, s);
 		draw_wall(img->data, dda, s);
-		draw_pos_minimap(img, s);
 		dda->line++;
 	}
 	if (dda->index_sprite)
 		do_sprite(img, dda, s);
 	free(dda->sprite_pos);
 	free(dda);
-	draw_minimap(img, s);
 }
