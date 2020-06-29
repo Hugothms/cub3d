@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:24:32 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 19:29:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 12:15:16 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	put_pixel(char *data, t_draw draw, int color, t_2int res)
 	int	(*tab)[res.w][1];
 
 	tab = (void *)data;
-		// printf("\n%d:%d:%d\n", (color / 256) % 256, color / (256 * 256), color % (256));
-	draw.color = draw.color / (float)((draw.color + 1) * 100);
 	*tab[draw.start.h][draw.start.w] = draw.color;
 	*tab[draw.start.h][draw.start.w] = color;
 }
@@ -27,11 +25,20 @@ void	put_texture(char *data, t_draw draw, char *texdata, t_2int res)
 {
 	int		(*tab);
 	int		(*tabtexture);
-	float	color;
+	int		color;
 
 	tab = (void *)data;
 	tabtexture = (void *)texdata;
-	color = tabtexture[draw.length] / (float)(draw.color + 1);
+	color = tabtexture[draw.length];
+	
+		// t_rgb *tcolor = int_to_rgb(color / (256 * 256), (color / 256) % 256, color % 256);
+		// t_rgb *tmp = tcolor;
+		// tcolor = mult_rgb_float(*tcolor, 1.0/(draw.color * draw.color + 1));
+		// free(tmp);
+		// min_rgb(tcolor);
+		// color = rgb_to_int(*tcolor);
+		// free(tcolor);
+
 	tab[draw.start.h * res.w + draw.start.w] = color;;
 }
 
