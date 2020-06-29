@@ -6,39 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/29 13:41:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 13:55:39 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	init_scene(t_scene *scene)
-{
-	scene->res.w = -1;
-	scene->res.h = -1;
-	if (!(scene->tex = malloc(NB_TEXTURES * sizeof(char*))))
-		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	scene->tex[NORTH] = NULL;
-	scene->tex[SOUTH] = NULL;
-	scene->tex[WEST] = NULL;
-	scene->tex[EAST] = NULL;
-	scene->tex[SPRITE]= NULL;
-	scene->floor = NULL;
-	scene->ceil = NULL;
-	scene->map = NULL;
-	scene->size.w = -1;
-	scene->pos.x = -1;
-	scene->pos.y = -1;
-	scene->dir.x = -1;
-	scene->dir.y = -1;
-	scene->move.left = 0;
-	scene->move.right = 0;
-	scene->move.down = 0;
-	scene->move.up = 0;
-	scene->move.turn_left = 0;
-	scene->move.turn_right = 0;
-	scene->nb_sprite = 0;
-}
 
 int		check_line(char *line, char **data, char *type, int nb_elements)
 {
@@ -111,13 +83,13 @@ t_scene	*parse(int fd)
 		set_all(s, line);
 		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]
 		&& s->tex[EAST] && s->tex[SPRITE] && s->floor && s->ceil)
-			break;
+			break ;
 	}
 	parse_map(s, fd);
 	return (s);
 }
 
-t_scene		*get_scene(const int argc, const char *argv[])
+t_scene	*get_scene(const int argc, const char *argv[])
 {
 	int			fd;
 	t_scene		*scene;
