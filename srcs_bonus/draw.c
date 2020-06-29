@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/29 12:31:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/06/29 13:45:40 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,21 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 **(tex_size.w * texy + texx) + 3];
 */
 
+/*
+**t_rgb *tcolor;
+**tcolor = int_to_rgb((color / 256) % 256, color / (256 * 256),
+**color % (256));
+**tcolor = mult_rgb_float(*s->ceil, 1/dda->perpwalldist[dda->line]);
+**min_rgb(tcolor);
+**draw.color = rgb_to_int(*tcolor);
+**free(tcolor);
+**
+**tcolor = mult_rgb_float(*s->floor, 1/dda->perpwalldist[dda->line]);
+**min_rgb(tcolor);
+**draw.color = rgb_to_int(*tcolor);
+**free(tcolor);
+*/
+
 void	draw_wall(char *data, t_dda *dda, t_scene *s)
 {
 	int		i;
@@ -105,26 +120,13 @@ void	draw_wall(char *data, t_dda *dda, t_scene *s)
 	pixel.h = 0;
 	draw.start = pixel;
 	draw.length = dda->draw.h;
-	// t_rgb *tcolor;
-	// tcolor = int_to_rgb((color / 256) % 256, color / (256 * 256), 
-	// color % (256));
-	// tcolor = mult_rgb_float(*s->ceil, 1/dda->perpwalldist[dda->line]);
-	// min_rgb(tcolor);
-	// draw.color = rgb_to_int(*tcolor);
-	// free(tcolor);
 	draw.color = rgb_to_int(*s->ceil);
-	// draw_v_line_shadow(data, draw, s->res);
 	draw_v_line(data, draw, s->res);
 	pixel.h += dda->draw.h;
 	draw_texture_line(data, pixel, dda, s);
 	pixel.h += dda->draw.w - dda->draw.h;
 	draw.start = pixel;
 	draw.length = s->res.h - dda->draw.w;
-	// tcolor = mult_rgb_float(*s->floor, 1/dda->perpwalldist[dda->line]);
-	// min_rgb(tcolor);
-	// draw.color = rgb_to_int(*tcolor);
-	// free(tcolor);
 	draw.color = rgb_to_int(*s->floor);
 	draw_v_line(data, draw, s->res);
-	// draw_v_line_shadow(data, draw, s->res);
 }

@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/29 12:23:58 by hthomas          ###   ########.fr        #
+#    Updated: 2020/06/29 13:41:38 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,11 +156,11 @@ test_bonus: bonus
 
 
 test_save: $(NAME)
-	./$< scenes/test.cub -save
+	./$< scenes/test.cub --save
 
 
 
-# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt -save
+# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt --save
 #"sudo apt-get update" "sudo apt install gdb" "sudo apt install gcc"
 #https://stackoverflow.com/c/42network/questions/950/954#954
 #.SILENT:
