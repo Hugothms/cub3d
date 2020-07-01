@@ -8,8 +8,8 @@ SO ./scenes/textures/64/eagle.xpm
 S ./scenes/textures/64/pillar.xpm
 
 
-F 344640,30,30
-C 100,5,-220
+F 0,30,0
+C 100,5,220
 
 
         1111111111111111111111111
