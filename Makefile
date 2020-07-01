@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/07/01 13:22:29 by hthomas          ###   ########.fr        #
+#    Updated: 2020/07/01 13:39:13 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ endif
 
 
 
-all : $(--LIBFTDIR)/$(--LIBFT) $(----LIBMLXDIR)/$(--LIBMLX) $(NAME)
+all : $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX) $(NAME)
 
 $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
