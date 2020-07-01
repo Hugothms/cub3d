@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:54:33 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 13:34:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ int		main(const int argc, const char *argv[])
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
-	printf("\nget_scene:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	ft_printf("\nget_scene:\t%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx = malloc_mlx_init();
 	end = clock();
-	printf("malloc_mlx_init:%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	ft_printf("malloc_mlx_init:%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	img = init_img(mlx, &scene->res);
 	end = clock();
-	printf("init_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	ft_printf("init_img:\t%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	parse_textures(mlx, scene);
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);

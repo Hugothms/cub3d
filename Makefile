@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/07/01 10:59:06 by hthomas          ###   ########.fr        #
+#    Updated: 2020/07/01 13:22:29 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
---LDFLAGS += -g3 -fsanitize=address
+--LDFLAGS +=#-g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native#-O3
 
 --SRCS =	srcs/check_map.c		\
@@ -72,18 +72,22 @@ NAME = cub3D
 --LIBFTDIR = libft
 --LIBFTLINK = -L $(--LIBFTDIR) -lft
 
+--FTPRINTF = libftprintf.a
+--FTPRINTFDIR = ft_printf
+--FTPRINTFLINK = -L $(--FTPRINTFDIR) -lftprintf
+
 --UNAME_S := $(shell uname -s)
 ifeq ($(--UNAME_S), Linux)
-	LIBMLXDIR	= libmlxlinux
-	MLX_INCLUDE = -lm -lXext -lX11
+	--LIBMLXDIR	= libmlxlinux
+	--MLX_INCLUDE = -lm -lXext -lX11
 	ENV			= -D LINUX
 else
-	LIBMLXDIR	= ogl
-	MLX_INCLUDE = -framework OpenGL -framework AppKit
+	--LIBMLXDIR	= ogl
+	--MLX_INCLUDE = -framework OpenGL -framework AppKit
 	ENV			=
 endif
 --LIBMLX = libmlx.a
---LIBMLXLINK = -L $(LIBMLXDIR) -lmlx
+--LIBMLXLINK = -L $(--LIBMLXDIR) -lmlx
 
 
 
@@ -91,35 +95,39 @@ endif
 
 
 
-all : $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX) $(NAME)
+all : $(--LIBFTDIR)/$(--LIBFT) $(----LIBMLXDIR)/$(--LIBMLX) $(NAME)
 
 $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
-	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
-bonus : $(--OBJS_BONUS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
-	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS_BONUS) $(--LIBFTLINK) $(--LIBMLXLINK) $(MLX_INCLUDE) $(ENV)
+bonus : $(--OBJS_BONUS) $(--HEADER) $(--FTPRINTFDIR)/$(--FTPRINTF) $(--LIBMLXDIR)/$(--LIBMLX)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS_BONUS) $(--FTPRINTFLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
 
 $(--LIBFTDIR)/$(--LIBFT) :
 	$(--MAKE) -C libft all
 
 $(--LIBMLXDIR)/$(--LIBMLX) :
-	$(--MAKE) -C $(LIBMLXDIR) all
+	$(--MAKE) -C $(--LIBMLXDIR) all
+
+$(--FTPRINTFDIR)/$(--FTPRINTF) :
+	$(--MAKE) -C $(--FTPRINTFDIR) all
 
 %.o: %.c $(--HEADER)
-	$(--CC) -c $(--LDFLAGS) -I$(--INCL) -o $@ $<
+	$(--CC) -c $(--LDFLAGS) -I $(--INCL) -o $@ $<
 
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) clean
-	# cd $(LIBMLXDIR) && $(--MAKE) clean
+	# cd $(--LIBMLXDIR) && $(--MAKE) clean
 	rm -rf $(--OBJS) $(--OBJS_BONUS) $(--LIBFT) $(--LIBMLX)
 
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
-	# cd $(LIBMLXDIR) && $(--MAKE) fclean
-	rm -f $(NAME) a.out bonus
+	cd $(--FTPRINTFDIR) && $(--MAKE) fclean
+	cd $(--LIBMLXDIR) && $(--MAKE) clean
+	rm -f $(NAME) a.out bonus 
 
 re:		fclean all
 

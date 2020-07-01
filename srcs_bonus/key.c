@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 16:49:23 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:54:08 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 12:53:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		key_function(const int keycode, t_window *w)
 		start = clock();
 		save_bmp(screenshot_datetime(filename), w->img->data, w->s->res);
 		end = clock();
-		printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+		ft_printf("save_img:\t%fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	}
 	move(w);
 	return (0);
