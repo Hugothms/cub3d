@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 13:31:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 13:35:28 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include <time.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
