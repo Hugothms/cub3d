@@ -6,11 +6,12 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/07/01 13:39:13 by hthomas          ###   ########.fr        #
+#    Updated: 2020/07/01 17:09:37 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
+
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
@@ -60,10 +61,8 @@ NAME = cub3D
 			srcs_bonus/utils2.c 		\
 			srcs_bonus/set_elements.c
 
-
 --OBJS = $(--SRCS:.c=.o)
 --OBJS_BONUS = $(--SRCS_BONUS:.c=.o)
---OBJSLIBFT =$(--LIBFTDIR)*.o
 
 --INCL = includes/
 --HEADER = $(--INCL)cub3d.h
@@ -90,11 +89,7 @@ endif
 --LIBMLXLINK = -L $(--LIBMLXDIR) -lmlx
 
 
-
-
-
-
-
+###########################ALL
 all : $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX) $(NAME)
 
 $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
@@ -103,7 +98,7 @@ $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBM
 bonus : $(--OBJS_BONUS) $(--HEADER) $(--FTPRINTFDIR)/$(--FTPRINTF) $(--LIBMLXDIR)/$(--LIBMLX)
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS_BONUS) $(--FTPRINTFLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
-
+###########################LIBS
 $(--LIBFTDIR)/$(--LIBFT) :
 	$(--MAKE) -C libft all
 
@@ -116,6 +111,7 @@ $(--FTPRINTFDIR)/$(--FTPRINTF) :
 %.o: %.c $(--HEADER)
 	$(--CC) -c $(--LDFLAGS) -I $(--INCL) -o $@ $<
 
+###########################CLEAN
 clean:
 	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) clean
@@ -131,13 +127,25 @@ fclean:		clean
 
 re:		fclean all
 
-
 .PHONY: clean fclean
 
+###########################TEST
+test: $(NAME)
+	./$< scenes/test.cub
+
+test_bonus: bonus
+	./$< scenes/test.cub
+
+
+test_save: $(NAME)
+	./$< scenes/test.cub --save
+
+#.SILENT:
 
 
 
-###########################
+
+###########################COLORS
 --BLACK_FG =	\033[38;5;0m
 --RED_FG =		\033[38;5;196m
 --REDL_FG =		\033[1;31m
@@ -154,22 +162,3 @@ re:		fclean all
 
 --CLEAR_COLOR =	\033[m
 ###########################
-
-
-test: $(NAME)
-	./$< scenes/test.cub
-
-test_bonus: bonus
-	./$< scenes/test.cub
-
-
-test_save: $(NAME)
-	./$< scenes/test.cub --save
-
-
-
-# gcc -g3 -fsanitize=address -lmlx -framework OpenGL -framework AppKit srcs/*.c -Iincludes libft/libft.a && ./a.out example.rt --save
-#"sudo apt-get update" "sudo apt install gdb" "sudo apt install gcc"
-#https://stackoverflow.com/c/42network/questions/950/954#954
-#.SILENT:
-
