@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 15:20:42 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/29 13:55:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 11:25:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ void	init_scene(t_scene *scene)
 	scene->move.turn_left = 0;
 	scene->move.turn_right = 0;
 	scene->nb_sprite = 0;
+}
+
+void	skip_empty_lines(int fd, char **line)
+{
+	while (get_next_line(fd, line) == 1)
+	{
+		if (*line[0])
+			break ;
+		free(*line);
+	}
 }

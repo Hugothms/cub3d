@@ -6,11 +6,11 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/06/29 13:41:38 by hthomas          ###   ########.fr        #
+#    Updated: 2020/07/01 10:59:06 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra

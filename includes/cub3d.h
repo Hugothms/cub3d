@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/29 13:55:20 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 11:25:14 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,5 +310,6 @@ void	set_sprite(t_scene *scene, char **map, int line, int col);
 t_rgb	*mult_rgb_float(t_rgb rgb, float mult);
 void	min_rgb(t_rgb *color);
 void	init_scene(t_scene *scene);
+void	skip_empty_lines(int fd, char **line);
 
 #endif

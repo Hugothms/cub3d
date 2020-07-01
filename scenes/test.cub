@@ -1,15 +1,15 @@
 R 750 500
 
+NO ./scenes/textures/64/diamand.xpm
 EA ./scenes/textures/64/redbrick.xpm
 WE ./scenes/textures/64/greystone.xpm
 SO ./scenes/textures/64/eagle.xpm
-NO ./scenes/textures/64/bluestone.xpm
 
 S ./scenes/textures/64/pillar.xpm
 
 
-F 30,30,30
-C 100,100,220
+F 344640,30,30
+C 100,5,-220
 
 
         1111111111111111111111111

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/28 12:24:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 11:28:57 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	set_initial_pos(t_scene *scene, char **map, int line, int col)
 	rotate(&scene->plane, 1.570796);
 }
 
-void	get_map2(t_scene *scene, char **map, int line)
+int		get_map2(t_scene *scene, char **map, int line)
 {
 	int	col;
 
@@ -72,6 +72,7 @@ void	get_map2(t_scene *scene, char **map, int line)
 			print_err_and_exit("Bad map format", PARSE_ERROR);
 		col++;
 	}
+	return (col == 0);
 }
 
 void	get_map(t_scene *scene, char *join)
@@ -82,14 +83,15 @@ void	get_map(t_scene *scene, char *join)
 
 	map = ft_split(join, '\n');
 	free(join);
-	line = 0;
 	scene->size.h = ft_tab_size(map);
 	scene->size.w = max_len_tab(map);
 	if (!(scene->map = malloc(scene->size.h * sizeof(char*))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
+	line = 0;
 	while (line < scene->size.h)
 	{
-		get_map2(scene, map, line);
+		if (get_map2(scene, map, line))
+			break ;
 		line++;
 	}
 	if (scene->pos.x == -1)
@@ -104,12 +106,7 @@ void	parse_map(t_scene *scene, int fd)
 	char	*tmp;
 	int		ret;
 
-	while (get_next_line(fd, &line) == 1)
-	{
-		if (line[0])
-			break ;
-		free(line);
-	}
+	skip_empty_lines(fd, &line);
 	tmp = line;
 	join = ft_strdup(line);
 	free(tmp);
@@ -118,6 +115,8 @@ void	parse_map(t_scene *scene, int fd)
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
+		if (!line[0])
+			print_err_and_exit("Empty line in map", PARSE_ERROR);
 		join_clean(&join, line);
 		join_clean(&join, "\n");
 		free(line);
