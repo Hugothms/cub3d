@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:29:24 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 12:12:29 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		get_map2(t_scene *scene, char **map, int line)
 		else if (map[line][col] == '0')
 			scene->map[line][col] = '8';
 		else if (map[line][col] == ' ')
-			scene->map[line][col] = '8';
+			scene->map[line][col] = ' ';
 		else if (ft_in_charset(map[line][col], "NSEW") && scene->pos.x == -1)
 			set_initial_pos(scene, map, line, col);
 		else

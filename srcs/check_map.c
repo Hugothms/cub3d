@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:16:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:03:32 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 12:20:19 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@
 ** }
 */
 
+void	check_case(char **map, t_2int c, t_2int size, int *ok)
+{
+	if (map[c.h][c.w] == '8')
+		*ok = recurs_map(map, c, size);
+	else if (map[c.h][c.w] == ' ')
+		*ok = 0;
+}
+
 int		recurs_map(char **map, t_2int c, t_2int size)
 {
 	int	ok[4];
@@ -58,20 +66,16 @@ int		recurs_map(char **map, t_2int c, t_2int size)
 	if (!c.h || !c.w || c.h == size.h - 1 || c.w == size.w - 1)
 		return (0);
 	c.h -= 1;
-	if (map[c.h][c.w] == '8')
-		ok[0] = recurs_map(map, c, size);
+	check_case(map, c, size, &ok[0]);
 	c.h += 1;
 	c.w -= 1;
-	if (map[c.h][c.w] == '8')
-		ok[1] = recurs_map(map, c, size);
+	check_case(map, c, size, &ok[1]);
 	c.w += 1;
 	c.h += 1;
-	if (map[c.h][c.w] == '8')
-		ok[2] = recurs_map(map, c, size);
+	check_case(map, c, size, &ok[2]);
 	c.h -= 1;
 	c.w += 1;
-	if (map[c.h][c.w] == '8')
-		ok[3] = recurs_map(map, c, size);
+	check_case(map, c, size, &ok[3]);
 	return (ok[0] && ok[1] && ok[2] && ok[3]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:52:01 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 12:19:09 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,7 @@ typedef struct	s_window
 
 //check_map
 void	check_map(char **map, t_2float pos, t_2int size);
+int		recurs_map(char **map, t_2int c, t_2int size);
 
 //color
 t_rgb	*int_to_rgb(int r, int g, int b);
