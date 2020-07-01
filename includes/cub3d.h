@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:25:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 11:52:01 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ void	draw_pos_minimap(t_img *img, t_scene *s);
 
 //error
 void	print_err_and_exit(char *str, int err);
-int		close_function(const t_window *w);
+int		close_function(const t_window *w, int save);
 void	free_scene(t_scene *scene);
 void	free_tab(void **tab);
 
@@ -303,7 +303,7 @@ int     ft_tab_size(char **tab);
 int     max_len_tab(char **tab);
 void	rotate(t_2float *dir, float angle);
 void	join_clean(char **s1, char *s2);
-void	save(t_scene *scene, t_img *img);
+void	save(t_scene *scene, t_img *img, t_mlx *mlx);
 
 //utils2
 void	set_sprite(t_scene *scene, char **map, int line, int col);

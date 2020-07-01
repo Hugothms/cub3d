@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:29:34 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 11:54:33 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ int		main(const int argc, const char *argv[])
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);
 	else if (argc == 3)
-		save(scene, img);
+		save(scene, img, mlx);
 	return (0);
 }
