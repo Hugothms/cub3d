@@ -6,14 +6,13 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 12:19:09 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/01 12:36:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
 #include <time.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -46,17 +45,17 @@
 # define PINK			16727215
 
 # define MAX_WIDE		3840
-# define NB_TEXTURES 5
-# define WHITE_SPACES " \t"
-# define NB_ELEM_RES 3
-# define NB_ELEM_TEX 2
-# define NB_ELEM_COLOR 2
+# define NB_TEXTURES	5
+# define WHITE_SPACES	" \t"
+# define NB_ELEM_RES	3
+# define NB_ELEM_TEX	2
+# define NB_ELEM_COLOR	2
 
-# define NORTH 0
-# define SOUTH 1
-# define WEST 2
-# define EAST 3
-# define SPRITE 4
+# define NORTH			0
+# define SOUTH			1
+# define WEST			2
+# define EAST			3
+# define SPRITE			4
 
 /*
 ** Keycodes LINUX and MAC
