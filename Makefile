@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/07/01 17:09:37 by hthomas          ###   ########.fr        #
+#    Updated: 2020/07/03 13:17:32 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
---LDFLAGS +=#-g3 -fsanitize=address
+--LDFLAGS += -g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native#-O3
 
 --SRCS =	srcs/check_map.c		\
@@ -96,7 +96,7 @@ $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBM
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
 bonus : $(--OBJS_BONUS) $(--HEADER) $(--FTPRINTFDIR)/$(--FTPRINTF) $(--LIBMLXDIR)/$(--LIBMLX)
-	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS_BONUS) $(--FTPRINTFLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $(NAME) $(--OBJS_BONUS) $(--FTPRINTFLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
 ###########################LIBS
 $(--LIBFTDIR)/$(--LIBFT) :
@@ -134,7 +134,7 @@ test: $(NAME)
 	./$< scenes/test.cub
 
 test_bonus: bonus
-	./$< scenes/test.cub
+	./$(NAME) scenes/test.cub
 
 
 test_save: $(NAME)

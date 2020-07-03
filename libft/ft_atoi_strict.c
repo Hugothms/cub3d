@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 16:04:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/04/14 20:09:02 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 12:51:25 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int	ft_atoi_strict(const char *nptr)
 		res *= 10;
 		res += *nptr++ - '0';
 	}
-	return (0);
+	return (-1);
 }
