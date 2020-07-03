@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/03 11:28:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 15:19:52 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,10 @@ void	parse_map(t_scene *scene, int fd)
 	{
 		ret = get_next_line(fd, &line);
 		if (!line[0])
+		{
+			free(line);
 			break ;
+		}
 		join_clean(&join, line);
 		join_clean(&join, "\n");
 		free(line);
