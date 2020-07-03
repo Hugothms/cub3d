@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 13:34:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:21:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int		main(const int argc, const char *argv[])
 	start = clock();
 	mlx = malloc_mlx_init();
 	end = clock();
-	ft_printf("malloc_mlx_init:%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	ft_printf("malloc_mlx_init:%ds\n", ((double)(end - start)) /
+	CLOCKS_PER_SEC);
 	start = clock();
 	img = init_img(mlx, &scene->res);
 	end = clock();

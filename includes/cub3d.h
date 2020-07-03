@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/03 11:44:49 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:23:38 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 // # else
 // #  include "mlx.h"
 // # endif
+
+
+# define AZERTY			0
 
 # define OPEN_ERROR		-1
 # define CLOSE_ERROR	-2
@@ -62,7 +65,6 @@
 ** Keycodes LINUX and MAC
 */
 // # ifdef LINUX
-#  define AZERTY		1
 #  define ESC			65307
 #  define ARROW_LEFT	65361
 #  define ARROW_RIGHT	65363
