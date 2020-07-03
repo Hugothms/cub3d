@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 00:15:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 12:12:29 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:30:17 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	parse_map(t_scene *scene, int fd)
 	{
 		ret = get_next_line(fd, &line);
 		if (!line[0])
-			print_err_and_exit("Empty line in map", PARSE_ERROR);
+			break ;
 		join_clean(&join, line);
 		join_clean(&join, "\n");
 		free(line);
