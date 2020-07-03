@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:54:10 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 12:33:35 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 11:49:20 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ int		check_res(char **data)
 
 void	set_res(t_scene *scene, char **data)
 {
-	t_2int	*res;
-
 	if (check_res(data))
 		print_err_and_exit("res (R) must be 2 positive numbers", 20);
-	res->w = ft_atoi_strict(data[1]);
-	res->h = ft_atoi_strict(data[2]);
-	scene->res = *res;
+	scene->res.w = ft_atoi_strict(data[1]);
+	scene->res.h = ft_atoi_strict(data[2]);
 }
 
 void	set_texture(t_scene *scene, char **data, int code)
