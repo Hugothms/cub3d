@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 13:35:28 by hthomas          ###   ########.fr       */
+/*   Updated: 2020/07/03 11:44:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@
 # define NB_ELEM_TEX	2
 # define NB_ELEM_COLOR	2
 
-# define NORTH			0
-# define SOUTH			1
-# define WEST			2
-# define EAST			3
+# define SOUTH			0
+# define EAST			1
+# define NORTH			2
+# define WEST			3
 # define SPRITE			4
 
 /*
