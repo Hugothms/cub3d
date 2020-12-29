@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/07/03 13:17:32 by hthomas          ###   ########.fr        #
+#    Updated: 2020/12/29 20:28:17 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 --MAKE = make
 --CC = gcc
 --CFLAGS += -Wall -Werror -Wextra
---LDFLAGS += -g3 -fsanitize=address
+--LDFLAGS +=# -g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native#-O3
 
 --SRCS =	srcs/check_map.c		\
@@ -49,6 +49,7 @@ NAME = cub3D
 			srcs_bonus/key.c 			\
 			srcs_bonus/main.c 			\
 			srcs_bonus/make_img.c 		\
+			srcs_bonus/main.c 			\
 			srcs_bonus/move.c 			\
 			srcs_bonus/move2.c 			\
 			srcs_bonus/parse_map.c 		\
