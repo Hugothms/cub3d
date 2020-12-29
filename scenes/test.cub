@@ -1,4 +1,4 @@
-R 800 500
+R 1300 900
 
 NO ./scenes/textures/64/diamand.xpm
 EA ./scenes/textures/64/redbrick.xpm
