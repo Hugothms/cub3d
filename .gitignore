@@ -17,3 +17,4 @@ ft_printf/libftprintf.a
 libmlxlinux/libmlx_Linux.a
 libmlxlinux/libmlx.a
 libmlxlinux/test/mlx-test
+*.xcf
