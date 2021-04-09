@@ -1,11 +1,11 @@
 R 1300 900
 
-NO ./scenes/textures/64/diamand.xpm
-EA ./scenes/textures/64/redbrick.xpm
-WE ./scenes/textures/64/greystone.xpm
-SO ./scenes/textures/64/eagle.xpm
+NO ./maps/textures64/diamand.xpm
+EA ./maps/textures64/redbrick.xpm
+WE ./maps/textures64/greystone.xpm
+SO ./maps/textures64/eagle.xpm
 
-S ./scenes/textures/64/pillar.xpm
+S ./maps/textures64/pillar.xpm
 
 
 F 0,30,0

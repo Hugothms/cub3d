@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2020/12/29 20:28:17 by hthomas          ###   ########.fr        #
+#    Updated: 2021/04/09 17:05:43 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ NAME = cub3D
 			srcs_bonus/key.c 			\
 			srcs_bonus/main.c 			\
 			srcs_bonus/make_img.c 		\
-			srcs_bonus/main.c 			\
 			srcs_bonus/move.c 			\
 			srcs_bonus/move2.c 			\
 			srcs_bonus/parse_map.c 		\
@@ -124,7 +123,7 @@ fclean:		clean
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
 	cd $(--FTPRINTFDIR) && $(--MAKE) fclean
 	cd $(--LIBMLXDIR) && $(--MAKE) clean
-	rm -f $(NAME) a.out bonus 
+	rm -f $(NAME) a.out bonus
 
 re:		fclean all
 
@@ -132,14 +131,13 @@ re:		fclean all
 
 ###########################TEST
 test: $(NAME)
-	./$< scenes/test.cub
+	./$< maps/test.cub
 
 test_bonus: bonus
-	./$(NAME) scenes/test.cub
-
+	./$(NAME) maps/test.cub
 
 test_save: $(NAME)
-	./$< scenes/test.cub --save
+	./$< maps/test.cub --save
 
 #.SILENT:
 
