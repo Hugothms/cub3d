@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2020/12/29 13:54:14 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/09 17:06:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 ** Keycodes LINUX and MAC
 */
 // # ifdef LINUX
+// #  define LINUX 1
 // #  define ESC			65307
 // #  define ARROW_LEFT	65361
 // #  define ARROW_RIGHT	65363
@@ -79,6 +80,7 @@
 // #  define KEY_W			119
 // #  define KEY_Z			122
 // # else
+#  define LINUX 0
 #  define AZERTY		0
 #  define ESC			53
 #  define ARROW_LEFT	123
@@ -146,7 +148,6 @@ typedef struct	s_calc_sprite
 	int			drawEndX;
 	int			texX;
 	int 		stripe;
-	
 }				t_calc_sprite;
 
 typedef struct	s_rgb

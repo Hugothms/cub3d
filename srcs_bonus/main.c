@@ -6,11 +6,12 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:32:30 by hthomas           #+#    #+#             */
-/*   Updated: 2020/12/29 13:56:00 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/09 16:55:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include <stdio.h>
 
 t_mlx	*malloc_mlx_init(void)
 {
@@ -31,9 +32,13 @@ t_img	*init_img(t_mlx *mlx, t_2int *res)
 
 	if (!(img = malloc(sizeof(*img))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
-	//mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
-	w = 10000;
-	h = 10000;
+	if (LINUX)
+		mlx_get_screen_size(mlx->mlx_ptr, &w, &h);
+	else
+	{
+		w = 2560;
+		h = 1600;
+	}
 	if (w < res->w)
 		res->w = w;
 	if (h < res->h)
@@ -87,16 +92,16 @@ int		main(const int argc, const char *argv[])
 	start = clock();
 	scene = get_scene(argc, argv);
 	end = clock();
-	ft_printf("\nget_scene:\t%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	printf("\nget_scene:\t %fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	start = clock();
 	mlx = malloc_mlx_init();
 	end = clock();
-	ft_printf("malloc_mlx_init:%ds\n", ((double)(end - start)) /
+	printf("malloc_mlx_init: %fs\n", ((double)(end - start)) /
 	CLOCKS_PER_SEC);
 	start = clock();
 	img = init_img(mlx, &scene->res);
 	end = clock();
-	ft_printf("init_img:\t%ds\n", ((double)(end - start)) / CLOCKS_PER_SEC);
+	printf("init_img:\t %fs\n", ((double)(end - start)) / CLOCKS_PER_SEC);
 	parse_textures(mlx, scene);
 	if (argc == 2)
 		start_game_loop(scene, mlx, img, argv[1]);
