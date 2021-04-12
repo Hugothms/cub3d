@@ -32,5 +32,5 @@ jobs:
         uses: alexandregv/norminette-action@v2
         with:
           # Flags passed to norminette
-          flags: srcs/ includes/ # default is .
+          flags: srcs/ # default is .
         
