@@ -1,10 +1,10 @@
 R	1920	1080
-NO ./maps/texturesbluestone.xpm
-SO ./maps/texturesgreystone.xpm
-WE ./maps/texturespurplestone.xpm
-WE ./maps/texturespurplestone.xpm
-EA ./maps/texturesredbrick.xpm
-S ./maps/texturesbarrel.xpm
+NO ./maps/textures/64/bluestone.xpm
+SO ./maps/textures/64/greystone.xpm
+WE ./maps/textures/64/purplestone.xpm
+WE ./maps/textures/64/purplestone.xpm
+EA ./maps/textures/64/redbrick.xpm
+S ./maps/textures/64/barrel.xpm
 
 
 F 255,0,255

@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/04/09 17:05:43 by hthomas          ###   ########.fr        #
+#    Updated: 2021/04/12 09:36:37 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,13 +131,13 @@ re:		fclean all
 
 ###########################TEST
 test: $(NAME)
-	./$< maps/test.cub
+	./$< maps/test2.cub
 
 test_bonus: bonus
-	./$(NAME) maps/test.cub
+	./$(NAME) maps/test2.cub
 
 test_save: $(NAME)
-	./$< maps/test.cub --save
+	./$< maps/test2.cub --save
 
 #.SILENT:
 

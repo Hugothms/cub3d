@@ -1,9 +1,9 @@
 R	640	480
-NO ./maps/texturesredbrick.xpm
-SO ./maps/texturesredbrick.xpm
-WE ./maps/texturesredbrick.xpm
-EA ./maps/texturesredbrick.xpm
-S ./maps/texturesbarrel.xpm
+NO ./maps/textures/64/redbrick.xpm
+SO ./maps/textures/64/redbrick.xpm
+WE ./maps/textures/64/redbrick.xpm
+EA ./maps/textures/64/redbrick.xpm
+S ./maps/textures/64/barrel.xpm
 
 F 117, 142, 79
 C 135, 245, 251

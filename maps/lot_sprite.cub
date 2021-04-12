@@ -1,9 +1,9 @@
 R	1920	1080
-NO ./maps/texturesredbrick.xpm
-SO ./maps/texturesredbrick.xpm
-EA ./maps/texturesredbrick.xpm
-WE ./maps/texturesredbrick.xpm
-S ./maps/texturesbarrel.xpm
+NO ./maps/textures/64/redbrick.xpm
+SO ./maps/textures/64/redbrick.xpm
+EA ./maps/textures/64/redbrick.xpm
+WE ./maps/textures/64/redbrick.xpm
+S ./maps/textures/64/barrel.xpm
 
 F 255,0,255
 C 0,128,128

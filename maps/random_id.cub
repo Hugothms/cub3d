@@ -1,11 +1,11 @@
-EA ./maps/texturesredbrick.xpm
+EA ./maps/textures/64/redbrick.xpm
 R	1920	1080
 C 0,128,128
-S ./maps/texturesbarrel.xpm
+S ./maps/textures/64/barrel.xpm
 F 255,0,0
-NO ./maps/texturesbluestone.xpm
-SO ./maps/texturesgreystone.xpm
-WE ./maps/texturespurplestone.xpm
+NO ./maps/textures/64/bluestone.xpm
+SO ./maps/textures/64/greystone.xpm
+WE ./maps/textures/64/purplestone.xpm
 
 1111111111111111111111111111111111111111111
 1000000000000000000000000000000002000002001
