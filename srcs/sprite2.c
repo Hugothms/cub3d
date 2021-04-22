@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 15:16:18 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/24 15:30:44 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/22 20:08:37 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	sprite1(t_dda *dda, t_scene *s, t_calc_sprite *cs, int sprite_order[])
 	cs->drawStartY = -cs->spriteHeight / 2 + s->res.h / 2;
 	if (cs->drawStartY < 0)
 		cs->drawStartY = 0;
-	cs->drawEndY = cs->spriteHeight / 2 + s->res.h / 2;
+	cs->drawEndY = cs->spriteHeight / 2 + s->res.h / 2 - 1;
 	if (cs->drawEndY >= s->res.h)
 		cs->drawEndY = s->res.h - 1;
 	cs->spriteWidth = abs((int)(s->res.h / (cs->transform_y)));
@@ -52,9 +52,7 @@ void	sprite2(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 			cs->texX = 0;
 		if (cs->transform_y >= 0 && cs->stripe > 0 && cs->stripe < s->res.w &&
 		cs->transform_y < dda->perpwalldist[cs->stripe])
-		{
 			print_sprite(img, dda, s, cs);
-		}
 		cs->stripe++;
 	}
 }

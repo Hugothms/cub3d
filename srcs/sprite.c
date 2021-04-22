@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 15:52:54 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/26 15:33:26 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/22 20:01:45 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_sprite(t_img *img, t_dda *dda, t_scene *s, t_calc_sprite *cs)
 	y = cs->drawStartY;
 	while (y <= cs->drawEndY)
 	{
-		d = (y) * 256 - s->res.h * 128 + cs->spriteHeight * 128;
+		d = y * 256 - s->res.h * 128 + cs->spriteHeight * 128;
 		texy = ((d * s->textures[SPRITE]->size.h) / cs->spriteHeight) / 256;
 		color = s->textures[SPRITE]->data[s->textures[SPRITE]->size.w *
 		texy + cs->texX];
