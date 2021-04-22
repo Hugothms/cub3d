@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 15:16:18 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/22 20:08:37 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/22 20:20:13 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	sprite1(t_dda *dda, t_scene *s, t_calc_sprite *cs, int sprite_order[])
 	if (cs->drawEndY >= s->res.h)
 		cs->drawEndY = s->res.h - 1;
 	cs->spriteWidth = abs((int)(s->res.h / (cs->transform_y)));
-	cs->drawStartX = -cs->spriteWidth / 2 + cs->spritescrx - 1;
+	cs->drawStartX = -cs->spriteWidth / 2 + cs->spritescrx;
 	if (cs->drawStartX < 0)
 		cs->drawStartX = 0;
-	cs->drawEndX = cs->spriteWidth / 2 + cs->spritescrx;
+	cs->drawEndX = cs->spriteWidth / 2 + cs->spritescrx - 1;
 	if (cs->drawEndX >= s->res.w)
 		cs->drawEndX = s->res.w - 1;
 }
