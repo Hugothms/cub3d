@@ -6,5 +6,6 @@ SRC = $(filter %.c, $(SRCS))
 
 all:
 	for src in $(SRC); do \
-		diff $$src ../srcs_bonus/$$src | grep -v 'Updated' | wc -l | sed s/"       "// > diff; \
+		echo $$src; \
+		diff $$src ../srcs_bonus/$$src | grep -v 'Updated' | wc -l; \
 	done

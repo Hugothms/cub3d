@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/04/12 09:36:37 by hthomas          ###   ########.fr        #
+#    Updated: 2021/04/23 17:10:43 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,48 +18,38 @@ NAME = cub3D
 --LDFLAGS +=# -g3 -fsanitize=address
 --OPTI = -Ofast -flto -march=native#-O3
 
---SRCS =	srcs/check_map.c		\
+--COMMONS =	srcs/check_map.c		\
 			srcs/color.c			\
-			srcs/dda.c				\
-			srcs/draw.c				\
 			srcs/error.c			\
 			srcs/get_next_line.c	\
-			srcs/key.c 				\
-			srcs/main.c 			\
-			srcs/make_img.c 		\
 			srcs/move.c 			\
 			srcs/move2.c 			\
 			srcs/parse_map.c 		\
 			srcs/parse.c 			\
-			srcs/put_pixel.c 		\
 			srcs/save_bmp.c			\
 			srcs/sprite.c			\
 			srcs/sprite2.c			\
 			srcs/utils.c 			\
-			srcs/utils2.c 			\
 			srcs/set_elements.c
 
---SRCS_BONUS = srcs_bonus/check_map.c	\
-			srcs_bonus/color.c			\
+--SRCS =	$(--COMMONS)		\
+			srcs/dda.c			\
+			srcs/draw.c			\
+			srcs/key.c 			\
+			srcs/main.c 		\
+			srcs/make_img.c 	\
+			srcs/put_pixel.c 	\
+			srcs/utils2.c
+
+--SRCS_BONUS = $(--COMMONS)				\
 			srcs_bonus/dda.c			\
 			srcs_bonus/draw_minimap.c	\
 			srcs_bonus/draw.c			\
-			srcs_bonus/error.c			\
-			srcs_bonus/get_next_line.c	\
 			srcs_bonus/key.c 			\
 			srcs_bonus/main.c 			\
 			srcs_bonus/make_img.c 		\
-			srcs_bonus/move.c 			\
-			srcs_bonus/move2.c 			\
-			srcs_bonus/parse_map.c 		\
-			srcs_bonus/parse.c 			\
 			srcs_bonus/put_pixel.c 		\
-			srcs_bonus/save_bmp.c		\
-			srcs_bonus/sprite.c			\
-			srcs_bonus/sprite2.c		\
-			srcs_bonus/utils.c 			\
-			srcs_bonus/utils2.c 		\
-			srcs_bonus/set_elements.c
+			srcs_bonus/utils2.c
 
 --OBJS = $(--SRCS:.c=.o)
 --OBJS_BONUS = $(--SRCS_BONUS:.c=.o)
