@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 18:45:38 by hthomas           #+#    #+#             */
-/*   Updated: 2020/06/29 13:45:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/23 13:07:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,28 @@ void	draw_v_line(char *data, t_draw draw, t_2int res)
 	}
 }
 
-/*
-**void	draw_v_line_shadow(char *data, t_draw draw, t_2int res)
-**{
-**	int i = 0;
-**	if (draw.start.h == 0)
-**		draw.coef = 1;
-**	else
-**		i = 1;
-**	while (draw.length-- > 0)
-**	{
-**		put_pixel(data, draw, draw.color, res);
-**		t_rgb *tcolor = int_to_rgb((draw.color / 256) % 256, draw.color /
-**(256 * 256), draw.color % (256));
-**		t_rgb *tmp = tcolor;
-**		draw.coef *= (i == 0 ? 0.9999 : 1.0001);
-**		tcolor = mult_rgb_float(*tcolor, draw.coef);
-**		free(tmp);
-**		min_rgb(tcolor);
-**		draw.color = rgb_to_int(*tcolor);
-**		free(tcolor);
-**		draw.start.h++;
-**	}
-**}
-*/
+void	draw_v_line_shadow(char *data, t_draw draw, t_2int res)
+{
+	int i = 0;
+	if (draw.start.h == 0)
+		draw.coef = 1;
+	else
+		i = 1;
+	while (draw.length-- > 0)
+	{
+		put_pixel(data, draw, draw.color, res);
+		t_rgb *tcolor = int_to_rgb((draw.color / 256) % 256, draw.color /
+(256 * 256), draw.color % (256));
+		t_rgb *tmp = tcolor;
+		draw.coef *= (i == 0 ? 0.9999 : 1.0001);
+		tcolor = mult_rgb_float(*tcolor, draw.coef);
+		free(tmp);
+		min_rgb(tcolor);
+		draw.color = rgb_to_int(*tcolor);
+		free(tcolor);
+		draw.start.h++;
+	}
+}
 
 void	draw_texture_line2(t_2int pos, t_dda *dda, t_scene *s, t_flemme *fl)
 {
@@ -84,31 +82,26 @@ void	draw_texture_line(char *data, t_2int pos, t_dda *dda, t_scene *s)
 	}
 }
 
-/*
-**data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 *
-**(tex_size.w * texy + texx)];
-**data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 *
-**(tex_size.w * texy + texx) + 1];
-**data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 *
-**(tex_size.w * texy + texx) + 2];
-**data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 *
-**(tex_size.w * texy + texx) + 3];
-*/
+// data[4 * (pos.h * s->res.w + pos.w)] = s->textures[dda->side]->data[4 *
+// (tex_size.w * texy + texx)];
+// data[4 * (pos.h * s->res.w + pos.w) + 1] = s->textures[dda->side]->data[4 *
+// (tex_size.w * texy + texx) + 1];
+// data[4 * (pos.h * s->res.w + pos.w) + 2] = s->textures[dda->side]->data[4 *
+// (tex_size.w * texy + texx) + 2];
+// data[4 * (pos.h * s->res.w + pos.w) + 3] = s->textures[dda->side]->data[4 *
+// (tex_size.w * texy + texx) + 3];
 
-/*
-**t_rgb *tcolor;
-**tcolor = int_to_rgb((color / 256) % 256, color / (256 * 256),
-**color % (256));
-**tcolor = mult_rgb_float(*s->ceil, 1/dda->perpwalldist[dda->line]);
-**min_rgb(tcolor);
-**draw.color = rgb_to_int(*tcolor);
-**free(tcolor);
-**
-**tcolor = mult_rgb_float(*s->floor, 1/dda->perpwalldist[dda->line]);
-**min_rgb(tcolor);
-**draw.color = rgb_to_int(*tcolor);
-**free(tcolor);
-*/
+// t_rgb *tcolor;
+// tcolor = int_to_rgb((color / 256) % 256, color / (256 * 256),
+// color % (256));
+// tcolor = mult_rgb_float(*s->ceil, 1/dda->perpwalldist[dda->line]);
+// min_rgb(tcolor);
+// draw.color = rgb_to_int(*tcolor);
+// free(tcolor);
+// tcolor = mult_rgb_float(*s->floor, 1/dda->perpwalldist[dda->line]);
+// min_rgb(tcolor);
+// draw.color = rgb_to_int(*tcolor);
+// free(tcolor);
 
 void	draw_wall(char *data, t_dda *dda, t_scene *s)
 {
