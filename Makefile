@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/04/23 17:10:43 by hthomas          ###   ########.fr        #
+#    Updated: 2021/10/07 14:47:19 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,13 +103,13 @@ $(--FTPRINTFDIR)/$(--FTPRINTF) :
 
 ###########################CLEAN
 clean:
-	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
+	@echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) clean
 	# cd $(--LIBMLXDIR) && $(--MAKE) clean
 	rm -rf $(--OBJS) $(--OBJS_BONUS) $(--LIBFT) $(--LIBMLX)
 
 fclean:		clean
-	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
+	@echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
 	cd $(--FTPRINTFDIR) && $(--MAKE) fclean
 	cd $(--LIBMLXDIR) && $(--MAKE) clean
