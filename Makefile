@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/04/23 17:10:43 by hthomas          ###   ########.fr        #
+#    Updated: 2022/03/13 19:08:10 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ NAME = cub3D
 --COMMONS =	srcs/check_map.c		\
 			srcs/color.c			\
 			srcs/error.c			\
-			srcs/get_next_line.c	\
 			srcs/move.c 			\
 			srcs/move2.c 			\
 			srcs/parse_map.c 		\
@@ -59,11 +58,8 @@ NAME = cub3D
 
 --LIBFT = libft.a
 --LIBFTDIR = libft
---LIBFTLINK = -L $(--LIBFTDIR) -lft
-
---FTPRINTF = libftprintf.a
---FTPRINTFDIR = ft_printf
---FTPRINTFLINK = -L $(--FTPRINTFDIR) -lftprintf
+--LIBFTINCL = includes/
+--LIBFTLINK = -L $(--LIBFTDIR)/$(LIBFTINCL) -lft
 
 --UNAME_S := $(shell uname -s)
 ifeq ($(--UNAME_S), Linux)
@@ -85,8 +81,8 @@ all : $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX) $(NAME)
 $(NAME) : $(--OBJS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
 	$(--CC) $(--OPTI) $(--LDFLAGS) -o $@ $(--OBJS) $(--LIBFTLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
-bonus : $(--OBJS_BONUS) $(--HEADER) $(--FTPRINTFDIR)/$(--FTPRINTF) $(--LIBMLXDIR)/$(--LIBMLX)
-	$(--CC) $(--OPTI) $(--LDFLAGS) -o $(NAME) $(--OBJS_BONUS) $(--FTPRINTFLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
+bonus : $(--OBJS_BONUS) $(--HEADER) $(--LIBFTDIR)/$(--LIBFT) $(--LIBMLXDIR)/$(--LIBMLX)
+	$(--CC) $(--OPTI) $(--LDFLAGS) -o $(NAME) $(--OBJS_BONUS) $(--LIBFTLINK) $(--LIBMLXLINK) $(--MLX_INCLUDE) $(ENV)
 
 ###########################LIBS
 $(--LIBFTDIR)/$(--LIBFT) :
@@ -94,9 +90,6 @@ $(--LIBFTDIR)/$(--LIBFT) :
 
 $(--LIBMLXDIR)/$(--LIBMLX) :
 	$(--MAKE) -C $(--LIBMLXDIR) all
-
-$(--FTPRINTFDIR)/$(--FTPRINTF) :
-	$(--MAKE) -C $(--FTPRINTFDIR) all
 
 %.o: %.c $(--HEADER)
 	$(--CC) -c $(--LDFLAGS) -I $(--INCL) -o $@ $<
@@ -111,7 +104,6 @@ clean:
 fclean:		clean
 	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
-	cd $(--FTPRINTFDIR) && $(--MAKE) fclean
 	cd $(--LIBMLXDIR) && $(--MAKE) clean
 	rm -f $(NAME) a.out bonus
 

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 15:20:42 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/01 11:24:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/03/13 19:05:04 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_scene(t_scene *scene)
 
 void	skip_empty_lines(int fd, char **line)
 {
-	while (get_next_line(fd, line) == 1)
+	while (get_next_line(line, fd) == 1)
 	{
 		if (*line[0])
 			break ;

@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:27 by hthomas           #+#    #+#             */
-/*   Updated: 2020/07/03 11:45:47 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/03/13 19:04:58 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_scene	*parse(int fd)
 	if (!(s = malloc(sizeof(*s))))
 		print_err_and_exit("Malloc failed", MALLOC_ERROR);
 	init_scene(s);
-	while ((ret = get_next_line(fd, &line)) == 1)
+	while ((ret = get_next_line(&line, fd)) == 1)
 	{
 		set_all(s, line);
 		if (s->res.w != -1 && s->tex[NORTH] && s->tex[SOUTH] && s->tex[WEST]

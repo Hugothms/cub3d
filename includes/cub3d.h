@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 09:33:37 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/09 17:06:10 by hthomas          ###   ########.fr       */
+/*   Updated: 2022/03/13 18:58:43 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <math.h>
 # include <errno.h>
 # include <unistd.h>
-# include "../libft/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
-# include "get_next_line.h"
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
+# include "../libft/includes/get_next_line.h"
 // # ifdef LINUX
 #  include "mlxlinux.h"
 // # else
