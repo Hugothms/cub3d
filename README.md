@@ -9,7 +9,7 @@ make a dynamic view inside a maze, in which you’ll have to find your way.
 ## Usage
 First clone the repository and the git submodules:
 
-    git clone --recurse-submodules -j8 git@github.com:Hugothms/cub3d.git
+    git clone --recurse-submodules git@github.com:Hugothms/cub3d.git
     
 Then make and run the executable:
 
