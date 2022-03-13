@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/04 09:45:09 by hthomas           #+#    #+#              #
-#    Updated: 2022/03/13 19:08:10 by hthomas          ###   ########.fr        #
+#    Updated: 2022/03/13 19:13:48 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,13 +96,13 @@ $(--LIBMLXDIR)/$(--LIBMLX) :
 
 ###########################CLEAN
 clean:
-	#echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
+	@echo "$(REDL_FG)Deleting .o$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) clean
 	# cd $(--LIBMLXDIR) && $(--MAKE) clean
 	rm -rf $(--OBJS) $(--OBJS_BONUS) $(--LIBFT) $(--LIBMLX)
 
 fclean:		clean
-	#echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
+	@echo "$(RED_FG)Deleting exe$(CLEAR_COLOR)"
 	cd $(--LIBFTDIR) && $(--MAKE) fclean
 	cd $(--LIBMLXDIR) && $(--MAKE) clean
 	rm -f $(NAME) a.out bonus
